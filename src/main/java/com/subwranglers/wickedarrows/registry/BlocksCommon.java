@@ -6,7 +6,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class BlocksCommon {
 
     public static void preInit() {
-        ForgeRegistries.BLOCKS.register(BlockInvokedIce.instance);
+        ForgeRegistries.BLOCKS.register(BlockInvokedIce.INSTANCE);
     }
 
     public static void init() {

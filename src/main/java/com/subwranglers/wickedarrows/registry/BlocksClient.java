@@ -10,7 +10,7 @@ public class BlocksClient {
 
     public static void preInit() {
         ModelResourceLocation location = new ModelResourceLocation(S.qualify(Names.INVOKED_ICE));
-        ModelLoader.setCustomModelResourceLocation(BlockInvokedIce.instanceItem, 0, location);
+        ModelLoader.setCustomModelResourceLocation(BlockInvokedIce.INSTANCE_ITEM, 0, location);
     }
 
     public static void init() {

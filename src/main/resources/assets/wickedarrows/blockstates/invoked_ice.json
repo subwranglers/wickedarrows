@@ -1,5 +1,7 @@
 {
   "variants": {
-    "normal": { "model": "ice" }
+    "normal": { "model": "ice" },
+    "turn_into_water=true": {"model": "ice"},
+    "turn_into_water=false": {"model": "ice"}
   }
 }

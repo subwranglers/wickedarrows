@@ -2,23 +2,24 @@ package util.coordinates;
 
 import net.minecraft.entity.EntityLivingBase;
 
-public class Point3D {
+public class Point3 {
     double x;
     double y;
     double z;
     boolean compareAsInt;
 
-    public Point3D(double x, double y, double z, boolean compareAsInt) {
+    public Point3(double x, double y, double z, boolean compareAsInt) {
         this.x = x;
+        this.y = y;
         this.z = z;
         this.compareAsInt = compareAsInt;
     }
 
-    public Point3D(double x, double y, double z) {
+    public Point3(double x, double y, double z) {
         this(x, y, z, false);
     }
 
-    public Point3D(EntityLivingBase living, boolean compareAsInt) {
+    public Point3(EntityLivingBase living, boolean compareAsInt) {
         this(living.posX, living.posY, living.posZ, compareAsInt);
     }
 
@@ -36,10 +37,10 @@ public class Point3D {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Point3D))
+        if (!(obj instanceof Point3))
             return false;
 
-        Point3D in = (Point3D) obj;
+        Point3 in = (Point3) obj;
         return compareAsInt
                 ? ((int) x) == ((int) in.x) && ((int)y == (int)in.y) && ((int) z) == ((int) in.z)
                 : x == in.x && y == in.y && z == in.z;

@@ -13,14 +13,12 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import util.Consumer2;
 import util.S;
-import util.coordinates.Circles;
-import util.coordinates.Point3D;
+import util.coordinates.Coordinates;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Consumer;
 
 /**
  *
@@ -31,23 +29,22 @@ public class EntityIceArrow extends EntityWArrow {
     private static Map<IBlockState, Consumer2<World, BlockPos>> changesBlocks = new HashMap<>();
 
     static {
-        overridesBlocks.add(S.getBs(Blocks.AIR));
-        overridesBlocks.add(S.getBs(Blocks.TALLGRASS));
-        overridesBlocks.add(S.getBs(Blocks.DEADBUSH));
-        overridesBlocks.add(S.getBs(Blocks.FIRE));
-        overridesBlocks.add(S.getBs(Blocks.SNOW));
-        overridesBlocks.add(S.getBs(Blocks.SNOW_LAYER));
-        overridesBlocks.add(S.getBs(Blocks.GRASS));
-        overridesBlocks.add(S.getBs(Blocks.RED_FLOWER));
-        overridesBlocks.add(S.getBs(Blocks.YELLOW_FLOWER));
-        overridesBlocks.add(S.getBs(Blocks.FLOWING_WATER));
-        overridesBlocks.add(S.getBs(Blocks.FLOWING_LAVA));
+        overridesBlocks.add(Blocks.AIR.getDefaultState());
+        overridesBlocks.add(Blocks.TALLGRASS.getDefaultState());
+        overridesBlocks.add(Blocks.DEADBUSH.getDefaultState());
+        overridesBlocks.add(Blocks.FIRE.getDefaultState());
+        overridesBlocks.add(Blocks.SNOW.getDefaultState());
+        overridesBlocks.add(Blocks.SNOW_LAYER.getDefaultState());
+        overridesBlocks.add(Blocks.RED_FLOWER.getDefaultState());
+        overridesBlocks.add(Blocks.YELLOW_FLOWER.getDefaultState());
+        overridesBlocks.add(Blocks.FLOWING_WATER.getDefaultState());
+        overridesBlocks.add(Blocks.FLOWING_LAVA.getDefaultState());
 
         IBlockState invokedIceMeta = BlockInvokedIce.getShouldTurnToWaterState(true);
         changesBlocks.put(Blocks.WATER.getDefaultState(), (world, pos) -> world.setBlockState(pos, invokedIceMeta));
 
         IBlockState obsidian = Blocks.OBSIDIAN.getDefaultState();
-        changesBlocks.put(Blocks.LAVA.getDefaultState(), (world, pos) -> world.setBlockState(pos, obsidian));
+        changesBlocks.put(Blocks.LAVA.getBlockState().getBaseState(), (world, pos) -> world.setBlockState(pos, obsidian));
         changesBlocks.put(Blocks.MAGMA.getDefaultState(), (world, pos) -> world.setBlockState(pos, obsidian));
     }
 
@@ -117,7 +114,7 @@ public class EntityIceArrow extends EntityWArrow {
         generateIceCage(
                 livingHit.world,
                 livingHit.getPosition(),
-                Math.max((int) livingHit.width, (int) livingHit.height)
+                Math.max((int) livingHit.width, (int) livingHit.height) + 2
         );
 
         long duration = System.currentTimeMillis() - start;
@@ -125,47 +122,17 @@ public class EntityIceArrow extends EntityWArrow {
     }
 
     private void generateIceCage(World world, BlockPos pos, int radius) {
-        int y = pos.getY();
         BlockPos.MutableBlockPos mut = new BlockPos.MutableBlockPos(pos);
         IBlockState invokedIce = BlockInvokedIce.getShouldTurnToWaterState(false);
 
-        for (int i = y - radius; i <= y + radius; i++) {
-            Consumer<Point3D> consumer = point3D -> {
-                mut.setPos(point3D.getX(), point3D.getY(), point3D.getZ());
-                tryPutBlock(world, mut, invokedIce);
-            };
-
-            Circles.getCircleCoords(pos.getX(), y, pos.getZ(), radius, consumer);
-        }
-//        // Build walls around the entity as tall as they are
-//        double r = (int) livingHit.width + 2.0D;
-//
-//        for (int y = belowEnt; y <= aboveEnt; y++)
-//            for (Point3D point : getAllPolarXZ(livingPos.getX(), livingPos.getZ(), r)) {
-//                pos.setPos(point.getX(), y, point.getZ());
-//                tryPutBlock(livingHit.world, pos, invokedIce);
-//            }
-//
-//        // Cap the top and bottom of the cage with domes, relative to how wide the cage is
-//        int y = 1;
-//        r--; // Start loop with decremented radius -- we're building within the wall's radius now
-//        while (r > 0.0D)  {
-//            for (Point3D point : getAllPolarXZ(livingPos.getX(), livingPos.getZ(), r)) {
-//
-//                // Build above
-//                pos.setPos(point.getX(), aboveEnt + y, point.getZ());
-//                tryPutBlock(livingHit.world, pos, invokedIce);
-//
-//                // Build below
-//                pos.setPos(point.getX(), belowEnt - y, point.getZ());
-//                tryPutBlock(livingHit.world, pos, invokedIce);
-//            }
-//            y++; // next layer
-//            r--; // smaller radius to close off eventually
-//        }
+        Coordinates.doPerSphereCoord(pos.getX(), pos.getY(), pos.getZ(), radius, point3D -> {
+            mut.setPos(point3D.getX(), point3D.getY(), point3D.getZ());
+            tryPutBlock(world, mut, invokedIce);
+        });
     }
 
     private void tryPutBlock(World worldIn, BlockPos.MutableBlockPos pos, IBlockState invokedIce) {
+        System.out.println("Trying to place ice at " + pos.toString());
         IBlockState testPos = worldIn.getBlockState(pos);
         if (overridesBlocks.contains(testPos))
             // Put ice block if we're supposed to override a specific block
