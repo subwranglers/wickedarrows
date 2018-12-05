@@ -18,6 +18,6 @@ public class ItemsCommon  {
     }
 
     public static void registerItems() {
-        ForgeRegistries.ITEMS.register(ItemIceArrow.instance);
+        ForgeRegistries.ITEMS.register(ItemIceArrow.INSTANCE);
     }
 }

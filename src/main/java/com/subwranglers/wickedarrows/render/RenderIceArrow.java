@@ -27,7 +27,6 @@ public class RenderIceArrow extends Render<EntityIceArrow> implements IRenderFac
         super(renderManagerIn);
     }
 
-
     @Override
     public void doRender(EntityIceArrow entity, double x, double y, double z, float entityYaw, float partialTicks) {
         this.bindEntityTexture(entity);

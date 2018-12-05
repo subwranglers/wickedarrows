@@ -1,6 +1,6 @@
 package com.subwranglers.wickedarrows;
 
-import com.subwranglers.wickedarrows.proxy.CommonProxy;
+import com.subwranglers.wickedarrows.proxy.ServerProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -20,7 +20,7 @@ public class WickedArrows {
     public static WickedArrows instance;
 
     @SidedProxy(clientSide = PROXY_CLIENT, serverSide = PROXY_SERVER)
-    public static CommonProxy proxy;
+    public static ServerProxy proxy;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {

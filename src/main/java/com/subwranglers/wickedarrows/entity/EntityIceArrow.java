@@ -9,11 +9,9 @@ import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -87,7 +85,7 @@ public class EntityIceArrow extends EntityWArrow {
 
     @Override
     protected ItemStack getArrowStack() {
-        return new ItemStack(ItemIceArrow.instance);
+        return new ItemStack(ItemIceArrow.INSTANCE);
     }
 
     @Override

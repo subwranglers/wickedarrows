@@ -4,6 +4,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class EntityWArrow extends EntityArrow {
@@ -23,5 +24,16 @@ public class EntityWArrow extends EntityArrow {
     @Override
     protected ItemStack getArrowStack() {
         return new ItemStack(Items.ARROW);
+    }
+
+    @Override
+    protected void onHit(RayTraceResult trace) {
+        super.onHit(trace);
+        if (trace.getBlockPos() != null && trace.typeOfHit == RayTraceResult.Type.BLOCK)
+            onBlockHit(trace);
+    }
+
+    protected void onBlockHit(RayTraceResult trace) {
+        // No-op, inheriting classes will implement
     }
 }

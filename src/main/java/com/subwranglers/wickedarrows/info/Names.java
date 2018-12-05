@@ -21,6 +21,7 @@ public class Names {
 
      */
     public static final String ICE_ARROW = "ice_arrow";
+    public static final String TORCH_ARROW = "torch_arrow";
 
     /*
 

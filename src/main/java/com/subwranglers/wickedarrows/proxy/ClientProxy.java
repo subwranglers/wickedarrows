@@ -3,6 +3,7 @@ package com.subwranglers.wickedarrows.proxy;
 import com.subwranglers.wickedarrows.block.BlockInvokedIce;
 import com.subwranglers.wickedarrows.entity.EntityIceArrow;
 import com.subwranglers.wickedarrows.item.ItemIceArrow;
+import com.subwranglers.wickedarrows.item.ItemTorchArrow;
 import com.subwranglers.wickedarrows.render.RenderIceArrow;
 import com.subwranglers.wickedarrows.sound.IceCrackleSoundEvent;
 import com.subwranglers.wickedarrows.sound.IceExplosionSoundEvent;
@@ -13,7 +14,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import static com.subwranglers.wickedarrows.info.Names.*;
 
-public class ClientProxy extends CommonProxy {
+public class ClientProxy extends ServerProxy {
 
     public void preInit() {
         super.preInit();
@@ -39,9 +40,16 @@ public class ClientProxy extends CommonProxy {
     private static void loadModels() {
         // Ice Arrow
         ModelLoader.setCustomModelResourceLocation(
-                ItemIceArrow.instance,
+                ItemIceArrow.INSTANCE,
                 0,
                 new ModelResourceLocation(name(ICE_ARROW, QUALIFY))
+        );
+
+        // Torch Arrow
+        ModelLoader.setCustomModelResourceLocation(
+                ItemTorchArrow.INSTANCE,
+                0,
+                new ModelResourceLocation(name(TORCH_ARROW, QUALIFY))
         );
     }
 

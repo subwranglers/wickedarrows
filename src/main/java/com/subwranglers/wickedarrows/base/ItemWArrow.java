@@ -11,7 +11,8 @@ public abstract class ItemWArrow extends ItemArrow {
 
     @Override
     public EntityArrow createArrow(World worldIn, ItemStack stack, EntityLivingBase shooter) {
-        return new EntityWArrow(worldIn, shooter);
+        throw new UnsupportedOperationException(
+                "inheriting class didn't return the proper entity in createArrow(World, ItemStack, EntityLivingBase)");
     }
 
     @Override

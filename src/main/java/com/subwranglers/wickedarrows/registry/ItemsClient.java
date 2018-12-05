@@ -23,7 +23,7 @@ public class ItemsClient {
     private static void loadModels() {
         // Ice Arrow
         ModelLoader.setCustomModelResourceLocation(
-                ItemIceArrow.instance,
+                ItemIceArrow.INSTANCE,
                 0,
                 new ModelResourceLocation(name(ICE_ARROW, QUALIFY))
         );
