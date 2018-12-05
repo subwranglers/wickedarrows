@@ -1,8 +1,8 @@
-package com.subwranglers.wickedarrows.items;
+package com.subwranglers.wickedarrows.item;
 
 import com.subwranglers.wickedarrows.WickedArrows;
 import com.subwranglers.wickedarrows.base.ItemWArrow;
-import com.subwranglers.wickedarrows.entities.EntityIceArrow;
+import com.subwranglers.wickedarrows.entity.EntityIceArrow;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityArrow;

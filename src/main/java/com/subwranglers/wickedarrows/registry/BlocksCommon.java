@@ -1,6 +1,6 @@
 package com.subwranglers.wickedarrows.registry;
 
-import com.subwranglers.wickedarrows.blocks.BlockInvokedIce;
+import com.subwranglers.wickedarrows.block.BlockInvokedIce;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class BlocksCommon {

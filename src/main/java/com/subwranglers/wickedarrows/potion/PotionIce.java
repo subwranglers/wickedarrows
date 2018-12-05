@@ -1,12 +1,12 @@
 package com.subwranglers.wickedarrows.potion;
 
-import com.subwranglers.wickedarrows.info.Names;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import util.S;
+
+import static com.subwranglers.wickedarrows.info.Names.*;
 
 public class PotionIce extends Potion {
 
@@ -15,13 +15,13 @@ public class PotionIce extends Potion {
     public static final int DURATION = 200;
     public static final int POTION_LEVEL = 2;
 
-    public static final PotionIce instance = new PotionIce();
+    public static final PotionIce INSTANCE = new PotionIce();
 
     private PotionIce() {
         super(true, POTION_COLOR);
 
-        setRegistryName(Names.ICE_POTION);
-        setPotionName(S.qualify(Names.ICE_POTION));
+        setRegistryName(ICE_POTION);
+        setPotionName(name(ICE_POTION, QUALIFY));
 
         final int MODIFIER = 3;
         registerPotionAttributeModifier(SharedMonsterAttributes.ATTACK_SPEED, UUID, -MODIFIER, POTION_LEVEL);
@@ -30,7 +30,7 @@ public class PotionIce extends Potion {
     }
 
     /**
-     * "Freezes" an entity as much as possible by preventing it from moving, attacking, breaking blocks and giving it
+     * "Freezes" an entity as much as possible by preventing it from moving, attacking, breaking block and giving it
      * fire resistance.
      *
      * @param living the entity to "freeze"
@@ -48,6 +48,6 @@ public class PotionIce extends Potion {
                 return false;
             }
         });
-        living.addPotionEffect(new PotionEffect(instance, DURATION));
+        living.addPotionEffect(new PotionEffect(INSTANCE, DURATION));
     }
 }

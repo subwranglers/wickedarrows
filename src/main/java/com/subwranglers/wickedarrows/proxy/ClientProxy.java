@@ -1,29 +1,56 @@
 package com.subwranglers.wickedarrows.proxy;
 
-import com.subwranglers.wickedarrows.registry.BlocksClient;
-import com.subwranglers.wickedarrows.registry.EntitiesClient;
-import com.subwranglers.wickedarrows.registry.ItemsClient;
+import com.subwranglers.wickedarrows.block.BlockInvokedIce;
+import com.subwranglers.wickedarrows.entity.EntityIceArrow;
+import com.subwranglers.wickedarrows.item.ItemIceArrow;
+import com.subwranglers.wickedarrows.render.RenderIceArrow;
+import com.subwranglers.wickedarrows.sound.IceCrackleSoundEvent;
+import com.subwranglers.wickedarrows.sound.IceExplosionSoundEvent;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
+
+import static com.subwranglers.wickedarrows.info.Names.*;
 
 public class ClientProxy extends CommonProxy {
 
     public void preInit() {
         super.preInit();
-        BlocksClient.preInit();
-        ItemsClient.preInit();
-        EntitiesClient.preInit();
+        loadBlocks();
+        loadModels();
+        registerRenderers();
+        registerSounds();
     }
 
     public void init() {
         super.init();
-        BlocksClient.init();
-        ItemsClient.init();
-        EntitiesClient.init();
     }
 
     public void postInit() {
         super.postInit();
-        BlocksClient.postInit();
-        ItemsClient.postInit();
-        EntitiesClient.postInit();
+    }
+
+    private static void loadBlocks() {
+        ModelResourceLocation location = new ModelResourceLocation(name(INVOKED_ICE, QUALIFY));
+        ModelLoader.setCustomModelResourceLocation(BlockInvokedIce.INSTANCE_ITEM, 0, location);
+    }
+
+    private static void loadModels() {
+        // Ice Arrow
+        ModelLoader.setCustomModelResourceLocation(
+                ItemIceArrow.instance,
+                0,
+                new ModelResourceLocation(name(ICE_ARROW, QUALIFY))
+        );
+    }
+
+    private static void registerRenderers() {
+        RenderingRegistry.registerEntityRenderingHandler(EntityIceArrow.class, RenderIceArrow::new);
+    }
+
+    private static void registerSounds() {
+        ForgeRegistries.SOUND_EVENTS.register(IceCrackleSoundEvent.INSTANCE);
+        ForgeRegistries.SOUND_EVENTS.register(IceExplosionSoundEvent.INSTANCE);
     }
 }

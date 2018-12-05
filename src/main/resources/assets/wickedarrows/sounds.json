@@ -1,0 +1,15 @@
+{
+  "ice_crackling": {
+    "category": "block",
+    "sounds": [
+      "wickedarrows:ice_crackling_1",
+      "wickedarrows:ice_crackling_2",
+      "wickedarrows:ice_crackling_3",
+      "wickedarrows:ice_crackling_4"
+    ]
+  },
+  "ice_explosion": {
+    "category": "block",
+    "sounds": ["wickedarrows:ice_explosion_2"]
+  }
+}

@@ -135,16 +135,18 @@
 
 package util.coordinates;
 
+import net.minecraft.util.math.Vec3i;
+
 import java.util.function.Consumer;
 
-public class Coordinates {
+public class MidpointSphere {
 
     /**
      * <p>Using a modified Midpoint Circle Algorithm, finds the coordinates used to make a sphere with the given
      * <var>radius</var></p>.
      * <p>https://stackoverflow.com/a/20385413/10475995</p>
      */
-    public static void doPerSphereCoord(int x0, int y0, int z0, int radius, Consumer<Point3> consumer) {
+    public static void doPerSphereCoord(int x0, int y0, int z0, int radius, Consumer<Vec3i> consumer) {
         int x = radius, y = 0;
         int radiusError = 1 - x;
 
@@ -162,7 +164,7 @@ public class Coordinates {
         }
     }
 
-    private static void drawCircle(int x0, int y0, int z0, int y1, int radius, int error0, Consumer<Point3> consumer) {
+    private static void drawCircle(int x0, int y0, int z0, int y1, int radius, int error0, Consumer<Vec3i> consumer) {
         int x = radius, z = 0;
         int radiusError = error0; // Initial error state passed in, NOT 1-x
 
@@ -170,44 +172,44 @@ public class Coordinates {
             // draw the 32 points here.
 
             // ----------------------------------------------------------
-            consumer.accept(new Point3(x0 + x, y0 + y1, z0 + z));
-            consumer.accept(new Point3(x0 + x, y0 + y1, z0 - z));
-            consumer.accept(new Point3(x0 + x, y0 - y1, z0 + z));
-            consumer.accept(new Point3(x0 + x, y0 - y1, z0 - z));
-            consumer.accept(new Point3(x0 - x, y0 + y1, z0 + z));
-            consumer.accept(new Point3(x0 - x, y0 + y1, z0 - z));
-            consumer.accept(new Point3(x0 - x, y0 - y1, z0 + z));
-            consumer.accept(new Point3(x0 - x, y0 - y1, z0 - z));
+            consumer.accept(new Vec3i(x0 + x, y0 + y1, z0 + z));
+            consumer.accept(new Vec3i(x0 + x, y0 + y1, z0 - z));
+            consumer.accept(new Vec3i(x0 + x, y0 - y1, z0 + z));
+            consumer.accept(new Vec3i(x0 + x, y0 - y1, z0 - z));
+            consumer.accept(new Vec3i(x0 - x, y0 + y1, z0 + z));
+            consumer.accept(new Vec3i(x0 - x, y0 + y1, z0 - z));
+            consumer.accept(new Vec3i(x0 - x, y0 - y1, z0 + z));
+            consumer.accept(new Vec3i(x0 - x, y0 - y1, z0 - z));
 
             // ----------------------------------------------------------
-            consumer.accept(new Point3(x0 + y1, y0 + x, z0 + z));
-            consumer.accept(new Point3(x0 + y1, y0 + x, z0 - z));
-            consumer.accept(new Point3(x0 + y1, y0 - x, z0 + z));
-            consumer.accept(new Point3(x0 + y1, y0 - x, z0 - z));
-            consumer.accept(new Point3(x0 - y1, y0 + x, z0 + z));
-            consumer.accept(new Point3(x0 - y1, y0 + x, z0 - z));
-            consumer.accept(new Point3(x0 - y1, y0 - x, z0 + z));
-            consumer.accept(new Point3(x0 - y1, y0 - x, z0 - z));
+            consumer.accept(new Vec3i(x0 + y1, y0 + x, z0 + z));
+            consumer.accept(new Vec3i(x0 + y1, y0 + x, z0 - z));
+            consumer.accept(new Vec3i(x0 + y1, y0 - x, z0 + z));
+            consumer.accept(new Vec3i(x0 + y1, y0 - x, z0 - z));
+            consumer.accept(new Vec3i(x0 - y1, y0 + x, z0 + z));
+            consumer.accept(new Vec3i(x0 - y1, y0 + x, z0 - z));
+            consumer.accept(new Vec3i(x0 - y1, y0 - x, z0 + z));
+            consumer.accept(new Vec3i(x0 - y1, y0 - x, z0 - z));
 
             // ----------------------------------------------------------
-            consumer.accept(new Point3(x0 + x, y0 + z, z0 + y1));
-            consumer.accept(new Point3(x0 + x, y0 + z, z0 - y1));
-            consumer.accept(new Point3(x0 + x, y0 - z, z0 + y1));
-            consumer.accept(new Point3(x0 + x, y0 - z, z0 - y1));
-            consumer.accept(new Point3(x0 - x, y0 + z, z0 + y1));
-            consumer.accept(new Point3(x0 - x, y0 + z, z0 - y1));
-            consumer.accept(new Point3(x0 - x, y0 - z, z0 + y1));
-            consumer.accept(new Point3(x0 - x, y0 - z, z0 - y1));
+            consumer.accept(new Vec3i(x0 + x, y0 + z, z0 + y1));
+            consumer.accept(new Vec3i(x0 + x, y0 + z, z0 - y1));
+            consumer.accept(new Vec3i(x0 + x, y0 - z, z0 + y1));
+            consumer.accept(new Vec3i(x0 + x, y0 - z, z0 - y1));
+            consumer.accept(new Vec3i(x0 - x, y0 + z, z0 + y1));
+            consumer.accept(new Vec3i(x0 - x, y0 + z, z0 - y1));
+            consumer.accept(new Vec3i(x0 - x, y0 - z, z0 + y1));
+            consumer.accept(new Vec3i(x0 - x, y0 - z, z0 - y1));
 
             // ----------------------------------------------------------
-            consumer.accept(new Point3(x0 + z, y0 + y1, z0 + x));
-            consumer.accept(new Point3(x0 + z, y0 + y1, z0 - x));
-            consumer.accept(new Point3(x0 + z, y0 - y1, z0 + x));
-            consumer.accept(new Point3(x0 + z, y0 - y1, z0 - x));
-            consumer.accept(new Point3(x0 - z, y0 + y1, z0 + x));
-            consumer.accept(new Point3(x0 - z, y0 + y1, z0 - x));
-            consumer.accept(new Point3(x0 - z, y0 - y1, z0 + x));
-            consumer.accept(new Point3(x0 - z, y0 - y1, z0 - x));
+            consumer.accept(new Vec3i(x0 + z, y0 + y1, z0 + x));
+            consumer.accept(new Vec3i(x0 + z, y0 + y1, z0 - x));
+            consumer.accept(new Vec3i(x0 + z, y0 - y1, z0 + x));
+            consumer.accept(new Vec3i(x0 + z, y0 - y1, z0 - x));
+            consumer.accept(new Vec3i(x0 - z, y0 + y1, z0 + x));
+            consumer.accept(new Vec3i(x0 - z, y0 + y1, z0 - x));
+            consumer.accept(new Vec3i(x0 - z, y0 - y1, z0 + x));
+            consumer.accept(new Vec3i(x0 - z, y0 - y1, z0 - x));
 
             z++;
             if (radiusError < 0) {

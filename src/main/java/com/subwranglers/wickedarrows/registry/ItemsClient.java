@@ -1,6 +1,6 @@
 package com.subwranglers.wickedarrows.registry;
 
-import com.subwranglers.wickedarrows.items.ItemIceArrow;
+import com.subwranglers.wickedarrows.item.ItemIceArrow;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 
@@ -25,7 +25,7 @@ public class ItemsClient {
         ModelLoader.setCustomModelResourceLocation(
                 ItemIceArrow.instance,
                 0,
-                new ModelResourceLocation(name(ICE_ARROW, QUAL))
+                new ModelResourceLocation(name(ICE_ARROW, QUALIFY))
         );
     }
 

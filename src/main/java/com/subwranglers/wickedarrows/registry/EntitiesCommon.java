@@ -1,9 +1,9 @@
 package com.subwranglers.wickedarrows.registry;
 
 import com.subwranglers.wickedarrows.WickedArrows;
-import com.subwranglers.wickedarrows.entities.EntityIceArrow;
+import com.subwranglers.wickedarrows.entity.EntityIceArrow;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 import static com.subwranglers.wickedarrows.info.Names.*;
@@ -29,11 +29,12 @@ public class EntitiesCommon {
                                 int trackingRange,
                                 int updateFrequency,
                                 boolean sendsVelocityUpdates) {
-        ResourceLocation loc = new ResourceLocation(name(name, QUAL & ENT));
+        ModelResourceLocation loc = new ModelResourceLocation(name(name, QUALIFY));
+//        ResourceLocation loc = new ResourceLocation(name(name, QUALIFY));
         EntityRegistry.registerModEntity(
                 loc,
                 entity,
-                name(name, ENT),
+                name(name, ENTITY),
                 id++,
                 WickedArrows.instance,
                 trackingRange,
