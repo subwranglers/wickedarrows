@@ -2,6 +2,7 @@ package com.subwranglers.wickedarrows.proxy;
 
 import com.subwranglers.wickedarrows.WickedArrows;
 import com.subwranglers.wickedarrows.block.BlockInvokedIce;
+import com.subwranglers.wickedarrows.block.BlockTorchArrow;
 import com.subwranglers.wickedarrows.entity.EntityIceArrow;
 import com.subwranglers.wickedarrows.entity.EntityTorchArrow;
 import com.subwranglers.wickedarrows.item.ItemIceArrow;
@@ -33,6 +34,7 @@ public class ServerProxy {
 
     private static void registerBlocks() {
         ForgeRegistries.BLOCKS.register(BlockInvokedIce.INSTANCE);
+        ForgeRegistries.BLOCKS.register(BlockTorchArrow.INSTANCE);
     }
 
     private static void registerEntities() {

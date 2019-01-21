@@ -7,38 +7,17 @@ public class Names {
     private static final String PRE_ITEM = "item_";
     private static final String PRE_ENTITY = "entity_";
 
-    /*
-
-        Blocks
-
-     */
-
+    // Blocks & Items ---------------------------
     public static final String INVOKED_ICE = "invoked_ice";
-
-    /*
-
-        Items
-
-     */
     public static final String ICE_ARROW = "ice_arrow";
     public static final String TORCH_ARROW = "torch_arrow";
 
-    /*
-
-        Potions
-
-     */
-
-    public static final String ICE_POTION = "ice_potion";
-
-    /*
-
-        Sounds
-
-     */
-
+    // Sounds -----------------------------------
     public static final String ICE_CRACKLING = "ice_crackling";
     public static final String ICE_EXPLOSION = "ice_explosion";
+
+    // Other ------------------------------------
+    public static final String ICE_POTION = "ice_potion";
 
     /**
      * Pass flag to prepend "block_" to the name.

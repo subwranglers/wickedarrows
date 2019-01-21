@@ -6,6 +6,8 @@ import com.subwranglers.wickedarrows.potion.PotionIce;
 import com.subwranglers.wickedarrows.sound.IceCrackleSoundEvent;
 import net.minecraft.block.BlockFrostedIce;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,6 +41,11 @@ public class BlockInvokedIce extends BlockFrostedIce {
         setLightOpacity(5);
         setSoundType(SoundType.GLASS);
         setHardness(1.2f);
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
     }
 
     public static IBlockState getDefaultBlockState() {

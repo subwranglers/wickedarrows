@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "on_face=up": {"model": "normal_torch"},
+    "on_face=down": {"model": "normal_torch", "z": 180},
+    "on_face=north": {"model": "normal_torch_wall", "y": 270},
+    "on_face=east": {"model": "normal_torch_wall"},
+    "on_face=south": {"model": "normal_torch_wall", "y": 90},
+    "on_face=west": {"model": "normal_torch_wall", "y": 180}
+  }
+}

@@ -1,8 +1,8 @@
 package com.subwranglers.wickedarrows.entity;
 
 import com.subwranglers.wickedarrows.base.EntityWArrow;
+import com.subwranglers.wickedarrows.block.BlockTorchArrow;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
@@ -21,8 +21,13 @@ public class EntityTorchArrow extends EntityWArrow {
     }
 
     @Override
+    public boolean isBurning() {
+        return false;
+    }
+
+    @Override
     protected void onBlockHit(RayTraceResult trace) {
-        world.setBlockState(trace.getBlockPos().offset(trace.sideHit), Blocks.TORCH.getDefaultState());
+        world.setBlockState(trace.getBlockPos().offset(trace.sideHit), BlockTorchArrow.INSTANCE.getDefaultState());
     }
 
     @Override
