@@ -6,7 +6,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class ItemsCommon  {
 
     public static void preInit() {
-        registerItems();
     }
 
     public static void init() {

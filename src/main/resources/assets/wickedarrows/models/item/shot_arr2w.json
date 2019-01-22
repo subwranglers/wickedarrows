@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "wickedarrows:items/shot_arr2w"
+  },
+  "model": "arrow"
+}

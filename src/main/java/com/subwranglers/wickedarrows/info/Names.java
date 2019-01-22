@@ -9,6 +9,14 @@ public class Names {
 
     // Blocks & Items ---------------------------
     public static final String INVOKED_ICE = "invoked_ice";
+    public static final String SHOT_ARR2W = "shot_arr2w";
+    public static final String SHOT_ARR3W = "shot_arr3w";
+    public static final String SHOT_ARR4W = "shot_arr4w";
+    public static final String SHOT_ARR5W = "shot_arr5w";
+    public static final String SHOT_ARR6W = "shot_arr6w";
+    public static final String SHOT_ARR7W = "shot_arr7w";
+    public static final String SHOT_ARR8W = "shot_arr8w";
+    public static final String SHOT_ARR9W = "shot_arr9w";
     public static final String ICE_ARROW = "ice_arrow";
     public static final String TORCH_ARROW = "torch_arrow";
 

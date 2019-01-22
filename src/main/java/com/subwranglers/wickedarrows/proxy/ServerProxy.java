@@ -4,9 +4,9 @@ import com.subwranglers.wickedarrows.WickedArrows;
 import com.subwranglers.wickedarrows.block.BlockInvokedIce;
 import com.subwranglers.wickedarrows.block.BlockTorchArrow;
 import com.subwranglers.wickedarrows.entity.EntityIceArrow;
+import com.subwranglers.wickedarrows.entity.EntityShotArrow;
 import com.subwranglers.wickedarrows.entity.EntityTorchArrow;
-import com.subwranglers.wickedarrows.item.ItemIceArrow;
-import com.subwranglers.wickedarrows.item.ItemTorchArrow;
+import com.subwranglers.wickedarrows.item.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -19,9 +19,9 @@ public class ServerProxy {
     private static int id = 1;
 
     public void preInit() {
-        registerBlocks();
-        registerEntities();
-        registerItems();
+        registerShotArrow();
+        registerIceArrow();
+        registerTorchArrow();
     }
 
     public void init() {
@@ -32,14 +32,30 @@ public class ServerProxy {
 
     }
 
-    private static void registerBlocks() {
-        ForgeRegistries.BLOCKS.register(BlockInvokedIce.INSTANCE);
-        ForgeRegistries.BLOCKS.register(BlockTorchArrow.INSTANCE);
+    public static void registerShotArrow() {
+        ForgeRegistries.ITEMS.register(ItemShotArr2w.INSTANCE);
+        ForgeRegistries.ITEMS.register(ItemShotArr3w.INSTANCE);
+        ForgeRegistries.ITEMS.register(ItemShotArr4w.INSTANCE);
+        ForgeRegistries.ITEMS.register(ItemShotArr5w.INSTANCE);
+        ForgeRegistries.ITEMS.register(ItemShotArr6w.INSTANCE);
+        ForgeRegistries.ITEMS.register(ItemShotArr7w.INSTANCE);
+        ForgeRegistries.ITEMS.register(ItemShotArr8w.INSTANCE);
+        ForgeRegistries.ITEMS.register(ItemShotArr9w.INSTANCE);
+
+        registerEntity(EntityShotArrow.class, SHOT_ARR2W, 128, 3, true);
     }
 
-    private static void registerEntities() {
+    public static void registerIceArrow() {
+        ForgeRegistries.BLOCKS.register(BlockInvokedIce.INSTANCE);
+        ForgeRegistries.ITEMS.register(ItemIceArrow.INSTANCE);
         registerEntity(EntityIceArrow.class, ICE_ARROW, 128, 3, true);
+    }
+
+    public static void registerTorchArrow() {
+        ForgeRegistries.BLOCKS.register(BlockTorchArrow.INSTANCE);
+        ForgeRegistries.ITEMS.register(ItemTorchArrow.INSTANCE);
         registerEntity(EntityTorchArrow.class, TORCH_ARROW, 128, 3, true);
+
     }
 
     private static void registerEntity(Class<? extends Entity> entity,
@@ -58,10 +74,5 @@ public class ServerProxy {
                 updateFrequency,
                 sendsVelocityUpdates
         );
-    }
-
-    public static void registerItems() {
-        ForgeRegistries.ITEMS.register(ItemIceArrow.INSTANCE);
-        ForgeRegistries.ITEMS.register(ItemTorchArrow.INSTANCE);
     }
 }
