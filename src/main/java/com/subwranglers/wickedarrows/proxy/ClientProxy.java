@@ -3,9 +3,11 @@ package com.subwranglers.wickedarrows.proxy;
 import com.subwranglers.wickedarrows.block.BlockInvokedIce;
 import com.subwranglers.wickedarrows.entity.EntityIceArrow;
 import com.subwranglers.wickedarrows.entity.EntityShotArrow;
+import com.subwranglers.wickedarrows.entity.EntityTorchArrow;
 import com.subwranglers.wickedarrows.item.*;
 import com.subwranglers.wickedarrows.render.RenderIceArrow;
 import com.subwranglers.wickedarrows.render.RenderShotArrow;
+import com.subwranglers.wickedarrows.render.RenderTorchArrow;
 import com.subwranglers.wickedarrows.sound.IceCrackleSoundEvent;
 import com.subwranglers.wickedarrows.sound.IceExplosionSoundEvent;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -108,10 +110,14 @@ public class ClientProxy extends ServerProxy {
     }
 
     private static void loadTorchArrow() {
+        // Torch Arrow Item Rendering
         ModelLoader.setCustomModelResourceLocation(
                 ItemTorchArrow.INSTANCE,
                 0,
                 new ModelResourceLocation(name(TORCH_ARROW, QUALIFY))
         );
+
+        // Entity Rendering
+        RenderingRegistry.registerEntityRenderingHandler(EntityTorchArrow.class, RenderTorchArrow::new);
     }
 }
