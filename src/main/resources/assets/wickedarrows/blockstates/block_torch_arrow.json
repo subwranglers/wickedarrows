@@ -1,0 +1,29 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "wickedarrows:block_torch_arrow"
+  },
+  "variants": {
+
+    "on_face": {
+      "up": { "model": "wickedarrows:block_torch_arrow" },
+      "down": { "model": "wickedarrows:block_torch_arrow", "z": 180 },
+      "north": { "model": "wickedarrows:block_torch_arrow", "y": 270 },
+      "east": { "model": "wickedarrows:block_torch_arrow" },
+      "south": { "model": "wickedarrows:block_torch_arrow", "y": 90 },
+      "west": { "model": "wickedarrows:block_torch_arrow", "y": 180 }
+    },
+
+    "clockwise": {
+      "north": {},
+      "northeast": {},
+      "east": {},
+      "southeast": {},
+      "south": {},
+      "southwest": {},
+      "west": {},
+      "northwest": {},
+      "none": {}
+    }
+  }
+}

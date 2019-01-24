@@ -1,18 +1,18 @@
-package com.subwranglers.wickedarrows.proxy;
+package com.subwranglers.wickedarrows.client;
 
 import com.subwranglers.wickedarrows.block.BlockInvokedIce;
+import com.subwranglers.wickedarrows.block.BlockTorchArrow;
 import com.subwranglers.wickedarrows.entity.EntityIceArrow;
 import com.subwranglers.wickedarrows.entity.EntityShotArrow;
 import com.subwranglers.wickedarrows.entity.EntityTorchArrow;
 import com.subwranglers.wickedarrows.item.*;
-import com.subwranglers.wickedarrows.render.RenderIceArrow;
-import com.subwranglers.wickedarrows.render.RenderShotArrow;
-import com.subwranglers.wickedarrows.render.RenderTorchArrow;
-import com.subwranglers.wickedarrows.sound.IceCrackleSoundEvent;
-import com.subwranglers.wickedarrows.sound.IceExplosionSoundEvent;
+import com.subwranglers.wickedarrows.proxy.ServerProxy;
+import com.subwranglers.wickedarrows.client.render.RenderIceArrow;
+import com.subwranglers.wickedarrows.client.render.RenderShotArrow;
+import com.subwranglers.wickedarrows.client.render.RenderTorchArrow;
+import com.subwranglers.wickedarrows.client.sound.IceCrackleSoundEvent;
+import com.subwranglers.wickedarrows.client.sound.IceExplosionSoundEvent;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.entity.RenderTippedArrow;
-import net.minecraft.entity.projectile.EntityTippedArrow;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -110,6 +110,10 @@ public class ClientProxy extends ServerProxy {
     }
 
     private static void loadTorchArrow() {
+        // Torch Arrow Block
+        ModelResourceLocation location = new ModelResourceLocation(name(TORCH_ARROW, QUALIFY & BLOCK));
+        ModelLoader.setCustomModelResourceLocation(BlockTorchArrow.INSTANCE_ITEM, 0, location);
+
         // Torch Arrow Item Rendering
         ModelLoader.setCustomModelResourceLocation(
                 ItemTorchArrow.INSTANCE,

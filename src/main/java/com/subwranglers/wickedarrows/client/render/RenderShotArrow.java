@@ -1,4 +1,4 @@
-package com.subwranglers.wickedarrows.render;
+package com.subwranglers.wickedarrows.client.render;
 
 import com.subwranglers.wickedarrows.entity.EntityShotArrow;
 import net.minecraft.client.renderer.entity.RenderArrow;

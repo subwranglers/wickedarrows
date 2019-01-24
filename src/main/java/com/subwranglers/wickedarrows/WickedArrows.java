@@ -13,7 +13,7 @@ import static net.minecraftforge.fml.common.Mod.*;
 public class WickedArrows {
 
     public static final String MOD_ID = "wickedarrows";
-    public static final String PROXY_CLIENT = "com.subwranglers.wickedarrows.proxy.ClientProxy";
+    public static final String PROXY_CLIENT = "com.subwranglers.wickedarrows.client.ClientProxy";
     public static final String PROXY_SERVER = "com.subwranglers.wickedarrows.proxy.ServerProxy";
 
     @Instance(MOD_ID)

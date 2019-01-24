@@ -1,8 +1,8 @@
-package com.subwranglers.wickedarrows.render;
+package com.subwranglers.wickedarrows.client.render;
 
 import com.subwranglers.wickedarrows.WickedArrows;
 import com.subwranglers.wickedarrows.entity.EntityTorchArrow;
-import com.subwranglers.wickedarrows.model.ModelTorchArrow;
+import com.subwranglers.wickedarrows.client.model.ModelTorchArrow;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

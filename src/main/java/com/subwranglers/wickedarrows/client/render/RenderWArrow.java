@@ -1,11 +1,10 @@
-package com.subwranglers.wickedarrows.render;
+package com.subwranglers.wickedarrows.client.render;
 
 import com.subwranglers.wickedarrows.base.EntityWArrow;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;

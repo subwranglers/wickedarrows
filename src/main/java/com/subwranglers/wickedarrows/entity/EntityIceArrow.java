@@ -4,7 +4,7 @@ import com.subwranglers.wickedarrows.base.EntityWArrow;
 import com.subwranglers.wickedarrows.block.BlockInvokedIce;
 import com.subwranglers.wickedarrows.item.ItemIceArrow;
 import com.subwranglers.wickedarrows.potion.PotionIce;
-import com.subwranglers.wickedarrows.sound.IceExplosionSoundEvent;
+import com.subwranglers.wickedarrows.client.sound.IceExplosionSoundEvent;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.state.IBlockState;

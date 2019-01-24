@@ -1,25 +1,18 @@
 package com.subwranglers.wickedarrows.block;
 
 import com.subwranglers.wickedarrows.info.Names;
-import com.subwranglers.wickedarrows.particle.ParticleIceCrackle;
 import com.subwranglers.wickedarrows.potion.PotionIce;
-import com.subwranglers.wickedarrows.sound.IceCrackleSoundEvent;
+import com.subwranglers.wickedarrows.client.sound.IceCrackleSoundEvent;
 import net.minecraft.block.BlockFrostedIce;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
 
 import javax.annotation.Nullable;
 import java.util.Random;

@@ -1,4 +1,4 @@
-package com.subwranglers.wickedarrows.particle;
+package com.subwranglers.wickedarrows.client.particle;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;

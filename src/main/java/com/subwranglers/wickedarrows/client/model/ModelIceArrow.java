@@ -1,4 +1,4 @@
-package com.subwranglers.wickedarrows.model;
+package com.subwranglers.wickedarrows.client.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBox;

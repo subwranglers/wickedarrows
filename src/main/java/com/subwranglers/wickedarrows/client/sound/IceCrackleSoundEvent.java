@@ -1,4 +1,4 @@
-package com.subwranglers.wickedarrows.sound;
+package com.subwranglers.wickedarrows.client.sound;
 
 import com.subwranglers.wickedarrows.WickedArrows;
 import com.subwranglers.wickedarrows.info.Names;
