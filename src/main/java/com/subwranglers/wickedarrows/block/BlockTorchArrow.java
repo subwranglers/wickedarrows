@@ -3,13 +3,11 @@ package com.subwranglers.wickedarrows.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -25,14 +23,7 @@ import static com.subwranglers.wickedarrows.info.Names.*;
 public class BlockTorchArrow extends Block {
 
     public static final String KEY_HIT_FACE = "hit_face";
-    public static final String KEY_CLOCKWISE = "clockwise";
     public static final PropertyDirection HIT_FACE = PropertyDirection.create(KEY_HIT_FACE);
-
-    /**
-     * The orientation of the block on whichever face it's attached to. By default, it has no orientation specified,
-     * which interprets as a "straight-on" orientation.
-     */
-    public static final PropertyEnum<EnumClockwise> CLOCKWISE = PropertyEnum.create(KEY_CLOCKWISE, EnumClockwise.class);
 
     public static final BlockTorchArrow INSTANCE = new BlockTorchArrow();
     public static final ItemBlock INSTANCE_ITEM = new ItemBlock(INSTANCE);
@@ -40,9 +31,7 @@ public class BlockTorchArrow extends Block {
     public BlockTorchArrow() {
         super(Material.CIRCUITS);
         setDefaultState(blockState.getBaseState()
-                .withProperty(HIT_FACE, EnumFacing.UP)
-                .withProperty(CLOCKWISE, EnumClockwise.NONE)
-        );
+                .withProperty(HIT_FACE, EnumFacing.UP));
         setCreativeTab(CreativeTabs.DECORATIONS);
 
         String name = name(TORCH_ARROW, BLOCK);
@@ -82,7 +71,7 @@ public class BlockTorchArrow extends Block {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, HIT_FACE, CLOCKWISE);
+        return new BlockStateContainer(this, HIT_FACE);
     }
 
     @Override
@@ -94,41 +83,6 @@ public class BlockTorchArrow extends Block {
     @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState()
-                .withProperty(HIT_FACE, EnumFacing.VALUES[meta]);
-    }
-
-    /**
-     * Enum values representing the orientation of the block. These are meant to be interpreted in 2D (looking directly
-     * at one block face).
-     */
-    public enum EnumClockwise implements IStringSerializable {
-        N(0, "north"),
-        NE(1, "northeast"),
-        E(2, "east"),
-        SE(3, "southeast"),
-        S(4, "south"),
-        SW(5, "southwest"),
-        W(6, "west"),
-        NW(7, "northwest"),
-        NONE(8, "none");
-
-        int index;
-        String name;
-
-        EnumClockwise(int index, String name) {
-            this.index = index;
-            this.name = name;
-        }
-
-        public EnumClockwise opposite(EnumClockwise rotation) {
-            EnumClockwise[] rots = values();
-            return rots[(rotation.index + 4) % rots.length - 1]; // -1 ignores "none"
-        }
-
-        @Override
-        public String getName() {
-            return name;
-        }
+        return getDefaultState().withProperty(HIT_FACE, EnumFacing.VALUES[meta]);
     }
 }

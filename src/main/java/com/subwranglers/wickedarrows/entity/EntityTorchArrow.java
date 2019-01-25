@@ -30,8 +30,7 @@ public class EntityTorchArrow extends EntityWArrow {
     protected void onBlockHit(RayTraceResult trace) {
         IBlockState torchArrowBlock = BlockTorchArrow.INSTANCE.getBlockState().getBaseState();
 
-        torchArrowBlock = torchArrowBlock.withProperty(BlockTorchArrow.HIT_FACE, trace.sideHit)
-                .withProperty(BlockTorchArrow.CLOCKWISE, BlockTorchArrow.EnumClockwise.NONE);
+        torchArrowBlock = torchArrowBlock.withProperty(BlockTorchArrow.HIT_FACE, trace.sideHit);
 
         world.setBlockState(trace.getBlockPos().offset(trace.sideHit), torchArrowBlock);
 

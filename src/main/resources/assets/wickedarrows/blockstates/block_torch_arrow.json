@@ -4,7 +4,6 @@
     "model": "wickedarrows:block_torch_arrow"
   },
   "variants": {
-
     "hit_face": {
       "up": { "model": "wickedarrows:block_torch_arrow" },
       "down": { "model": "wickedarrows:block_torch_arrow", "x": 180 },
@@ -14,18 +13,6 @@
 
       "east": { "model": "wickedarrows:block_torch_arrow", "y": 90, "x": 90 },
       "west": { "model": "wickedarrows:block_torch_arrow", "y": 90, "x": 270 }
-    },
-
-    "clockwise": {
-      "north": {},
-      "northeast": {},
-      "east": {},
-      "southeast": {},
-      "south": {},
-      "southwest": {},
-      "west": {},
-      "northwest": {},
-      "none": {}
     }
   }
 }
