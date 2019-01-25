@@ -5,13 +5,15 @@
   },
   "variants": {
 
-    "on_face": {
+    "hit_face": {
       "up": { "model": "wickedarrows:block_torch_arrow" },
-      "down": { "model": "wickedarrows:block_torch_arrow", "z": 180 },
-      "north": { "model": "wickedarrows:block_torch_arrow", "y": 270 },
-      "east": { "model": "wickedarrows:block_torch_arrow" },
-      "south": { "model": "wickedarrows:block_torch_arrow", "y": 90 },
-      "west": { "model": "wickedarrows:block_torch_arrow", "y": 180 }
+      "down": { "model": "wickedarrows:block_torch_arrow", "x": 180 },
+
+      "north": { "model": "wickedarrows:block_torch_arrow", "x": 90 },
+      "south": { "model": "wickedarrows:block_torch_arrow", "x": 270 },
+
+      "east": { "model": "wickedarrows:block_torch_arrow", "y": 90, "x": 90 },
+      "west": { "model": "wickedarrows:block_torch_arrow", "y": 90, "x": 270 }
     },
 
     "clockwise": {

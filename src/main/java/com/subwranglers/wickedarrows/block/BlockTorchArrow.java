@@ -24,9 +24,9 @@ import static com.subwranglers.wickedarrows.info.Names.*;
 
 public class BlockTorchArrow extends Block {
 
-    public static final String KEY_ON_FACE = "on_face";
+    public static final String KEY_HIT_FACE = "hit_face";
     public static final String KEY_CLOCKWISE = "clockwise";
-    public static final PropertyDirection ON_FACE = PropertyDirection.create(KEY_ON_FACE);
+    public static final PropertyDirection HIT_FACE = PropertyDirection.create(KEY_HIT_FACE);
 
     /**
      * The orientation of the block on whichever face it's attached to. By default, it has no orientation specified,
@@ -40,7 +40,7 @@ public class BlockTorchArrow extends Block {
     public BlockTorchArrow() {
         super(Material.CIRCUITS);
         setDefaultState(blockState.getBaseState()
-                .withProperty(ON_FACE, EnumFacing.UP)
+                .withProperty(HIT_FACE, EnumFacing.UP)
                 .withProperty(CLOCKWISE, EnumClockwise.NONE)
         );
         setCreativeTab(CreativeTabs.DECORATIONS);
@@ -49,8 +49,8 @@ public class BlockTorchArrow extends Block {
         setUnlocalizedName(name);
         setRegistryName(name);
 
-        setLightOpacity(0);
-        setLightLevel(30.f);
+        setLightOpacity(-2);
+        setLightLevel(2.f);
 
         setTickRandomly(true);
     }
@@ -82,24 +82,20 @@ public class BlockTorchArrow extends Block {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, ON_FACE, CLOCKWISE);
+        return new BlockStateContainer(this, HIT_FACE, CLOCKWISE);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        EnumFacing dir = state.getValue(ON_FACE);
-        EnumClockwise rot = state.getValue(CLOCKWISE);
-
-        int out = dir.getIndex() << 4;
-        out &= rot.index;
-
-        return out;
+        EnumFacing dir = state.getValue(HIT_FACE);
+        return dir.getIndex();
     }
 
     @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return super.getStateFromMeta(meta);
+        return getDefaultState()
+                .withProperty(HIT_FACE, EnumFacing.VALUES[meta]);
     }
 
     /**

@@ -2,6 +2,7 @@ package com.subwranglers.wickedarrows.entity;
 
 import com.subwranglers.wickedarrows.base.EntityWArrow;
 import com.subwranglers.wickedarrows.block.BlockTorchArrow;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -27,7 +28,15 @@ public class EntityTorchArrow extends EntityWArrow {
 
     @Override
     protected void onBlockHit(RayTraceResult trace) {
-        world.setBlockState(trace.getBlockPos().offset(trace.sideHit), BlockTorchArrow.INSTANCE.getDefaultState());
+        IBlockState torchArrowBlock = BlockTorchArrow.INSTANCE.getBlockState().getBaseState();
+
+        torchArrowBlock = torchArrowBlock.withProperty(BlockTorchArrow.HIT_FACE, trace.sideHit)
+                .withProperty(BlockTorchArrow.CLOCKWISE, BlockTorchArrow.EnumClockwise.NONE);
+
+        world.setBlockState(trace.getBlockPos().offset(trace.sideHit), torchArrowBlock);
+
+        // Destroy this entity. The torch arrow gets "converted" into a block which gives reduced materials on harvest.
+        setDead();
     }
 
     @Override
