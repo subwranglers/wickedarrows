@@ -2,8 +2,13 @@ package com.subwranglers.wickedarrows.entity;
 
 import com.subwranglers.wickedarrows.base.EntityWArrow;
 import com.subwranglers.wickedarrows.block.BlockTorchArrow;
+import com.subwranglers.wickedarrows.item.ItemTorchArrow;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
@@ -28,14 +33,25 @@ public class EntityTorchArrow extends EntityWArrow {
 
     @Override
     protected void onBlockHit(RayTraceResult trace) {
-        IBlockState torchArrowBlock = BlockTorchArrow.INSTANCE.getBlockState().getBaseState();
+        if (isDead)
+            return;
 
-        torchArrowBlock = torchArrowBlock.withProperty(BlockTorchArrow.HIT_FACE, trace.sideHit);
-
-        world.setBlockState(trace.getBlockPos().offset(trace.sideHit), torchArrowBlock);
-
-        // Destroy this entity. The torch arrow gets "converted" into a block which gives reduced materials on harvest.
+        // Destroy this entity. The BlockTorchArrow drops 1 ItemTorchArrow on harvest.
         setDead();
+
+        boolean canPlace = world.mayPlace(
+                BlockTorchArrow.INSTANCE,
+                trace.getBlockPos().offset(trace.sideHit),
+                true,
+                trace.sideHit,
+                shootingEntity
+        );
+        BlockPos fromSideHit = trace.getBlockPos().offset(trace.sideHit);
+
+        if (canPlace)
+            world.setBlockState(fromSideHit, BlockTorchArrow.applyToBlockFace(trace.sideHit));
+        else
+            Block.spawnAsEntity(world, fromSideHit, new ItemStack(ItemTorchArrow.INSTANCE));
     }
 
     @Override
