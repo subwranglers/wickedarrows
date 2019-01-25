@@ -2,6 +2,7 @@ package com.subwranglers.wickedarrows.block;
 
 import com.subwranglers.wickedarrows.item.ItemTorchArrow;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
@@ -43,7 +44,14 @@ public class BlockTorchArrow extends Block {
         setLightOpacity(-2);
         setLightLevel(2.f);
 
+        setSoundType(SoundType.WOOD);
+
         setTickRandomly(true);
+    }
+
+    public static IBlockState applyToBlockFace(EnumFacing facing) {
+        IBlockState torchArrowBlock = INSTANCE.getBlockState().getBaseState();
+        return torchArrowBlock.withProperty(HIT_FACE, facing);
     }
 
     /*
@@ -110,4 +118,22 @@ public class BlockTorchArrow extends Block {
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return ItemTorchArrow.INSTANCE;
     }
+
+//    @Override
+//    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+//        for (EnumFacing facing : EnumFacing.VALUES) {
+//            IBlockState neighbour = worldIn.getBlockState(pos.offset(facing));
+//            if (neighbour.getBlock() == Blocks.TNT)
+//                igniteTntNeighbours(worldIn, pos.offset(facing));
+//        }
+//    }
+//
+//    private void igniteTntNeighbours(World worldIn, BlockPos pos) {
+//        if (!worldIn.isRemote) {
+//            worldIn.setBlockToAir(pos);
+//            EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(worldIn, (double) ((float) pos.getX() + 0.5F), (double) pos.getY(), (double) ((float) pos.getZ() + 0.5F), null);
+//            worldIn.spawnEntity(entitytntprimed);
+//            worldIn.playSound((EntityPlayer) null, entitytntprimed.posX, entitytntprimed.posY, entitytntprimed.posZ, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
+//        }
+//    }
 }
