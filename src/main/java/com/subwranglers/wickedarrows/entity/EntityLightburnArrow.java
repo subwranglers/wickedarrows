@@ -1,6 +1,7 @@
 package com.subwranglers.wickedarrows.entity;
 
 import com.subwranglers.wickedarrows.base.EntityWArrow;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
 
@@ -18,5 +19,8 @@ public class EntityLightburnArrow extends EntityWArrow {
         super(worldIn, shooter);
     }
 
-
+    @Override
+    public void shoot(Entity shooter, float pitch, float yaw, float p_184547_4_, float velocity, float inaccuracy) {
+        super.shoot(shooter, pitch, yaw, p_184547_4_, (velocity + 1.f) * 20, inaccuracy);
+    }
 }
