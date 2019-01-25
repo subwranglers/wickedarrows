@@ -1,11 +1,13 @@
 package com.subwranglers.wickedarrows.block;
 
+import com.subwranglers.wickedarrows.item.ItemTorchArrow;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -44,6 +46,12 @@ public class BlockTorchArrow extends Block {
         setTickRandomly(true);
     }
 
+    /*
+
+        Options
+
+     */
+
     @SuppressWarnings("deprecation")
     @Override
     public boolean isOpaqueCube(IBlockState state) {
@@ -56,18 +64,24 @@ public class BlockTorchArrow extends Block {
         return false;
     }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-        // TODO: 11/12/18 spawn flame particles
-    }
-
     @SuppressWarnings("deprecation")
     @Nullable
     @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         return NULL_AABB;
     }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+        // TODO: 11/12/18 spawn flame particles
+    }
+
+    /*
+
+        Block states
+
+     */
 
     @Override
     protected BlockStateContainer createBlockState() {
@@ -84,5 +98,16 @@ public class BlockTorchArrow extends Block {
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return getDefaultState().withProperty(HIT_FACE, EnumFacing.VALUES[meta]);
+    }
+
+    /*
+
+        Implementation
+
+     */
+
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return ItemTorchArrow.INSTANCE;
     }
 }
