@@ -40,7 +40,7 @@ public class EntityShotArrow extends EntityWArrow {
     }
 
     private float velocityAdjustment(float velocity) {
-        float ratio = 70.0f / 8.0f / 100; // 0.1125
+        float ratio = 50.0f / 8.0f / 100; // 0.0625
         return velocity * ratio * numArrows;
     }
 
