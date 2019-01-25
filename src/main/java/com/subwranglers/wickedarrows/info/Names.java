@@ -19,6 +19,7 @@ public class Names {
     public static final String SHOT_ARR9W = "shot_arr9w";
     public static final String ICE_ARROW = "ice_arrow";
     public static final String TORCH_ARROW = "torch_arrow";
+    public static final String LIGHTBURN_ARROW = "lightburn_arrow";
 
     // Sounds -----------------------------------
     public static final String ICE_CRACKLING = "ice_crackling";

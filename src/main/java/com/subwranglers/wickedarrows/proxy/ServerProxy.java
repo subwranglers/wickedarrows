@@ -4,6 +4,7 @@ import com.subwranglers.wickedarrows.WickedArrows;
 import com.subwranglers.wickedarrows.block.BlockInvokedIce;
 import com.subwranglers.wickedarrows.block.BlockTorchArrow;
 import com.subwranglers.wickedarrows.entity.EntityIceArrow;
+import com.subwranglers.wickedarrows.entity.EntityLightburnArrow;
 import com.subwranglers.wickedarrows.entity.EntityShotArrow;
 import com.subwranglers.wickedarrows.entity.EntityTorchArrow;
 import com.subwranglers.wickedarrows.item.*;
@@ -22,6 +23,7 @@ public class ServerProxy {
         registerShotArrow();
         registerIceArrow();
         registerTorchArrow();
+        registerLightburnArrow();
     }
 
     public void init() {
@@ -29,32 +31,6 @@ public class ServerProxy {
     }
 
     public void postInit() {
-
-    }
-
-    public static void registerShotArrow() {
-        ForgeRegistries.ITEMS.register(ItemShotArr2w.INSTANCE);
-        ForgeRegistries.ITEMS.register(ItemShotArr3w.INSTANCE);
-        ForgeRegistries.ITEMS.register(ItemShotArr4w.INSTANCE);
-        ForgeRegistries.ITEMS.register(ItemShotArr5w.INSTANCE);
-        ForgeRegistries.ITEMS.register(ItemShotArr6w.INSTANCE);
-        ForgeRegistries.ITEMS.register(ItemShotArr7w.INSTANCE);
-        ForgeRegistries.ITEMS.register(ItemShotArr8w.INSTANCE);
-        ForgeRegistries.ITEMS.register(ItemShotArr9w.INSTANCE);
-
-        registerEntity(EntityShotArrow.class, SHOT_ARR2W, 128, 3, true);
-    }
-
-    public static void registerIceArrow() {
-        ForgeRegistries.BLOCKS.register(BlockInvokedIce.INSTANCE);
-        ForgeRegistries.ITEMS.register(ItemIceArrow.INSTANCE);
-        registerEntity(EntityIceArrow.class, ICE_ARROW, 128, 3, true);
-    }
-
-    public static void registerTorchArrow() {
-        ForgeRegistries.BLOCKS.register(BlockTorchArrow.INSTANCE);
-        ForgeRegistries.ITEMS.register(ItemTorchArrow.INSTANCE);
-        registerEntity(EntityTorchArrow.class, TORCH_ARROW, 128, 3, true);
 
     }
 
@@ -74,5 +50,39 @@ public class ServerProxy {
                 updateFrequency,
                 sendsVelocityUpdates
         );
+    }
+
+    private static void registerEntity(Class<? extends Entity> entity, String name) {
+        registerEntity(entity, name, 128, 3, true);
+    }
+
+    public static void registerShotArrow() {
+        ForgeRegistries.ITEMS.register(ItemShotArr2w.INSTANCE);
+        ForgeRegistries.ITEMS.register(ItemShotArr3w.INSTANCE);
+        ForgeRegistries.ITEMS.register(ItemShotArr4w.INSTANCE);
+        ForgeRegistries.ITEMS.register(ItemShotArr5w.INSTANCE);
+        ForgeRegistries.ITEMS.register(ItemShotArr6w.INSTANCE);
+        ForgeRegistries.ITEMS.register(ItemShotArr7w.INSTANCE);
+        ForgeRegistries.ITEMS.register(ItemShotArr8w.INSTANCE);
+        ForgeRegistries.ITEMS.register(ItemShotArr9w.INSTANCE);
+
+        registerEntity(EntityShotArrow.class, SHOT_ARR2W);
+    }
+
+    public static void registerIceArrow() {
+        ForgeRegistries.BLOCKS.register(BlockInvokedIce.INSTANCE);
+        ForgeRegistries.ITEMS.register(ItemIceArrow.INSTANCE);
+        registerEntity(EntityIceArrow.class, ICE_ARROW);
+    }
+
+    public static void registerTorchArrow() {
+        ForgeRegistries.BLOCKS.register(BlockTorchArrow.INSTANCE);
+        ForgeRegistries.ITEMS.register(ItemTorchArrow.INSTANCE);
+        registerEntity(EntityTorchArrow.class, TORCH_ARROW);
+    }
+
+    private static void registerLightburnArrow() {
+        ForgeRegistries.ITEMS.register(ItemLightburnArrow.INSTANCE);
+        registerEntity(EntityLightburnArrow.class, LIGHTBURN_ARROW);
     }
 }

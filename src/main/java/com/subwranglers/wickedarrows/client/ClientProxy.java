@@ -2,7 +2,9 @@ package com.subwranglers.wickedarrows.client;
 
 import com.subwranglers.wickedarrows.block.BlockInvokedIce;
 import com.subwranglers.wickedarrows.block.BlockTorchArrow;
+import com.subwranglers.wickedarrows.client.render.RenderLightburnArrow;
 import com.subwranglers.wickedarrows.entity.EntityIceArrow;
+import com.subwranglers.wickedarrows.entity.EntityLightburnArrow;
 import com.subwranglers.wickedarrows.entity.EntityShotArrow;
 import com.subwranglers.wickedarrows.entity.EntityTorchArrow;
 import com.subwranglers.wickedarrows.item.*;
@@ -27,6 +29,7 @@ public class ClientProxy extends ServerProxy {
         loadShotArrow();
         loadIceArrow();
         loadTorchArrow();
+        loadLightburnArrow();
     }
 
     public void init() {
@@ -123,5 +126,17 @@ public class ClientProxy extends ServerProxy {
 
         // Entity Rendering
         RenderingRegistry.registerEntityRenderingHandler(EntityTorchArrow.class, RenderTorchArrow::new);
+    }
+
+    private static void loadLightburnArrow() {
+        // Item Rendering
+        ModelLoader.setCustomModelResourceLocation(
+                ItemLightburnArrow.INSTANCE,
+                0,
+                new ModelResourceLocation(name(LIGHTBURN_ARROW, QUALIFY))
+        );
+
+        // Entity Rendering
+        RenderingRegistry.registerEntityRenderingHandler(EntityLightburnArrow.class, RenderLightburnArrow::new);
     }
 }
