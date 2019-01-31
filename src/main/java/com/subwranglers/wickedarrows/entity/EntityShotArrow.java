@@ -51,9 +51,7 @@ public class EntityShotArrow extends EntityWArrow {
         int increment = (20 / 5) * (numArrows - ARROWS_SAFE_MAX);
         int result = MathHelper.getInt(new Random(), 1, 100);
 
-        System.out.println(String.format("%d/%d ? %b (result < chance boundary)", result, increment, result < increment));
-
-        if (numArrows > ARROWS_SAFE_MAX &&  result <= increment)
+        if (numArrows > ARROWS_SAFE_MAX && result <= increment)
             return 200.f;
         else
             return inaccuracy * numArrows * 1.75f;
@@ -63,8 +61,6 @@ public class EntityShotArrow extends EntityWArrow {
     public void shoot(Entity shooter, float pitch, float yaw, float p_184547_4_, float velocity, float inaccuracy) {
         velocity = Math.abs(velocity - velocityAdjustment(velocity));
         inaccuracy = inaccuracyAdjustment(inaccuracy);
-
-        System.out.println(String.format("V: %f, Arrows: %d", velocity, numArrows));
 
         super.shoot(shooter, pitch, yaw, p_184547_4_, velocity, inaccuracy);
 
@@ -78,12 +74,4 @@ public class EntityShotArrow extends EntityWArrow {
             world.spawnEntity(arrow);
         }
     }
-
-//    @Override
-//    public void shoot(double x, double y, double z, float velocity, float inaccuracy) {
-//        velocity = velocityAdjustment(velocity);
-//        int arrows = numArrows;
-//        while (arrows-- > 0)
-//            super.shoot(x, y, z, velocity, inaccuracy);
-//    }
 }
