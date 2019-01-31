@@ -17,8 +17,4 @@ public class IceExplosionSoundEvent extends SoundEvent {
         super(new ResourceLocation(WickedArrows.MOD_ID, Names.ICE_EXPLOSION));
         setRegistryName(WickedArrows.MOD_ID, Names.ICE_EXPLOSION);
     }
-
-    public static void play(EntityPlayer player, World world, BlockPos pos) {
-        world.playSound(player, pos, INSTANCE, SoundCategory.AMBIENT, 0.5f, 1.0f);
-    }
 }

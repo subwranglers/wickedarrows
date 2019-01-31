@@ -12,6 +12,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -84,6 +85,11 @@ public class EntityIceArrow extends EntityWArrow {
     }
 
     @Override
+    public SoundCategory getSoundCategory() {
+        return SoundCategory.BLOCKS;
+    }
+
+    @Override
     protected ItemStack getArrowStack() {
         return new ItemStack(ItemIceArrow.INSTANCE);
     }
@@ -93,7 +99,7 @@ public class EntityIceArrow extends EntityWArrow {
         super.onHit(trace);
 
         if (trace.getBlockPos() != null && trace.typeOfHit == RayTraceResult.Type.BLOCK && !isDead) {
-            IceExplosionSoundEvent.play(null, world, getPosition());
+            playSound(IceExplosionSoundEvent.INSTANCE, 0.5F, 1.0F);
             generateIceSpike(trace);
             setDead();
         }
@@ -108,7 +114,7 @@ public class EntityIceArrow extends EntityWArrow {
 
         PotionIce.applyFrozenEffectToEntity(livingHit);
 
-        IceExplosionSoundEvent.play(null, world, getPosition());
+        playSound(IceExplosionSoundEvent.INSTANCE, 0.5F, 1.0F);
 
         generateIceCage(
                 livingHit.getPosition(),
