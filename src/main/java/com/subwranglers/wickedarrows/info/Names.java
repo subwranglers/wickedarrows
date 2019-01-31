@@ -20,6 +20,7 @@ public class Names {
     public static final String ICE_ARROW = "ice_arrow";
     public static final String TORCH_ARROW = "torch_arrow";
     public static final String LIGHTBURN_ARROW = "lightburn_arrow";
+    public static final String SHARP_ARROW = "sharp_arrow";
 
     // Sounds -----------------------------------
     public static final String ICE_CRACKLING = "ice_crackling";

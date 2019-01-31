@@ -3,10 +3,7 @@ package com.subwranglers.wickedarrows.proxy;
 import com.subwranglers.wickedarrows.WickedArrows;
 import com.subwranglers.wickedarrows.block.BlockInvokedIce;
 import com.subwranglers.wickedarrows.block.BlockTorchArrow;
-import com.subwranglers.wickedarrows.entity.EntityIceArrow;
-import com.subwranglers.wickedarrows.entity.EntityLightburnArrow;
-import com.subwranglers.wickedarrows.entity.EntityShotArrow;
-import com.subwranglers.wickedarrows.entity.EntityTorchArrow;
+import com.subwranglers.wickedarrows.entity.*;
 import com.subwranglers.wickedarrows.item.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
@@ -24,6 +21,7 @@ public class ServerProxy {
         registerIceArrow();
         registerTorchArrow();
         registerLightburnArrow();
+        registerSharpArrow();
     }
 
     public void init() {
@@ -84,5 +82,10 @@ public class ServerProxy {
     private static void registerLightburnArrow() {
         ForgeRegistries.ITEMS.register(ItemLightburnArrow.INSTANCE);
         registerEntity(EntityLightburnArrow.class, LIGHTBURN_ARROW);
+    }
+
+    private static void registerSharpArrow() {
+        ForgeRegistries.ITEMS.register(ItemSharpArrow.INSTANCE);
+        registerEntity(EntitySharpArrow.class, SHARP_ARROW);
     }
 }

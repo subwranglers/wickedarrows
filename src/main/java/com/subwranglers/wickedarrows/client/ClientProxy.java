@@ -2,16 +2,10 @@ package com.subwranglers.wickedarrows.client;
 
 import com.subwranglers.wickedarrows.block.BlockInvokedIce;
 import com.subwranglers.wickedarrows.block.BlockTorchArrow;
-import com.subwranglers.wickedarrows.client.render.RenderLightburnArrow;
-import com.subwranglers.wickedarrows.entity.EntityIceArrow;
-import com.subwranglers.wickedarrows.entity.EntityLightburnArrow;
-import com.subwranglers.wickedarrows.entity.EntityShotArrow;
-import com.subwranglers.wickedarrows.entity.EntityTorchArrow;
+import com.subwranglers.wickedarrows.client.render.*;
+import com.subwranglers.wickedarrows.entity.*;
 import com.subwranglers.wickedarrows.item.*;
 import com.subwranglers.wickedarrows.proxy.ServerProxy;
-import com.subwranglers.wickedarrows.client.render.RenderIceArrow;
-import com.subwranglers.wickedarrows.client.render.RenderShotArrow;
-import com.subwranglers.wickedarrows.client.render.RenderTorchArrow;
 import com.subwranglers.wickedarrows.client.sound.IceCrackleSoundEvent;
 import com.subwranglers.wickedarrows.client.sound.IceExplosionSoundEvent;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -30,6 +24,7 @@ public class ClientProxy extends ServerProxy {
         loadIceArrow();
         loadTorchArrow();
         loadLightburnArrow();
+        loadSharpArrow();
     }
 
     public void init() {
@@ -138,5 +133,17 @@ public class ClientProxy extends ServerProxy {
 
         // Entity Rendering
         RenderingRegistry.registerEntityRenderingHandler(EntityLightburnArrow.class, RenderLightburnArrow::new);
+    }
+
+    private static void loadSharpArrow() {
+        // Item Rendering
+        ModelLoader.setCustomModelResourceLocation(
+                ItemSharpArrow.INSTANCE,
+                0,
+                new ModelResourceLocation(name(SHARP_ARROW, QUALIFY))
+        );
+
+        // Entity Rendering
+        RenderingRegistry.registerEntityRenderingHandler(EntitySharpArrow.class, RenderSharpArrow::new);
     }
 }
