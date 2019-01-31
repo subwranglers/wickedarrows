@@ -30,7 +30,7 @@ public class PotionIce extends Potion {
     }
 
     /**
-     * "Freezes" an entity as much as possible by preventing it from moving, attacking, breaking block and giving it
+     * "Freezes" an entity as much as possible by preventing it from moving, attacking, breaking blocks and giving it
      * fire resistance.
      *
      * @param living the entity to "freeze"
