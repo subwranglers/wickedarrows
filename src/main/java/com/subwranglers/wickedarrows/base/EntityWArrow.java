@@ -28,9 +28,10 @@ public class EntityWArrow extends EntityArrow {
 
     @Override
     protected void onHit(RayTraceResult trace) {
-        super.onHit(trace);
         if (trace.getBlockPos() != null && trace.typeOfHit == RayTraceResult.Type.BLOCK)
             onBlockHit(trace);
+
+        super.onHit(trace);
     }
 
     protected void onBlockHit(RayTraceResult trace) {
