@@ -101,8 +101,10 @@ public class EntityIceArrow extends EntityWArrow {
 
     @Override
     protected void arrowHit(EntityLivingBase livingHit) {
-        // They're frozen -- remove all velocity FIXME: Client side only
-        livingHit.setVelocity(0, 0, 0);
+        // They're frozen -- remove all velocity
+        livingHit.motionX = 0.D;
+        livingHit.motionY = 0.D;
+        livingHit.motionZ = 0.D;
 
         PotionIce.applyFrozenEffectToEntity(livingHit);
 
