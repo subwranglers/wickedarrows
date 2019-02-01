@@ -1,10 +1,10 @@
 package com.subwranglers.wickedarrows.entity;
 
 import com.subwranglers.wickedarrows.base.EntityWArrow;
-import com.subwranglers.wickedarrows.item.ItemShotArr2w;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityTippedArrow;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -36,7 +36,7 @@ public class EntityShotArrow extends EntityWArrow {
 
     @Override
     protected ItemStack getArrowStack() {
-        return new ItemStack(ItemShotArr2w.INSTANCE);
+        return new ItemStack(Items.ARROW);
     }
 
     private float velocityAdjustment(float velocity) {
