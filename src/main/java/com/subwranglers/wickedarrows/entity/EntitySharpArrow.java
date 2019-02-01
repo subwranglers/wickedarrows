@@ -8,11 +8,9 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 
 public class EntitySharpArrow extends EntityWArrow {
 
-    private Random random = new Random();
     private int firedVelocity;
 
     /**
