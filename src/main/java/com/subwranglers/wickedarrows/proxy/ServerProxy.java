@@ -22,6 +22,7 @@ public class ServerProxy {
         registerTorchArrow();
         registerLightburnArrow();
         registerSharpArrow();
+        registerHungerArrow();
     }
 
     public void init() {
@@ -87,5 +88,10 @@ public class ServerProxy {
     private static void registerSharpArrow() {
         ForgeRegistries.ITEMS.register(ItemSharpArrow.INSTANCE);
         registerEntity(EntitySharpArrow.class, SHARP_ARROW);
+    }
+
+    private static void registerHungerArrow() {
+        ForgeRegistries.ITEMS.register(ItemHungerArrow.INSTANCE);
+        registerEntity(EntityHungerArrow.class, HUNGER_ARROW);
     }
 }
