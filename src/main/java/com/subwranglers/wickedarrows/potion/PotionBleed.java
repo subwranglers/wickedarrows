@@ -64,9 +64,7 @@ public class PotionBleed extends Potion {
                     // Smaller interval the more health the entity has
                     int health = (int) Math.ceil(entityIn.getHealth());
                     int interval = Math.max(Math.abs(20 - health), 1);
-
                     interval *= (MCConst.TICKS_PER_SECOND / 4);
-                    System.out.println(String.format("Entity has %f health, attack interval is %d (ticks)", entityIn.getHealth(), interval));
 
                     if (duration % interval == 0)
                         entityIn.attackEntityFrom(DamageSource.MAGIC, DAMAGE);
