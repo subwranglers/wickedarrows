@@ -1,6 +1,5 @@
-package com.subwranglers.wickedarrows.proxy;
+package com.subwranglers.wickedarrows;
 
-import com.subwranglers.wickedarrows.WickedArrows;
 import com.subwranglers.wickedarrows.block.BlockInvokedIce;
 import com.subwranglers.wickedarrows.block.BlockTorchArrow;
 import com.subwranglers.wickedarrows.entity.*;

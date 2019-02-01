@@ -1,6 +1,5 @@
 package com.subwranglers.wickedarrows;
 
-import com.subwranglers.wickedarrows.proxy.ServerProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -14,7 +13,7 @@ public class WickedArrows {
 
     public static final String MOD_ID = "wickedarrows";
     public static final String PROXY_CLIENT = "com.subwranglers.wickedarrows.client.ClientProxy";
-    public static final String PROXY_SERVER = "com.subwranglers.wickedarrows.proxy.ServerProxy";
+    public static final String PROXY_SERVER = "com.subwranglers.wickedarrows.ServerProxy";
 
     @Instance(MOD_ID)
     public static WickedArrows instance;

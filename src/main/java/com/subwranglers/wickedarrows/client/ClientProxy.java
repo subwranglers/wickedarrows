@@ -5,7 +5,7 @@ import com.subwranglers.wickedarrows.block.BlockTorchArrow;
 import com.subwranglers.wickedarrows.client.render.*;
 import com.subwranglers.wickedarrows.entity.*;
 import com.subwranglers.wickedarrows.item.*;
-import com.subwranglers.wickedarrows.proxy.ServerProxy;
+import com.subwranglers.wickedarrows.ServerProxy;
 import com.subwranglers.wickedarrows.client.sound.IceCrackleSoundEvent;
 import com.subwranglers.wickedarrows.client.sound.IceExplosionSoundEvent;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
