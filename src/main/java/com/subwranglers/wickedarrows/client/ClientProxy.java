@@ -26,6 +26,7 @@ public class ClientProxy extends ServerProxy {
         loadLightburnArrow();
         loadSharpArrow();
         loadHungerArrow();
+        loadMerlinArrow();
     }
 
     public void init() {
@@ -158,5 +159,17 @@ public class ClientProxy extends ServerProxy {
 
         // Entity Rendering
         RenderingRegistry.registerEntityRenderingHandler(EntityHungerArrow.class, RenderHungerArrow::new);
+    }
+
+    private static void loadMerlinArrow() {
+        // Item Rendering
+        ModelLoader.setCustomModelResourceLocation(
+                ItemMerlinArrow.INSTANCE,
+                0,
+                new ModelResourceLocation(name(MERLIN_ARROW, QUALIFY))
+        );
+
+        // Entity Rendering
+        RenderingRegistry.registerEntityRenderingHandler(EntityMerlinArrow.class, RenderMerlinArrow::new);
     }
 }

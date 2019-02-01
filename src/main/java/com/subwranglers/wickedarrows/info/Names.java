@@ -22,6 +22,7 @@ public class Names {
     public static final String LIGHTBURN_ARROW = "lightburn_arrow";
     public static final String SHARP_ARROW = "sharp_arrow";
     public static final String HUNGER_ARROW = "hunger_arrow";
+    public static final String MERLIN_ARROW = "merlin_arrow";
 
     // Sounds -----------------------------------
     public static final String ICE_CRACKLING = "ice_crackling";
