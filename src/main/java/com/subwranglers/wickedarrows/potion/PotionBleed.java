@@ -28,7 +28,7 @@ public class PotionBleed extends Potion {
     /**
      * How much damage should be applied to the targeted entity (as an additive/subtractive value)
      */
-    public static final float DAMAGE = 2.F;
+    public static final float DAMAGE = 1.F;
 
     protected PotionBleed() {
         super(true, 0xff0000);
