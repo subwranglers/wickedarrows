@@ -28,6 +28,7 @@ public class Names {
 
     // Other ------------------------------------
     public static final String ICE_POTION = "ice_potion";
+    public static final String BLEED_POTION = "bleed_potion";
 
     /**
      * Pass flag to prepend "block_" to the name.
