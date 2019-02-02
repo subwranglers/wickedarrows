@@ -2,7 +2,7 @@
 {
   "modid": "wickedarrows",
   "name": "Wicked Arrows",
-  "description": "A collection of unique and powerful arrows for the archery-inclined.",
+  "description": "A collection of unique and powerful arrows.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
