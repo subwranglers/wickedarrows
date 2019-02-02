@@ -1,4 +1,4 @@
-package com.subwranglers.wickedarrows.ai;
+package com.subwranglers.wickedarrows.events;
 
 import com.subwranglers.wickedarrows.entity.EntityHungerArrow;
 import net.minecraft.entity.Entity;
@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber
-public class AIHungerArrow {
+public class EventHungerArrowAI {
 
     /**
      * How fast specified mobs move when moving toward the entity struck with an {@link EntityHungerArrow}.
