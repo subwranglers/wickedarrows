@@ -49,7 +49,7 @@ public class EntityShotArrow extends EntityWArrow {
         final int ARROWS_SAFE_MAX = 3;
 
         int increment = (20 / 5) * (numArrows - ARROWS_SAFE_MAX);
-        int result = MathHelper.getInt(new Random(), 1, 100);
+        int result = MathHelper.getInt(world.rand, 1, 100);
 
         if (numArrows > ARROWS_SAFE_MAX && result <= increment)
             return 200.f;
