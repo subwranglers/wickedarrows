@@ -1,5 +1,6 @@
 package com.subwranglers.wickedarrows.potion;
 
+import com.subwranglers.wickedarrows.WickedArrows;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.MobEffects;
@@ -20,8 +21,8 @@ public class PotionIce extends Potion {
     private PotionIce() {
         super(true, POTION_COLOR);
 
-        setRegistryName(ICE_POTION);
-        setPotionName(name(ICE_POTION, QUALIFY));
+        setRegistryName(WickedArrows.MOD_ID, ICE_POTION);
+        setPotionName(name(ICE_POTION, QUALIFY)); // TODO: 01/02/19 this needs to be a localized string
 
         final int MODIFIER = 3;
         registerPotionAttributeModifier(SharedMonsterAttributes.ATTACK_SPEED, UUID, -MODIFIER, POTION_LEVEL);

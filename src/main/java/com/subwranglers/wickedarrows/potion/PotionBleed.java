@@ -1,5 +1,6 @@
 package com.subwranglers.wickedarrows.potion;
 
+import com.subwranglers.wickedarrows.WickedArrows;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.potion.Potion;
@@ -32,8 +33,8 @@ public class PotionBleed extends Potion {
 
     protected PotionBleed() {
         super(true, 0xff0000);
-        setRegistryName(BLEED_POTION);
-        setPotionName(name(BLEED_POTION, QUALIFY));
+        setRegistryName(WickedArrows.MOD_ID, BLEED_POTION);
+        setPotionName(name(BLEED_POTION, QUALIFY)); // TODO: 01/02/19 this needs to be a localized string
 
         registerPotionAttributeModifier(SharedMonsterAttributes.MOVEMENT_SPEED, UUID, -0.1D, 1);
     }
