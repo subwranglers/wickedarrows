@@ -2,13 +2,13 @@
 {
   "modid": "wickedarrows",
   "name": "Wicked Arrows",
-  "description": "A collection of ",
+  "description": "A collection of unique and powerful arrows for the archery-inclined.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
   "authorList": ["wobblegat"],
-  "credits": "The Forge and FML guys, for forge. ",
+  "credits": "The Forge and FML guys, for forge.",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
