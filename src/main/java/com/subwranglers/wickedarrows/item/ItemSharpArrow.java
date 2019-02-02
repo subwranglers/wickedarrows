@@ -19,7 +19,6 @@ public class ItemSharpArrow extends ItemWArrow {
     public ItemSharpArrow() {
         setMaxStackSize(MCConst.DEF_MAX_STACK_SIZE);
         setCreativeTab(CreativeTabs.COMBAT);
-        setUnlocalizedName(SHARP_ARROW);
         setRegistryName(WickedArrows.MOD_ID, SHARP_ARROW);
     }
 

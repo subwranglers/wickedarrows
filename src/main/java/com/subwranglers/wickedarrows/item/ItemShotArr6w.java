@@ -19,7 +19,6 @@ public class ItemShotArr6w extends ItemWArrow {
     public ItemShotArr6w() {
         setMaxStackSize(MCConst.DEF_MAX_STACK_SIZE);
         setCreativeTab(CreativeTabs.COMBAT);
-        setUnlocalizedName(SHOT_ARR6W);
         setRegistryName(WickedArrows.MOD_ID, SHOT_ARR6W);
     }
 

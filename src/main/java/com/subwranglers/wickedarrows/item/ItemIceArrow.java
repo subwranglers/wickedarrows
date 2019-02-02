@@ -19,7 +19,6 @@ public class ItemIceArrow extends ItemWArrow {
     private ItemIceArrow() {
         setMaxStackSize(MCConst.DEF_MAX_STACK_SIZE);
         setCreativeTab(CreativeTabs.COMBAT);
-        setUnlocalizedName(ICE_ARROW);
         setRegistryName(WickedArrows.MOD_ID, ICE_ARROW);
     }
 

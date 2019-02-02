@@ -27,15 +27,14 @@ public class BlockInvokedIce extends BlockFrostedIce {
     protected BlockInvokedIce() {
         super();
 
-        setUnlocalizedName(Names.INVOKED_ICE);
         setRegistryName(Names.INVOKED_ICE);
-
         setLightLevel(LIGHT_LEVEL);
         setLightOpacity(5);
         setSoundType(SoundType.GLASS);
         setHardness(1.2f);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;

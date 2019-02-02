@@ -19,7 +19,6 @@ public class ItemMerlinArrow extends ItemWArrow {
     public ItemMerlinArrow() {
         setMaxStackSize(MCConst.DEF_MAX_STACK_SIZE);
         setCreativeTab(CreativeTabs.COMBAT);
-        setUnlocalizedName(MERLIN_ARROW);
         setRegistryName(WickedArrows.MOD_ID, MERLIN_ARROW);
     }
 

@@ -19,7 +19,6 @@ public class ItemTorchArrow extends ItemWArrow {
     public ItemTorchArrow() {
         setMaxStackSize(MCConst.DEF_MAX_STACK_SIZE);
         setCreativeTab(CreativeTabs.COMBAT);
-        setUnlocalizedName(TORCH_ARROW);
         setRegistryName(WickedArrows.MOD_ID, TORCH_ARROW);
     }
 

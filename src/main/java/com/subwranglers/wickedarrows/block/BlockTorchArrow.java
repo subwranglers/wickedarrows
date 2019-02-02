@@ -38,7 +38,6 @@ public class BlockTorchArrow extends Block {
         setCreativeTab(CreativeTabs.DECORATIONS);
 
         String name = name(TORCH_ARROW, BLOCK);
-        setUnlocalizedName(name);
         setRegistryName(name);
 
         setLightOpacity(-2);

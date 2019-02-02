@@ -19,7 +19,6 @@ public class ItemLightburnArrow extends ItemWArrow {
     public ItemLightburnArrow() {
         setMaxStackSize(MCConst.DEF_MAX_STACK_SIZE);
         setCreativeTab(CreativeTabs.COMBAT);
-        setUnlocalizedName(LIGHTBURN_ARROW);
         setRegistryName(WickedArrows.MOD_ID, LIGHTBURN_ARROW);
     }
 

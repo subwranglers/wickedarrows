@@ -19,7 +19,6 @@ public class ItemHungerArrow extends ItemWArrow {
     public ItemHungerArrow() {
         setMaxStackSize(MCConst.DEF_MAX_STACK_SIZE);
         setCreativeTab(CreativeTabs.COMBAT);
-        setUnlocalizedName(HUNGER_ARROW);
         setRegistryName(WickedArrows.MOD_ID, HUNGER_ARROW);
     }
 
