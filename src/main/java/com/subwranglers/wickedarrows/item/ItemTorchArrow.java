@@ -23,6 +23,11 @@ public class ItemTorchArrow extends ItemWArrow {
     }
 
     @Override
+    public String getItemStackDisplayName(ItemStack stack) {
+        return getRegistryName().toString();
+    }
+
+    @Override
     public EntityArrow createArrow(World worldIn, ItemStack stack, EntityLivingBase shooter) {
         return new EntityTorchArrow(worldIn, shooter);
     }

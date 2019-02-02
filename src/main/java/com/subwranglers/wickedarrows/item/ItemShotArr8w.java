@@ -23,6 +23,11 @@ public class ItemShotArr8w extends ItemWArrow {
     }
 
     @Override
+    public String getItemStackDisplayName(ItemStack stack) {
+        return getRegistryName().toString();
+    }
+
+    @Override
     public EntityArrow createArrow(World worldIn, ItemStack stack, EntityLivingBase shooter) {
         return new EntityShotArrow(worldIn, shooter).setNumArrows(8);
     }
