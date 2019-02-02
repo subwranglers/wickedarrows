@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 public class EntityMerlinArrow extends EntityWArrow {
 
-    public static final float VERTICAL_VELOCITY = 0.9F;
+    public static final float VERTICAL_VELOCITY = 0.8F;
 
     protected float firedVelocity;
 
@@ -33,12 +33,12 @@ public class EntityMerlinArrow extends EntityWArrow {
 
     private void setup() {
         pickupStatus = PickupStatus.CREATIVE_ONLY;
-        setDamage(getDamage() / 2);
+        setDamage(getDamage() / 6);
     }
 
     @Override
     public void shoot(double x, double y, double z, float velocity, float inaccuracy) {
-        setKnockbackStrength((int) Math.ceil(velocity + 1) * 2);
+        setKnockbackStrength((int) Math.ceil(velocity + 1) * 3);
         firedVelocity = velocity;
         super.shoot(x, y, z, velocity, inaccuracy);
     }
