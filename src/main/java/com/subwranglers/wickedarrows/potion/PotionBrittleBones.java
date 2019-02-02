@@ -6,9 +6,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import util.MCConst;
 
-import static com.subwranglers.wickedarrows.info.Names.BRITTLE_BONES_POTION;
-import static com.subwranglers.wickedarrows.info.Names.QUALIFY;
-import static com.subwranglers.wickedarrows.info.Names.name;
+import static com.subwranglers.wickedarrows.info.Names.*;
 
 public class PotionBrittleBones extends Potion {
 
@@ -25,13 +23,7 @@ public class PotionBrittleBones extends Potion {
     }
 
     public static void apply(EntityLivingBase entity, int amplifier) {
-        entity.addPotionEffect(new PotionEffect(INSTANCE, Math.max(amplifier, 1) * DURATION) {
-            @Override
-            public boolean onUpdate(EntityLivingBase entityIn) {
-                if (getDuration() == 0)
-                    System.out.println("Brittle Bones finished");
-                return super.onUpdate(entityIn);
-            }
-        });
+        // The actual effects of this potion are implemented in EventBrittleBones
+        entity.addPotionEffect(new PotionEffect(INSTANCE, Math.max(amplifier, 1) * DURATION));
     }
 }
