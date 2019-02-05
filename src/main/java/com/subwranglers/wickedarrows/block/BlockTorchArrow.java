@@ -8,9 +8,15 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityTNTPrimed;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -118,21 +124,29 @@ public class BlockTorchArrow extends Block {
         return ItemTorchArrow.INSTANCE;
     }
 
-//    @Override
-//    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-//        for (EnumFacing facing : EnumFacing.VALUES) {
-//            IBlockState neighbour = worldIn.getBlockState(pos.offset(facing));
-//            if (neighbour.getBlock() == Blocks.TNT)
-//                igniteTntNeighbours(worldIn, pos.offset(facing));
-//        }
-//    }
-//
-//    private void igniteTntNeighbours(World worldIn, BlockPos pos) {
-//        if (!worldIn.isRemote) {
-//            worldIn.setBlockToAir(pos);
-//            EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(worldIn, (double) ((float) pos.getX() + 0.5F), (double) pos.getY(), (double) ((float) pos.getZ() + 0.5F), null);
-//            worldIn.spawnEntity(entitytntprimed);
-//            worldIn.playSound((EntityPlayer) null, entitytntprimed.posX, entitytntprimed.posY, entitytntprimed.posZ, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
-//        }
-//    }
+    @Override
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+        for (EnumFacing facing : EnumFacing.VALUES) {
+            IBlockState neighbour = worldIn.getBlockState(pos.offset(facing));
+            if (neighbour.getBlock() == Blocks.TNT) {
+                igniteTntNeighbours(worldIn, pos.offset(facing));
+                if (canPlaceBlockAt(worldIn, pos.offset(state.getValue(HIT_FACE))))
+                    dropAsItem(worldIn, pos);
+            }
+        }
+    }
+
+    private void igniteTntNeighbours(World worldIn, BlockPos pos) {
+        if (!worldIn.isRemote) {
+            worldIn.setBlockToAir(pos);
+            EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(worldIn, (double) ((float) pos.getX() + 0.5F), (double) pos.getY(), (double) ((float) pos.getZ() + 0.5F), null);
+            worldIn.spawnEntity(entitytntprimed);
+            worldIn.playSound(null, entitytntprimed.posX, entitytntprimed.posY, entitytntprimed.posZ, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        }
+    }
+
+    public static void dropAsItem(World world, BlockPos pos) {
+        world.setBlockToAir(pos);
+        Block.spawnAsEntity(world, pos, new ItemStack(ItemTorchArrow.INSTANCE));
+    }
 }
