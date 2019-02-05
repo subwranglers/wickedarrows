@@ -2,8 +2,13 @@ package com.subwranglers.wickedarrows.entity;
 
 import com.subwranglers.wickedarrows.base.EntityWArrow;
 import com.subwranglers.wickedarrows.potion.PotionBleed;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
@@ -54,6 +59,13 @@ public class EntitySharpArrow extends EntityWArrow {
     @Override
     protected void onBlockHit(RayTraceResult trace) {
         canDie = true;
+        BlockPos hit = trace.getBlockPos();
+
+        if (world.getBlockState(hit).getBlock() == Blocks.TNT) {
+            world.setBlockToAir(hit);
+            Block.spawnAsEntity(world, hit, new ItemStack(Blocks.TNT));
+            setDead();
+        }
     }
 
     @Override
