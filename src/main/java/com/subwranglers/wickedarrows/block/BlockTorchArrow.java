@@ -37,6 +37,8 @@ public class BlockTorchArrow extends Block {
     public static final BlockTorchArrow INSTANCE = new BlockTorchArrow();
     public static final ItemBlock INSTANCE_ITEM = new ItemBlock(INSTANCE);
 
+    protected boolean isDropped;
+
     public BlockTorchArrow() {
         super(Material.CIRCUITS);
         setDefaultState(blockState.getBaseState()
@@ -130,8 +132,11 @@ public class BlockTorchArrow extends Block {
             IBlockState neighbour = worldIn.getBlockState(pos.offset(facing));
             if (neighbour.getBlock() == Blocks.TNT) {
                 igniteTntNeighbours(worldIn, pos.offset(facing));
-                if (canPlaceBlockAt(worldIn, pos.offset(state.getValue(HIT_FACE))))
-                    dropAsItem(worldIn, pos);
+
+                if (canPlaceBlockAt(worldIn, pos.offset(state.getValue(HIT_FACE).getOpposite()))) {
+                    dropBlockAsItem(worldIn, pos, getDefaultState(), 1);
+                    worldIn.setBlockToAir(pos);
+                }
             }
         }
     }
@@ -143,10 +148,5 @@ public class BlockTorchArrow extends Block {
             worldIn.spawnEntity(entitytntprimed);
             worldIn.playSound(null, entitytntprimed.posX, entitytntprimed.posY, entitytntprimed.posZ, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
         }
-    }
-
-    public static void dropAsItem(World world, BlockPos pos) {
-        world.setBlockToAir(pos);
-        Block.spawnAsEntity(world, pos, new ItemStack(ItemTorchArrow.INSTANCE));
     }
 }
