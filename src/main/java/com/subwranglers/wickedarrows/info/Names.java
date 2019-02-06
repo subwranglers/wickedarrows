@@ -24,7 +24,7 @@ public class Names {
     public static final String HUNGER_ARROW = "hunger_arrow";
     public static final String MERLIN_ARROW = "merlin_arrow";
     public static final String VOID_SNARE_ARROW = "void_snare_arrow";
-
+    public static final String SEEKING_ARROW = "seeking_arrow";
     public static final String RICOCHET_ARROW = "ricochet_arrow";
 
     // Sounds -----------------------------------

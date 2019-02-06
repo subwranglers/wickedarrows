@@ -27,7 +27,7 @@ public class ServerProxy {
         registerHungerArrow();
         registerMerlinArrow();
         registerVoidSnareArrow();
-
+        registerSeekingArrow();
         registerRicochetArrow();
     }
 
@@ -112,6 +112,11 @@ public class ServerProxy {
     private static void registerVoidSnareArrow() {
         ForgeRegistries.ITEMS.register(ItemVoidSnareArrow.INSTANCE);
         registerEntity(EntityVoidSnareArrow.class, VOID_SNARE_ARROW);
+    }
+
+    private static void registerSeekingArrow() {
+        ForgeRegistries.ITEMS.register(ItemSeekingArrow.INSTANCE);
+        registerEntity(EntitySeekingArrow.class, SEEKING_ARROW);
     }
 
     private static void registerRicochetArrow() {
