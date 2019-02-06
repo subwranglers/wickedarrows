@@ -51,9 +51,12 @@ public class EntityShotArrow extends EntityWArrow {
         int increment = (20 / 5) * (numArrows - ARROWS_SAFE_MAX);
         int result = MathHelper.getInt(world.rand, 1, 100);
 
-        if (numArrows > ARROWS_SAFE_MAX && result <= increment)
+        if (numArrows > ARROWS_SAFE_MAX && result <= increment) {
+            if (shootingEntity instanceof EntityLivingBase)
+                // Essentially notify the player that the firing has "failed"
+                ((EntityLivingBase) shootingEntity).renderBrokenItemStack(new ItemStack(Items.STRING));
             return 200.f;
-        else
+        } else
             return inaccuracy * numArrows * 1.75f;
     }
 
