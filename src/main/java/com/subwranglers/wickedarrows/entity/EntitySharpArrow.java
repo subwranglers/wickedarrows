@@ -4,6 +4,7 @@ import com.subwranglers.wickedarrows.base.EntityWArrow;
 import com.subwranglers.wickedarrows.potion.PotionBleed;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -64,11 +65,12 @@ public class EntitySharpArrow extends EntityWArrow {
         PotionBleed.apply(living, firedVelocity);
 
         // 50% chance to drop a mob's loot on hit
-        if (world instanceof WorldServer && MathHelper.getInt(world.rand, 1, 2) < 2)
-            tryDropEntityLoot(living);
+        int chance = MathHelper.getInt(world.rand, 1, 2);
+        if (world instanceof WorldServer && living instanceof EntityLiving && chance < 2)
+            tryDropEntityLoot((EntityLiving) living);
     }
 
-    public void tryDropEntityLoot(EntityLivingBase living) {
+    public void tryDropEntityLoot(EntityLiving living) {
         String[] id = EntityList.getKey(living).toString().split(":");
         ResourceLocation mobLootResLoc = new ResourceLocation(id[0] + ":entities/" + id[1]);
         LootTable loot = world.getLootTableManager().getLootTableFromLocation(mobLootResLoc);
