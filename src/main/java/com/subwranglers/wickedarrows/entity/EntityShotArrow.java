@@ -71,7 +71,7 @@ public class EntityShotArrow extends EntityWArrow {
         while (arrows-- > 0) {
             World world = getEntityWorld();
             EntityTippedArrow arrow = new EntityTippedArrow(world, (EntityLivingBase) shooter);
-            arrow.shoot(shooter, pitch + arrows, yaw + arrows, p_184547_4_, velocity, inaccuracy);
+            arrow.shoot(shooter, pitch, yaw, p_184547_4_, velocity, inaccuracy);
             arrow.setDamage(arrow.getDamage() * numArrows);
 
             world.spawnEntity(arrow);
