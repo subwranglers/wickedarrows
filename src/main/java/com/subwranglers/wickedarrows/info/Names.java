@@ -25,6 +25,8 @@ public class Names {
     public static final String MERLIN_ARROW = "merlin_arrow";
     public static final String VOID_SNARE_ARROW = "void_snare_arrow";
 
+    public static final String RICOCHET_ARROW = "ricochet_arrow";
+
     // Sounds -----------------------------------
     public static final String ICE_CRACKLING = "ice_crackling";
     public static final String ICE_EXPLOSION = "ice_explosion";
