@@ -3,25 +3,24 @@ package com.subwranglers.wickedarrows.entity;
 import com.subwranglers.wickedarrows.base.EntityWArrow;
 import com.subwranglers.wickedarrows.potion.PotionBleed;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.storage.loot.LootContext;
+import net.minecraft.world.storage.loot.LootTable;
 
-import javax.annotation.Nullable;
+import java.util.List;
 
 public class EntitySharpArrow extends EntityWArrow {
 
     private int firedVelocity;
-
-    /**
-     * Prevent the game from destroying this entity until it hits a block.
-     */
-    private boolean canDie = false;
 
     public EntitySharpArrow(World worldIn) {
         super(worldIn);
@@ -39,15 +38,8 @@ public class EntitySharpArrow extends EntityWArrow {
     }
 
     private void setup() {
-        noClip = true;
         pickupStatus = PickupStatus.CREATIVE_ONLY;
         setKnockbackStrength(-1);
-    }
-
-    @Nullable
-    @Override
-    public AxisAlignedBB getCollisionBoundingBox() {
-        return null;
     }
 
     @Override
@@ -58,7 +50,6 @@ public class EntitySharpArrow extends EntityWArrow {
 
     @Override
     protected void onBlockHit(RayTraceResult trace) {
-        canDie = true;
         BlockPos hit = trace.getBlockPos();
 
         if (world.getBlockState(hit).getBlock() == Blocks.TNT) {
@@ -71,11 +62,30 @@ public class EntitySharpArrow extends EntityWArrow {
     @Override
     protected void arrowHit(EntityLivingBase living) {
         PotionBleed.apply(living, firedVelocity);
+
+        // 50% chance to drop a mob's loot on hit
+        if (world instanceof WorldServer && MathHelper.getInt(world.rand, 1, 2) < 2)
+            tryDropEntityLoot(living);
     }
 
-    @Override
-    public void setDead() {
-        if (canDie)
-            super.setDead();
+    public void tryDropEntityLoot(EntityLivingBase living) {
+        String[] id = EntityList.getKey(living).toString().split(":");
+        ResourceLocation mobLootResLoc = new ResourceLocation(id[0] + ":entities/" + id[1]);
+        LootTable loot = world.getLootTableManager().getLootTableFromLocation(mobLootResLoc);
+
+        LootContext.Builder builder = new LootContext.Builder((WorldServer) world);
+        builder.withLootedEntity(living);
+
+        List<ItemStack> drops = loot.generateLootForPools(world.rand, builder.build());
+
+        if (drops.size() > 0) {
+            ItemStack dropStack = drops.get(MathHelper.getInt(world.rand, 0, drops.size() - 1));
+
+            System.out.println(String.format("Dropping %d items", dropStack.getCount()));
+
+            dropStack.setCount(1);
+            Block.spawnAsEntity(world, living.getPosition(), dropStack);
+        }
     }
+
 }
