@@ -36,6 +36,8 @@ public class EntityVoidVacuum extends Entity {
     private AxisAlignedBB captureAabb;
     private boolean mobCaptured;
 
+    public int renderAngle;
+
     private Predicate<Entity> predicate = entity -> {
         if (entity == null) return false;
         double dx = Math.pow(posX - entity.posX, 2);

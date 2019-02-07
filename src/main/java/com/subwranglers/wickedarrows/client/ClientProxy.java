@@ -187,6 +187,7 @@ public class ClientProxy extends ServerProxy {
 
         // Entity Rendering
         RenderingRegistry.registerEntityRenderingHandler(EntityVoidSnareArrow.class, RenderVoidSnareArrow::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityVoidVacuum.class, RenderVoidVacuum::new);
 
         // Sound Effects
         ForgeRegistries.SOUND_EVENTS.register(SoundEventVoidVacuum.INSTANCE);
