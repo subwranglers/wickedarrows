@@ -35,7 +35,6 @@ public class RenderVoidVacuum extends Render<EntityVoidVacuum> {
         entity.renderAngle = MathHelper.wrapDegrees(entity.renderAngle + 50);
         GlStateManager.rotate(entity.renderAngle, 0.f, 1.f, 0.f);
 
-        System.out.println("angle: " + entity.renderAngle);
         model.render(entity, 0, 0, partialTicks, entity.rotationYaw, entity.rotationPitch, 0.1f);
 
         GlStateManager.enableLighting();
