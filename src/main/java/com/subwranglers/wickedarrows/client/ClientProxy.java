@@ -3,6 +3,7 @@ package com.subwranglers.wickedarrows.client;
 import com.subwranglers.wickedarrows.block.BlockInvokedIce;
 import com.subwranglers.wickedarrows.block.BlockTorchArrow;
 import com.subwranglers.wickedarrows.client.render.*;
+import com.subwranglers.wickedarrows.client.sound.SoundEventVoidVacuum;
 import com.subwranglers.wickedarrows.entity.*;
 import com.subwranglers.wickedarrows.item.*;
 import com.subwranglers.wickedarrows.ServerProxy;
@@ -107,7 +108,7 @@ public class ClientProxy extends ServerProxy {
         // Entity Rendering
         RenderingRegistry.registerEntityRenderingHandler(EntityIceArrow.class, RenderIceArrow::new);
 
-        // Sounds
+        // Sound Effects
         ForgeRegistries.SOUND_EVENTS.register(IceCrackleSoundEvent.INSTANCE);
         ForgeRegistries.SOUND_EVENTS.register(IceExplosionSoundEvent.INSTANCE);
     }
@@ -186,6 +187,9 @@ public class ClientProxy extends ServerProxy {
 
         // Entity Rendering
         RenderingRegistry.registerEntityRenderingHandler(EntityVoidSnareArrow.class, RenderVoidSnareArrow::new);
+
+        // Sound Effects
+        ForgeRegistries.SOUND_EVENTS.register(SoundEventVoidVacuum.INSTANCE);
     }
 
     private static void loadSeekingArrow() {

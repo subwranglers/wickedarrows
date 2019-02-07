@@ -1,5 +1,6 @@
 package com.subwranglers.wickedarrows.entity;
 
+import com.subwranglers.wickedarrows.client.sound.SoundEventVoidVacuum;
 import com.subwranglers.wickedarrows.item.ItemVoidSnareArrow;
 import com.subwranglers.wickedarrows.nbt.NBTEndlessVoid;
 import net.minecraft.entity.Entity;
@@ -7,6 +8,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import util.MCConst;
@@ -23,6 +25,7 @@ public class EntityVoidVacuum extends Entity {
     private static final String KEY_RADIUS = "radius";
     private static final String KEY_STRENGTH = "strength";
 
+    // This shouldn't be changed, as the accompanying sound effect is 10 seconds long.
     private static final int LIFETIME_TICKS = MCConst.TICKS_PER_SECOND * 10;
 
     private EntityPlayer owner;
@@ -73,22 +76,16 @@ public class EntityVoidVacuum extends Entity {
     }
 
     @Override
+    public void onAddedToWorld() {
+        super.onAddedToWorld();
+        world.playSound(null, posX, posY, posZ, SoundEventVoidVacuum.INSTANCE, SoundCategory.AMBIENT, 0.5f, 1.f);
+    }
+
+    @Override
     public void onUpdate() {
         super.onUpdate();
 
-        if (ticksExisted < LIFETIME_TICKS) {
-            world.getEntitiesWithinAABB(Entity.class, aabbRadius, predicate::test).forEach(entity -> {
-                entity.addVelocity(
-                        // Pull entities towards this VoidVacuum
-                        entity.posX > posX ? -strength : strength,
-                        entity.posY > posY ? -strength : strength,
-                        entity.posZ > posZ ? -strength : strength
-                );
-                applyEntityCollision(entity);
-            });
-
-
-        } else {
+        if (ticksExisted >= LIFETIME_TICKS) {
 
             if (!world.isRemote)
                 setDead();
@@ -102,6 +99,18 @@ public class EntityVoidVacuum extends Entity {
                     ));
 
             // TODO: 06/02/19 Render slime explosion and sound FX
+        } else if (ticksExisted > MCConst.TICKS_PER_SECOND / 2) {
+            world.getEntitiesWithinAABB(Entity.class, aabbRadius, predicate::test).forEach(entity -> {
+                entity.addVelocity(
+                        // Pull entities towards this VoidVacuum
+                        entity.posX > posX ? -strength : strength,
+                        entity.posY > posY ? -strength : strength,
+                        entity.posZ > posZ ? -strength : strength
+                );
+                applyEntityCollision(entity);
+            });
+
+
         }
     }
 

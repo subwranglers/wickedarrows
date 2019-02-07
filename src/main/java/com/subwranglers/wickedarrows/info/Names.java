@@ -30,6 +30,7 @@ public class Names {
     // Sounds -----------------------------------
     public static final String ICE_CRACKLING = "ice_crackling";
     public static final String ICE_EXPLOSION = "ice_explosion";
+    public static final String VOID_VACUUM_FX = "void_vacuum_fx";
 
     // Potions ------------------------------------
     public static final String ICE_POTION = "ice_potion";

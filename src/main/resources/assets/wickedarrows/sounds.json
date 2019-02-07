@@ -11,5 +11,9 @@
   "ice_explosion": {
     "category": "block",
     "sounds": ["wickedarrows:ice_explosion_2"]
+  },
+  "void_vacuum_fx": {
+    "category": "ambient",
+    "sounds": ["wickedarrows:void_vacuum_fx"]
   }
 }
