@@ -64,9 +64,7 @@ public class EntitySharpArrow extends EntityWArrow {
     protected void arrowHit(EntityLivingBase living) {
         PotionBleed.apply(living, firedVelocity);
 
-        // 50% chance to drop a mob's loot on hit
-        int chance = MathHelper.getInt(world.rand, 1, 2);
-        if (world instanceof WorldServer && living instanceof EntityLiving && chance < 2)
+        if (world instanceof WorldServer && living instanceof EntityLiving)
             tryDropEntityLoot((EntityLiving) living);
     }
 
@@ -78,6 +76,7 @@ public class EntitySharpArrow extends EntityWArrow {
         LootContext.Builder builder = new LootContext.Builder((WorldServer) world);
         builder.withLootedEntity(living);
 
+        // TODO: 06/02/19 instead of generateLootForPools(), use some other non-random method
         List<ItemStack> drops = loot.generateLootForPools(world.rand, builder.build());
 
         if (drops.size() > 0) {
