@@ -21,8 +21,7 @@ public class EntityVoidVacuum extends Entity {
     private static final String KEY_RADIUS = "radius";
     private static final String KEY_STRENGTH = "strength";
 
-    private static final int LIFETIME_TICKS = MCConst.TICKS_PER_SECOND;
-//    private static final int LIFETIME_TICKS = MCConst.TICKS_PER_SECOND * 10;
+    private static final int LIFETIME_TICKS = MCConst.TICKS_PER_SECOND * 10;
 
     private double radius;
     private AxisAlignedBB aabbRadius;
