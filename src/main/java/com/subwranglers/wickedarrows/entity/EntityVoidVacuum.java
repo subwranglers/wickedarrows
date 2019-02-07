@@ -13,6 +13,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import util.MCConst;
+import util.coordinates.AabbUtil;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Predicate;
@@ -146,6 +147,10 @@ public class EntityVoidVacuum extends Entity {
 
      */
 
+    public final AxisAlignedBB getCaptureAabb() {
+        return captureAabb;
+    }
+
     public int nextAngle() {
         renderAngle = MathHelper.wrapDegrees(renderAngle + ANGLE_INTERVAL);
         return renderAngle;
@@ -183,15 +188,10 @@ public class EntityVoidVacuum extends Entity {
         this.mobCaptured = NBTEndlessVoid.hasPlayerCapturedMob(owner);
     }
 
-    private void updateAABB() {
-        aabbRadius = new AxisAlignedBB(
-                Math.floor(posX) + -radius,
-                Math.floor(posY) + -radius,
-                Math.floor(posZ) + -radius,
-                Math.floor(posX) + radius,
-                Math.floor(posY) + radius,
-                Math.floor(posZ) + radius);
 
-        captureAabb = new AxisAlignedBB(posX, posY, posZ, posX + 1, posY + 1, posZ + 1);
+
+    private void updateAABB() {
+        aabbRadius = AabbUtil.getRadiusAabb(posX, posY, posZ, radius);
+        captureAabb = new AxisAlignedBB(posX, posY - 1, posZ, posX + 1, posY + 1, posZ + 1);
     }
 }
