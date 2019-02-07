@@ -22,13 +22,13 @@ public class PotionMobCaptured extends Potion {
     protected PotionMobCaptured() {
         super(false, COLOR);
         setRegistryName(WickedArrows.MOD_ID, MOB_CAPTURED_POTION);
-        setPotionName(name(MOB_CAPTURED_POTION, QUALIFY));
     }
 
     public static void apply(Entity player, EntityLivingBase mobCaptured) {
         if (!(player instanceof EntityPlayer))
             return;
 
+        INSTANCE.setPotionName(mobCaptured.getName());
         ((EntityPlayer) player).addPotionEffect(
                 new PotionEffect(INSTANCE, (int) mobCaptured.getMaxHealth() * DURATION_MULTIPLIER) {
 
