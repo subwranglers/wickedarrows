@@ -19,6 +19,7 @@ public class ServerProxy {
     private static int id = 1;
 
     public void preInit() {
+        // Arrows
         registerShotArrow();
         registerIceArrow();
         registerTorchArrow();
@@ -29,6 +30,9 @@ public class ServerProxy {
         registerVoidSnareArrow();
         registerSeekingArrow();
         registerRicochetArrow();
+
+        // Other
+        registerVoidVacuum();
     }
 
     public void init() {
@@ -60,6 +64,12 @@ public class ServerProxy {
     private static void registerEntity(Class<? extends Entity> entity, String name) {
         registerEntity(entity, name, 128, 3, true);
     }
+
+    /*
+
+        Arrows
+
+     */
 
     public static void registerShotArrow() {
         ForgeRegistries.ITEMS.register(ItemShotArr2w.INSTANCE);
@@ -122,5 +132,15 @@ public class ServerProxy {
     private static void registerRicochetArrow() {
         ForgeRegistries.ITEMS.register(ItemRicochetArrow.INSTANCE);
         registerEntity(EntityRicochetArrow.class, RICOCHET_ARROW);
+    }
+
+    /*
+
+        Other
+
+     */
+
+    private static void registerVoidVacuum() {
+        registerEntity(EntityVoidVacuum.class, VOID_VACUUM);
     }
 }
