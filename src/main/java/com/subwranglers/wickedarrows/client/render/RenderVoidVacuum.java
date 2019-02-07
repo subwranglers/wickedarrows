@@ -4,6 +4,7 @@ import com.subwranglers.wickedarrows.WickedArrows;
 import com.subwranglers.wickedarrows.client.model.ModelVoidVacuum;
 import com.subwranglers.wickedarrows.entity.EntityVoidVacuum;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
@@ -30,9 +31,12 @@ public class RenderVoidVacuum extends Render<EntityVoidVacuum> {
         GlStateManager.pushMatrix();
         GlStateManager.disableLighting();
 
-        GlStateManager.translate((float) x, (float) y - 3.f, (float) z);
+        GlStateManager.translate((float) x, (float) y/* - 3.f*/, (float) z);
 
         GlStateManager.rotate(entity.nextAngle(), 0.f, 1.f, 0.f);
+
+        // We want the Void Vacuum to glow
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240f, 240f);
 
         model.render(entity, 0, 0, partialTicks, entity.rotationYaw, entity.rotationPitch, 0.1f);
 
