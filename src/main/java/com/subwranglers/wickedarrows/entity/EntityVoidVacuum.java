@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import util.MCConst;
 
@@ -20,6 +21,9 @@ public class EntityVoidVacuum extends Entity {
 
     public static final double DEFAULT_RADIUS = 10;
     public static final double DEFAULT_STRENGTH = 0.1;
+
+    public static final int ANGLE_INTERVAL = 50;
+
     private static final double STRENGTH_MULTIPLIER = 0.7d;
 
     private static final String KEY_RADIUS = "radius";
@@ -36,7 +40,7 @@ public class EntityVoidVacuum extends Entity {
     private AxisAlignedBB captureAabb;
     private boolean mobCaptured;
 
-    public int renderAngle;
+    private int renderAngle;
 
     private Predicate<Entity> predicate = entity -> {
         if (entity == null) return false;
@@ -141,6 +145,11 @@ public class EntityVoidVacuum extends Entity {
         Getters and Setters
 
      */
+
+    public int nextAngle() {
+        renderAngle = MathHelper.wrapDegrees(renderAngle + ANGLE_INTERVAL);
+        return renderAngle;
+    }
 
     @Override
     public void setPosition(double x, double y, double z) {
