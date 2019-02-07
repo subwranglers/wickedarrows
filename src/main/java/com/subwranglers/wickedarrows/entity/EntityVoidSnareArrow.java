@@ -31,10 +31,14 @@ public class EntityVoidSnareArrow extends EntityWArrow {
 
     @Override
     protected void onBlockHit(RayTraceResult trace) {
-        if (NBTEndlessVoid.hasPlayerCapturedMob(shootingEntity)) {
+        if (NBTEndlessVoid.hasPlayerCapturedMob(shootingEntity))
             NBTEndlessVoid.releaseCapturedEntity(shootingEntity, trace);
-            setDead();
-        }
+
+        else if (shootingEntity != null && !world.isRemote)
+            // Spawn a void vacuum where the arrow landed
+            spawnVoidVacuum();
+
+        setDead();
     }
 
     @Override
@@ -44,11 +48,21 @@ public class EntityVoidSnareArrow extends EntityWArrow {
         else {
             NBTEndlessVoid.captureMob(shootingEntity, living);
 
-            if (shootingEntity instanceof EntityPlayer)
+            if (shootingEntity instanceof EntityPlayer) {
                 // TODO: 06/02/19 Play successful sound effect and render a "voidey-like", wispy texture from the entity
                 // captured to the player
                 // Refund the arrow to the shooter
                 ((EntityPlayer) shootingEntity).addItemStackToInventory(getArrowStack());
+
+                spawnVoidVacuum();
+            }
         }
+    }
+
+    protected void spawnVoidVacuum() {
+        EntityVoidVacuum vacuum = new EntityVoidVacuum(world);
+        vacuum.setOwner((EntityPlayer) shootingEntity);
+        vacuum.setPosition(posX, posY, posZ);
+        world.spawnEntity(vacuum);
     }
 }
