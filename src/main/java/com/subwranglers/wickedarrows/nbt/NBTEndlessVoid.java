@@ -1,6 +1,7 @@
 package com.subwranglers.wickedarrows.nbt;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,7 +20,7 @@ public class NBTEndlessVoid {
     }
 
     public static void captureMob(Entity player, EntityLivingBase mob) {
-        if (!(player instanceof EntityPlayer))
+        if (!(player instanceof EntityPlayer) || !(mob instanceof EntityCreature))
             return;
 
         // Add creature to the player's "void"
