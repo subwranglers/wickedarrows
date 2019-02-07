@@ -7,10 +7,14 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import util.coordinates.AabbUtil;
 
 public class EntityVoidSnareArrow extends EntityWArrow {
+
+    public static final double ATTACK_RANGE = 20.d;
 
     public EntityVoidSnareArrow(World worldIn) {
         super(worldIn);
@@ -36,9 +40,15 @@ public class EntityVoidSnareArrow extends EntityWArrow {
 
         if (NBTEndlessVoid.hasPlayerCapturedMob(shootingEntity)) {
             EntityCreature creature = NBTEndlessVoid.releaseCapturedEntity(shootingEntity, trace);
-            if (trace.entityHit != null && creature != null)
-                // Attack entity hit with released mob
-                creature.setAttackTarget((EntityLivingBase) trace.entityHit);
+            if (creature != null) {
+                if (trace.entityHit != null)
+                    // Attack entity hit with released mob
+                    creature.setAttackTarget((EntityLivingBase) trace.entityHit);
+                else {
+                    AxisAlignedBB range = AabbUtil.getRadiusAabb(trace.getBlockPos(), ATTACK_RANGE);
+                    creature.setAttackTarget(world.findNearestEntityWithinAABB(EntityCreature.class, range, creature));
+                }
+            }
 
         } else if (shootingEntity != null && !world.isRemote)
             // Spawn a void vacuum where the arrow landed
