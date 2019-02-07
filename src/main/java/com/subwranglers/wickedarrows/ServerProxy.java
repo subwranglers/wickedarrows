@@ -7,6 +7,7 @@ import com.subwranglers.wickedarrows.item.*;
 import com.subwranglers.wickedarrows.potion.PotionBleed;
 import com.subwranglers.wickedarrows.potion.PotionBrittleBones;
 import com.subwranglers.wickedarrows.potion.PotionIce;
+import com.subwranglers.wickedarrows.potion.PotionMobCaptured;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -122,6 +123,7 @@ public class ServerProxy {
     private static void registerVoidSnareArrow() {
         ForgeRegistries.ITEMS.register(ItemVoidSnareArrow.INSTANCE);
         registerEntity(EntityVoidSnareArrow.class, VOID_SNARE_ARROW);
+        ForgeRegistries.POTIONS.register(PotionMobCaptured.INSTANCE);
     }
 
     private static void registerSeekingArrow() {

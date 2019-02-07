@@ -1,6 +1,7 @@
 package com.subwranglers.wickedarrows.nbt;
 
 import com.subwranglers.wickedarrows.entity.EntityVoidVacuum;
+import com.subwranglers.wickedarrows.potion.PotionMobCaptured;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityList;
@@ -30,6 +31,8 @@ public class NBTEndlessVoid {
 
         // Creature is being tracked, now remove them from the world
         player.world.removeEntity(mob);
+
+        PotionMobCaptured.apply(player, mob);
     }
 
     public static void releaseCapturedEntity(Entity player, RayTraceResult result) {
@@ -66,6 +69,8 @@ public class NBTEndlessVoid {
         // Keeping this statement outside of the if statements above: if an entity gets captured and that data gets
         // corrupted then the worst that happens is you spend 1 arrow and the corrupted data gets removed.
         data.removeTag(KEY_VOID_SNARE);
+
+        ((EntityPlayer) player).removePotionEffect(PotionMobCaptured.INSTANCE);
     }
 
     /**
