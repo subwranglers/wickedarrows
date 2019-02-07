@@ -1,8 +1,11 @@
 package com.subwranglers.wickedarrows.entity;
 
 import com.subwranglers.wickedarrows.base.EntityWArrow;
+import com.subwranglers.wickedarrows.item.ItemVoidSnareArrow;
 import com.subwranglers.wickedarrows.nbt.NBTEndlessVoid;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
@@ -22,21 +25,30 @@ public class EntityVoidSnareArrow extends EntityWArrow {
     }
 
     @Override
+    protected ItemStack getArrowStack() {
+        return new ItemStack(ItemVoidSnareArrow.INSTANCE);
+    }
+
+    @Override
     protected void onBlockHit(RayTraceResult trace) {
-        if (NBTEndlessVoid.hasPlayerCapturedMob(shootingEntity))
+        if (NBTEndlessVoid.hasPlayerCapturedMob(shootingEntity)) {
             NBTEndlessVoid.releaseCapturedEntity(shootingEntity, trace);
+            setDead();
+        }
     }
 
     @Override
     protected void arrowHit(EntityLivingBase living) {
-        try {
-            if (NBTEndlessVoid.hasPlayerCapturedMob(shootingEntity))
-                NBTEndlessVoid.releaseCapturedEntity(shootingEntity, living);
-            else
-                NBTEndlessVoid.captureMob(shootingEntity, living);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (NBTEndlessVoid.hasPlayerCapturedMob(shootingEntity))
+            NBTEndlessVoid.releaseCapturedEntity(shootingEntity, living);
+        else {
+            NBTEndlessVoid.captureMob(shootingEntity, living);
+
+            if (shootingEntity instanceof EntityPlayer)
+                // TODO: 06/02/19 Play successful sound effect and render a "voidey-like", wispy texture from the entity
+                // captured to the player
+                // Refund the arrow to the shooter
+                ((EntityPlayer) shootingEntity).addItemStackToInventory(getArrowStack());
         }
     }
-
 }
