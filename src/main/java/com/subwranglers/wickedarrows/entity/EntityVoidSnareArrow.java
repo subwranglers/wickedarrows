@@ -30,7 +30,9 @@ public class EntityVoidSnareArrow extends EntityWArrow {
     }
 
     @Override
-    protected void onBlockHit(RayTraceResult trace) {
+    protected void onHit(RayTraceResult trace) {
+        super.onHit(trace);
+
         if (NBTEndlessVoid.hasPlayerCapturedMob(shootingEntity))
             NBTEndlessVoid.releaseCapturedEntity(shootingEntity, trace);
 
@@ -38,31 +40,16 @@ public class EntityVoidSnareArrow extends EntityWArrow {
             // Spawn a void vacuum where the arrow landed
             spawnVoidVacuum();
 
-        setDead();
-    }
-
-    @Override
-    protected void arrowHit(EntityLivingBase living) {
-        if (NBTEndlessVoid.hasPlayerCapturedMob(shootingEntity))
-            NBTEndlessVoid.releaseCapturedEntity(shootingEntity, living);
-        else {
-            NBTEndlessVoid.captureMob(shootingEntity, living);
-
-            if (shootingEntity instanceof EntityPlayer) {
-                // TODO: 06/02/19 Play successful sound effect and render a "voidey-like", wispy texture from the entity
-                // captured to the player
-                // Refund the arrow to the shooter
-                ((EntityPlayer) shootingEntity).addItemStackToInventory(getArrowStack());
-
-                spawnVoidVacuum();
-            }
-        }
+        if (!isDead)
+            setDead();
     }
 
     protected void spawnVoidVacuum() {
         EntityVoidVacuum vacuum = new EntityVoidVacuum(world);
         vacuum.setOwner((EntityPlayer) shootingEntity);
         vacuum.setPosition(posX, posY, posZ);
+        vacuum.setRadius(EntityVoidVacuum.DEFAULT_RADIUS);
+        vacuum.setStrength(EntityVoidVacuum.DEFAULT_STRENGTH);
         world.spawnEntity(vacuum);
     }
 }
