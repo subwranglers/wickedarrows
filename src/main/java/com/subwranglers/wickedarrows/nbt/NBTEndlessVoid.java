@@ -1,5 +1,6 @@
 package com.subwranglers.wickedarrows.nbt;
 
+import com.subwranglers.wickedarrows.entity.EntityVoidVacuum;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityList;
@@ -32,12 +33,8 @@ public class NBTEndlessVoid {
     }
 
     public static void releaseCapturedEntity(Entity player, RayTraceResult result) {
-        BlockPos pos = result.getBlockPos().offset(result.sideHit);
-        releaseCapturedEntity(player, pos.getX(), pos.getY(), pos.getZ());
-    }
-
-    public static void releaseCapturedEntity(Entity player, EntityLivingBase living) {
-        BlockPos pos = living.getPosition();
+        BlockPos pos = result.entityHit != null ?
+                result.entityHit.getPosition() : result.getBlockPos().offset(result.sideHit);
         releaseCapturedEntity(player, pos.getX(), pos.getY(), pos.getZ());
     }
 
@@ -50,7 +47,7 @@ public class NBTEndlessVoid {
         NBTTagCompound data = player.getEntityData();
         NBTTagCompound creature = data.getCompoundTag(KEY_VOID_SNARE);
 
-        if (creature.hasKey("id")) {
+        if (creature.hasKey(KEY_ID)) {
             ResourceLocation resLoc = new ResourceLocation(creature.getString(KEY_ID));
             Entity entity = EntityList.createEntityByIDFromName(resLoc, world);
 
@@ -69,5 +66,20 @@ public class NBTEndlessVoid {
         // Keeping this statement outside of the if statements above: if an entity gets captured and that data gets
         // corrupted then the worst that happens is you spend 1 arrow and the corrupted data gets removed.
         data.removeTag(KEY_VOID_SNARE);
+    }
+
+    /**
+     * Removes a mob that a player has captured using a {@link EntityVoidVacuum}
+     *
+     * @param player
+     */
+    public static void consumeMob(Entity player) {
+        if (!(player instanceof EntityPlayer))
+            return;
+
+        NBTTagCompound data = player.getEntityData();
+
+        if (data.hasKey(KEY_VOID_SNARE))
+            data.removeTag(KEY_VOID_SNARE);
     }
 }
