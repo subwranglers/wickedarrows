@@ -13,7 +13,7 @@ import static com.subwranglers.wickedarrows.info.Names.*;
 
 public class PotionMobCaptured extends Potion {
 
-    private static final int COLOR = 0x5e0080;
+    private static final int COLOR = 0x005e0080;
 
     public static final int DURATION_MULTIPLIER = MCConst.TICKS_PER_SECOND * 15;
 
@@ -37,11 +37,6 @@ public class PotionMobCaptured extends Potion {
                         if (getDuration() <= 1)
                             NBTEndlessVoid.consumeMob(entityIn);
                         return super.onUpdate(entityIn);
-                    }
-
-                    @Override
-                    public boolean doesShowParticles() {
-                        return false;
                     }
                 });
     }
