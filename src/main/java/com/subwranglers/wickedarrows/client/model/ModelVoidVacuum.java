@@ -14,8 +14,8 @@ public class ModelVoidVacuum extends ModelBase {
 
         voidrift = new ModelRenderer(this);
         voidrift.setRotationPoint(0.0F, 24.0F, 0.0F);
-        voidrift.cubeList.add(new ModelBox(voidrift, 0, 48, -8.0F, 3.0F, 0.0F, 16, 32, 0, 0.0F, false));
-        voidrift.cubeList.add(new ModelBox(voidrift, 0, 0, 0.0F, 3.0F, -8.0F, 0, 32, 16, 0.0F, false));
+        voidrift.cubeList.add(new ModelBox(voidrift, 0, 48, -8.0F, -40.0F, 0.0F, 16, 32, 0, 0.0F, false));
+        voidrift.cubeList.add(new ModelBox(voidrift, 0, 0, 0.0F, -40.0F, -8.0F, 0, 32, 16, 0.0F, false));
     }
 
     @Override
