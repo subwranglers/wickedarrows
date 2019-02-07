@@ -3,6 +3,7 @@ package com.subwranglers.wickedarrows.entity;
 import com.subwranglers.wickedarrows.base.EntityWArrow;
 import com.subwranglers.wickedarrows.item.ItemVoidSnareArrow;
 import com.subwranglers.wickedarrows.nbt.NBTEndlessVoid;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -33,10 +34,13 @@ public class EntityVoidSnareArrow extends EntityWArrow {
     protected void onHit(RayTraceResult trace) {
         super.onHit(trace);
 
-        if (NBTEndlessVoid.hasPlayerCapturedMob(shootingEntity))
-            NBTEndlessVoid.releaseCapturedEntity(shootingEntity, trace);
+        if (NBTEndlessVoid.hasPlayerCapturedMob(shootingEntity)) {
+            EntityCreature creature = NBTEndlessVoid.releaseCapturedEntity(shootingEntity, trace);
+            if (trace.entityHit != null && creature != null)
+                // Attack entity hit with released mob
+                creature.setAttackTarget((EntityLivingBase) trace.entityHit);
 
-        else if (shootingEntity != null && !world.isRemote)
+        } else if (shootingEntity != null && !world.isRemote)
             // Spawn a void vacuum where the arrow landed
             spawnVoidVacuum();
 

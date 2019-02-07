@@ -35,24 +35,25 @@ public class NBTEndlessVoid {
         PotionMobCaptured.apply(player, mob);
     }
 
-    public static void releaseCapturedEntity(Entity player, RayTraceResult result) {
+    public static EntityCreature releaseCapturedEntity(Entity player, RayTraceResult result) {
         BlockPos pos = result.entityHit != null ?
                 result.entityHit.getPosition() : result.getBlockPos().offset(result.sideHit);
-        releaseCapturedEntity(player, pos.getX(), pos.getY(), pos.getZ());
+        return releaseCapturedEntity(player, pos.getX(), pos.getY(), pos.getZ());
     }
 
-    public static void releaseCapturedEntity(Entity player, int x, int y, int z) {
+    public static EntityCreature releaseCapturedEntity(Entity player, int x, int y, int z) {
         if (!(player instanceof EntityPlayer) || !(player.world instanceof WorldServer))
-            return;
+            return null;
 
         WorldServer world = (WorldServer) player.world;
 
         NBTTagCompound data = player.getEntityData();
         NBTTagCompound creature = data.getCompoundTag(KEY_VOID_SNARE);
 
+        Entity entity = null;
         if (creature.hasKey(KEY_ID)) {
             ResourceLocation resLoc = new ResourceLocation(creature.getString(KEY_ID));
-            Entity entity = EntityList.createEntityByIDFromName(resLoc, world);
+            entity = EntityList.createEntityByIDFromName(resLoc, world);
 
             if (entity != null) {
                 // Restore the mob's original state
@@ -71,6 +72,8 @@ public class NBTEndlessVoid {
         data.removeTag(KEY_VOID_SNARE);
 
         ((EntityPlayer) player).removePotionEffect(PotionMobCaptured.INSTANCE);
+
+        return (EntityCreature) entity;
     }
 
     /**
