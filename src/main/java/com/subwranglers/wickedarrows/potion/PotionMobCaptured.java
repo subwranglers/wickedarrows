@@ -15,7 +15,20 @@ public class PotionMobCaptured extends Potion {
 
     private static final int COLOR = 0x005e0080;
 
-    public static final int DURATION_MULTIPLIER = MCConst.TICKS_PER_SECOND * 15;
+    /**
+     * Starting value to subtract from for how long any given mob will survive in the <i>Endless Void.</i>
+     */
+    public static final int MAX_DURATION = MCConst.TICKS_PER_SECOND * 600;
+
+    /**
+     * Minimum possible duration a mob can be held in the <i>Endless Void.</i>
+     */
+    public static final int MIN_DURATION = MCConst.TICKS_PER_SECOND * 60;
+
+    /**
+     * How much time should be subtracted from {@link #MAX_DURATION}. Multiply by the capture'd mob's current health.
+     */
+    public static final int INTERVAL = MCConst.TICKS_PER_SECOND * 15;
 
     public static final PotionMobCaptured INSTANCE = new PotionMobCaptured();
 
@@ -28,13 +41,23 @@ public class PotionMobCaptured extends Potion {
         if (!(player instanceof EntityPlayer))
             return;
 
+        int duration = (int) NBTEndlessVoid.getCapturedVoidHealth(player) * INTERVAL;
+
         INSTANCE.setPotionName(mobCaptured.getName());
-        ((EntityPlayer) player).addPotionEffect(
-                new PotionEffect(INSTANCE, (int) mobCaptured.getMaxHealth() * DURATION_MULTIPLIER) {
+        ((EntityPlayer) player).addPotionEffect(new PotionEffect(INSTANCE, duration - 1) {
 
                     @Override
                     public boolean onUpdate(EntityLivingBase entityIn) {
-                        if (getDuration() <= 1)
+                        int ticksRemaining = getDuration();
+                        if (ticksRemaining % INTERVAL == 0) {
+
+                            // Damage the mob
+                            if (NBTEndlessVoid.damageCapturedVoidHealth(entityIn) <= 0.f) {
+                                // Mob was lost to the Endless Void. Consume the mob and remove this potion effect.
+                                NBTEndlessVoid.consumeMob(entityIn);
+                                entityIn.removePotionEffect(INSTANCE);
+                            }
+                        } else if (getDuration() <= 1)
                             NBTEndlessVoid.consumeMob(entityIn);
                         return super.onUpdate(entityIn);
                     }

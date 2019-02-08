@@ -16,17 +16,47 @@ import net.minecraft.world.WorldServer;
 public class NBTEndlessVoid {
     public static final String KEY_ID = "id";
     public static final String KEY_VOID_SNARE = "VoidSnare_CreatureCaptured";
+    public static final String KEY_VOID_HEALTH = "VoidSnare_VoidHealth";
+
+    public static final float MAX_VOID_HEALTH = 20.f;
 
     public static boolean hasPlayerCapturedMob(Entity player) {
         return player != null && player instanceof EntityPlayer && player.getEntityData().hasKey(KEY_VOID_SNARE);
+    }
+
+    public static float getCapturedVoidHealth(Entity player) {
+        if (!(player instanceof EntityPlayer))
+            return -1.f;
+
+        return player.getEntityData()
+                .getCompoundTag(KEY_VOID_SNARE)
+                .getCompoundTag("ForgeData")
+                .getFloat(KEY_VOID_HEALTH);
+    }
+
+    public static float damageCapturedVoidHealth(Entity player) {
+        if (!(player instanceof EntityPlayer))
+            return -1.f;
+
+        NBTTagCompound creatureData = player.getEntityData().getCompoundTag(KEY_VOID_SNARE).getCompoundTag("ForgeData");
+        float newHealth = creatureData.getFloat(KEY_VOID_HEALTH) - 1.f;
+        creatureData.setFloat(KEY_VOID_HEALTH, newHealth);
+
+        return newHealth;
     }
 
     public static void captureMob(Entity player, EntityLivingBase mob) {
         if (!(player instanceof EntityPlayer) || !(mob instanceof EntityCreature))
             return;
 
+        // Give the creature a starting VoidHealth value if it doesn't already have it
+        if (!mob.getEntityData().hasKey(KEY_VOID_HEALTH))
+            mob.getEntityData().setFloat(KEY_VOID_HEALTH, Math.min(mob.getMaxHealth(), MAX_VOID_HEALTH));
+
         // Add creature to the player's "void"
         NBTTagCompound creature = mob.serializeNBT();
+
+        // Add captured creature to the player's data
         player.getEntityData().setTag(NBTEndlessVoid.KEY_VOID_SNARE, creature);
 
         // Creature is being tracked, now remove them from the world
