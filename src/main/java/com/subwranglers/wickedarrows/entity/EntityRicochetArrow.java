@@ -4,6 +4,7 @@ import com.subwranglers.wickedarrows.base.EntityWArrow;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import util.coordinates.AabbUtil;
 import util.coordinates.SphereCoordsBetween;
@@ -73,16 +74,13 @@ public class EntityRicochetArrow extends EntityWArrow {
         if (entities.size() < 1)
             return;
 
-        Iterator<EntityLivingBase> it = entities.iterator();
-        EntityLivingBase target = it.next();
+        shootAtEntity(this, living, getTarget(entities));
+    }
 
-        while (it.hasNext()) {
-            EntityLivingBase next = it.next();
-            if (getDistance(next) < getDistance(target))
-                target = next;
-        }
-
-        shootAtEntity(this, living, target);
+    protected EntityLivingBase getTarget(List<EntityLivingBase> entities) {
+        if (entities.size() == 1)
+            return entities.get(0);
+        return entities.get(MathHelper.getInt(world.rand, 0, entities.size() - 1));
     }
 
     public static void shootAtEntity(EntityRicochetArrow parent, EntityLivingBase from, EntityLivingBase target) {
