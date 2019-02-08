@@ -1,5 +1,6 @@
 package com.subwranglers.wickedarrows.nbt;
 
+import com.subwranglers.wickedarrows.Strings;
 import com.subwranglers.wickedarrows.entity.EntityVoidVacuum;
 import com.subwranglers.wickedarrows.potion.PotionMobCaptured;
 import net.minecraft.entity.Entity;
@@ -11,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.WorldServer;
 
 public class NBTEndlessVoid {
@@ -122,7 +124,9 @@ public class NBTEndlessVoid {
 
         NBTTagCompound data = player.getEntityData();
 
-        if (data.hasKey(KEY_VOID_SNARE))
+        if (data.hasKey(KEY_VOID_SNARE)) {
             data.removeTag(KEY_VOID_SNARE);
+            player.sendMessage(new TextComponentString(Strings.MOB_CONSUMED_BY_VOID));
+        }
     }
 }
