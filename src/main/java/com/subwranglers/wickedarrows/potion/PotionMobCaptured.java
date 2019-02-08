@@ -15,20 +15,7 @@ public class PotionMobCaptured extends Potion {
 
     private static final int COLOR = 0x005e0080;
 
-    /**
-     * Starting value to subtract from for how long any given mob will survive in the <i>Endless Void.</i>
-     */
-    public static final int MAX_DURATION = MCConst.TICKS_PER_SECOND * 600;
-
-    /**
-     * Minimum possible duration a mob can be held in the <i>Endless Void.</i>
-     */
-    public static final int MIN_DURATION = MCConst.TICKS_PER_SECOND * 60;
-
-    /**
-     * How much time should be subtracted from {@link #MAX_DURATION}. Multiply by the capture'd mob's current health.
-     */
-    public static final int INTERVAL = MCConst.TICKS_PER_SECOND * 15;
+    public static final int INTERVAL = MCConst.TICKS_PER_SECOND * 5;
 
     public static final PotionMobCaptured INSTANCE = new PotionMobCaptured();
 
@@ -41,10 +28,11 @@ public class PotionMobCaptured extends Potion {
         if (!(player instanceof EntityPlayer))
             return;
 
-        int duration = (int) NBTEndlessVoid.getCapturedVoidHealth(player) * INTERVAL;
+        // -1 so we don't immediately apply damage when the effect is applied
+        int duration = (int) NBTEndlessVoid.getCapturedVoidHealth(player) * INTERVAL - 1;
 
         INSTANCE.setPotionName(mobCaptured.getName());
-        ((EntityPlayer) player).addPotionEffect(new PotionEffect(INSTANCE, duration - 1) {
+        ((EntityPlayer) player).addPotionEffect(new PotionEffect(INSTANCE, duration) {
 
                     @Override
                     public boolean onUpdate(EntityLivingBase entityIn) {

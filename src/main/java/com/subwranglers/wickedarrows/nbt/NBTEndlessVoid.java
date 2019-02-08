@@ -18,7 +18,7 @@ public class NBTEndlessVoid {
     public static final String KEY_VOID_SNARE = "VoidSnare_CreatureCaptured";
     public static final String KEY_VOID_HEALTH = "VoidSnare_VoidHealth";
 
-    public static final float MAX_VOID_HEALTH = 20.f;
+    public static final float MAX_VOID_HEALTH = 60.f;
 
     public static boolean hasPlayerCapturedMob(Entity player) {
         return player != null && player instanceof EntityPlayer && player.getEntityData().hasKey(KEY_VOID_SNARE);
@@ -45,13 +45,18 @@ public class NBTEndlessVoid {
         return newHealth;
     }
 
+    public static float getStartingVoidHealth(EntityLivingBase living) {
+        // Hardcoded numbers arbitrary -- they were found by fiddling around.
+        return 100.f - Math.min(living.getMaxHealth() * 3, MAX_VOID_HEALTH);
+    }
+
     public static void captureMob(Entity player, EntityLivingBase mob) {
         if (!(player instanceof EntityPlayer) || !(mob instanceof EntityCreature))
             return;
 
         // Give the creature a starting VoidHealth value if it doesn't already have it
         if (!mob.getEntityData().hasKey(KEY_VOID_HEALTH))
-            mob.getEntityData().setFloat(KEY_VOID_HEALTH, Math.min(mob.getMaxHealth(), MAX_VOID_HEALTH));
+            mob.getEntityData().setFloat(KEY_VOID_HEALTH, getStartingVoidHealth(mob));
 
         // Add creature to the player's "void"
         NBTTagCompound creature = mob.serializeNBT();
