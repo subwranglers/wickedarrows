@@ -6,6 +6,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import org.apache.commons.math3.util.FastMath;
 
+
+// TODO: 08/02/19 Merge this implementation with SphericalCoordinates.java
 public class SphereCoordsBetween {
 
     Vec3d from;

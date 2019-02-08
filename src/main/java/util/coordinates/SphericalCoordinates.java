@@ -3,6 +3,7 @@ package util.coordinates;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
+// TODO: 08/02/19 Merge this implementation with SphereCoordsBetween.java
 public class SphericalCoordinates {
 
     /**
