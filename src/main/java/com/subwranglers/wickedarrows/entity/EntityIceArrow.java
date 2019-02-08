@@ -150,23 +150,10 @@ public class EntityIceArrow extends EntityWArrow {
     private Vec3d getSpikeTipCoords(RayTraceResult rayTrace) {
         boolean hitSides = rayTrace.sideHit != EnumFacing.DOWN && rayTrace.sideHit != EnumFacing.UP; // for brevity
         float pitch = hitSides ? rotationPitch : -rotationPitch;
-        float yaw = hitSides ? getYawRotation(rayTrace.sideHit) : rotationYaw;
+        float yaw = hitSides ? SphericalCoordinates.getMirroredYaw(rotationYaw, rayTrace.sideHit) : rotationYaw;
         int velocityLength = 8;
 
         return SphericalCoordinates.getFromSphere(rayTrace.hitVec, velocityLength, yaw, pitch);
-    }
-
-    private float getYawRotation(EnumFacing direction) {
-        switch (direction) {
-            case SOUTH:
-            case NORTH:
-                return -(rotationYaw + 180);
-            case WEST:
-            case EAST:
-                return -rotationYaw;
-            default:
-                throw new UnsupportedOperationException("direction given not NORTH, WEST, EAST, or SOUTH");
-        }
     }
 
     private void generateIceCage(BlockPos pos, int radius) {

@@ -1,5 +1,6 @@
 package util.coordinates;
 
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
@@ -26,5 +27,22 @@ public class SphericalCoordinates {
         float f2 = radius * -MathHelper.cos(-pitch * 0.017453292F);
         float f3 = radius * MathHelper.sin(-pitch * 0.017453292F);
         return new Vec3d(-(double) (f1 * f2), -(double) f3, (double) (f * f2));
+    }
+
+    public static float getMirroredYaw(float rotationYaw, EnumFacing direction) {
+        switch (direction) {
+            case SOUTH:
+            case NORTH:
+                return -(rotationYaw + 180);
+            case WEST:
+            case EAST:
+                return -rotationYaw;
+            case UP:
+            case DOWN:
+                // Don't mirror the yaw if top / bottom enums are given.
+                return rotationYaw;
+            default:
+                throw new UnsupportedOperationException("unsupported EnumFacing direction provided");
+        }
     }
 }
