@@ -98,7 +98,9 @@ public class NBTEndlessVoid {
 
                 // Force mob to the position the arrow provided and remove all of its velocity
                 entity.setPosition(x + 0.5d, y, z + 0.5d);
-                entity.setVelocity(0.d, 0.d, 0.d);
+                entity.motionX = 0.d;
+                entity.motionY = 0.d;
+                entity.motionZ = 0.d;
                 player.world.spawnEntity(entity);
             }
         }
