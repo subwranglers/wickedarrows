@@ -4,7 +4,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import org.apache.commons.math3.util.FastMath;
 
 
 // TODO: 08/02/19 Merge this implementation with SphericalCoordinates.java
@@ -37,9 +36,9 @@ public class SphereCoordsBetween {
 
         // Since spherical coords are done using origin we need make a Vector relating these coords to origin.
         o = to.subtract(from);
-        radius = FastMath.sqrt(o.x * o.x + o.y * o.y + o.z * o.z);
-        pitch = FastMath.atan2(FastMath.sqrt(o.x * o.x + o.y * o.y), o.z);
-        yaw = FastMath.atan2(o.y, o.x);
+        radius = MathHelper.sqrt(o.x * o.x + o.y * o.y + o.z * o.z);
+        pitch = MathHelper.atan2(MathHelper.sqrt(o.x * o.x + o.y * o.y), o.z);
+        yaw = MathHelper.atan2(o.y, o.x);
     }
 
     public SphereCoordsBetween(BlockPos from, BlockPos to) {
@@ -97,7 +96,7 @@ public class SphereCoordsBetween {
      * @return {@link Double}, converted to degrees and corrected to Minecraft's pitch representation
      */
     public double getPitch() {
-        return FastMath.toDegrees(pitch) - 90;
+        return Math.toDegrees(pitch) - 90;
     }
 
     /**
@@ -106,7 +105,7 @@ public class SphereCoordsBetween {
      * @return {@link Double}, converted to degrees and corrected to Minecraft's yaw representation
      */
     public double getYaw() {
-        return MathHelper.wrapDegrees(FastMath.toDegrees(yaw) - 90);
+        return MathHelper.wrapDegrees(Math.toDegrees(yaw) - 90);
     }
 
     /**
