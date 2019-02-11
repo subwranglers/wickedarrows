@@ -20,6 +20,7 @@ import java.util.UUID;
 public class EntityRicochetArrow extends EntityWArrow {
 
     public static final int DEFAULT_REBOUNDS_COUNT = 60;
+    public static final double HORIZON_PITCH_RANGE = 2.d;
 
     public static final double REBOUND_RANGE = 8.d;
     protected float firedVelocity;
@@ -139,7 +140,7 @@ public class EntityRicochetArrow extends EntityWArrow {
             pitch = -rotationPitch;
         }
 
-        if (Math.abs(prevY - posY) < 0.1d)
+        if (Math.abs(prevY - posY) < 0.1d && isHorizonPitch())
             // We're scooting along the ground -- raise the pitch so we can bounce again
             pitch -= 30.f;
 
@@ -149,5 +150,9 @@ public class EntityRicochetArrow extends EntityWArrow {
         world.spawnEntity(rico);
 
         setDead();
+    }
+
+    private boolean isHorizonPitch() {
+        return rotationPitch < HORIZON_PITCH_RANGE && rotationPitch > -HORIZON_PITCH_RANGE;
     }
 }
