@@ -19,7 +19,6 @@ import java.util.UUID;
 
 public class EntityRicochetArrow extends EntityWArrow {
 
-    public static final int DEFAULT_REBOUNDS_COUNT = 60;
     public static final double HORIZON_PITCH_RANGE = 2.d;
 
     public static final double REBOUND_RANGE = 8.d;
@@ -28,8 +27,6 @@ public class EntityRicochetArrow extends EntityWArrow {
 
     protected UUID originalShooter;
     protected double prevY = Float.MIN_VALUE;
-
-    protected int reboundsRemaining = DEFAULT_REBOUNDS_COUNT;
 
     public EntityRicochetArrow(World worldIn) {
         super(worldIn);
@@ -47,12 +44,11 @@ public class EntityRicochetArrow extends EntityWArrow {
         originalShooter = shooter.getUniqueID();
     }
 
-    public EntityRicochetArrow(EntityRicochetArrow other, int newReboundCount) {
+    public EntityRicochetArrow(EntityRicochetArrow other) {
         super(other.world, (EntityLivingBase) other.shootingEntity);
         firedVelocity = other.firedVelocity;
         p_184547_4_ = other.p_184547_4_;
         originalShooter = other.originalShooter;
-        reboundsRemaining = newReboundCount;
         posX = other.posX;
         posY = other.posY;
         posZ = other.posZ;
@@ -88,8 +84,9 @@ public class EntityRicochetArrow extends EntityWArrow {
 
         if (entities.size() > 0)
             shootAtEntity(this, living, getTarget(entities));
-        else
-            shootAtEntity(this, living, living);
+        else if (shootingEntity != null && shootingEntity instanceof EntityLivingBase) {
+            shootAtEntity(this, living, (EntityLivingBase) shootingEntity);
+        }
     }
 
     protected EntityLivingBase getTarget(List<EntityLivingBase> entities) {
@@ -99,10 +96,10 @@ public class EntityRicochetArrow extends EntityWArrow {
     }
 
     public static void shootAtEntity(EntityRicochetArrow parent, EntityLivingBase from, EntityLivingBase target) {
-        if (parent.reboundsRemaining <= 0)
+        if (parent.isInvalidVelocity())
             return;
 
-        EntityRicochetArrow rico = new EntityRicochetArrow(parent, parent.reboundsRemaining - 1);
+        EntityRicochetArrow rico = new EntityRicochetArrow(parent);
 
         // From eye-height, shoot the arrow at the target's midpoint
         SphereCoordsBetween tween = new SphereCoordsBetween(
@@ -113,18 +110,21 @@ public class EntityRicochetArrow extends EntityWArrow {
                 target.posZ,
                 target.posY + target.height / 2.d);
 
-        rico.shoot(from, tween.getPitchF(), tween.getYawF(), rico.p_184547_4_, rico.firedVelocity, 0.f);
+        // Shoot at target with added velocity
+        parent.firedVelocity *= 1.05f;
+        rico.shoot(from, tween.getPitchF(), tween.getYawF(), rico.p_184547_4_, parent.firedVelocity, 0.f);
 
         parent.world.spawnEntity(rico);
     }
 
     @Override
     protected void onBlockHit(RayTraceResult trace) {
-        if (shootingEntity == null || reboundsRemaining <= 0)
+        if (shootingEntity == null || isInvalidVelocity())
             return;
 
-        firedVelocity = Math.max(firedVelocity * 0.99f, 0.2f);
-        EntityRicochetArrow rico = new EntityRicochetArrow(this, reboundsRemaining - 1);
+        // Reduce velocity by 2%
+        firedVelocity *= 0.98f;
+        EntityRicochetArrow rico = new EntityRicochetArrow(this);
 
         motionX = 0;
         motionY = 0;
@@ -152,7 +152,11 @@ public class EntityRicochetArrow extends EntityWArrow {
         setDead();
     }
 
-    private boolean isHorizonPitch() {
+    public boolean isHorizonPitch() {
         return rotationPitch < HORIZON_PITCH_RANGE && rotationPitch > -HORIZON_PITCH_RANGE;
+    }
+
+    public boolean isInvalidVelocity() {
+        return firedVelocity < 0.8f;
     }
 }
