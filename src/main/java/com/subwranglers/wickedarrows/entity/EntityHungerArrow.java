@@ -34,7 +34,7 @@ public class EntityHungerArrow extends EntityWArrow {
     private void setup() {
         exhaustionDamage = (float) getDamage();
 
-        // Remove all physical damage from this arrow -- it'll be affecting hunger instead.
+        // Remove most physical damage from this arrow -- it'll mainly be affecting hunger instead.
         setDamage(0.01);
 
         // Players shouldn't be allowed to pick up hunger arrows after they're fired.
