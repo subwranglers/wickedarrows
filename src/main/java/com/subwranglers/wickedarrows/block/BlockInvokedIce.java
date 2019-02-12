@@ -1,5 +1,6 @@
 package com.subwranglers.wickedarrows.block;
 
+import com.subwranglers.wickedarrows.WickedArrows;
 import com.subwranglers.wickedarrows.info.Names;
 import com.subwranglers.wickedarrows.potion.PotionIce;
 import com.subwranglers.wickedarrows.client.sound.IceCrackleSoundEvent;
@@ -27,7 +28,7 @@ public class BlockInvokedIce extends BlockFrostedIce {
     protected BlockInvokedIce() {
         super();
 
-        setRegistryName(Names.INVOKED_ICE);
+        setRegistryName(WickedArrows.MOD_ID, Names.INVOKED_ICE);
         setLightLevel(LIGHT_LEVEL);
         setLightOpacity(5);
         setSoundType(SoundType.GLASS);
