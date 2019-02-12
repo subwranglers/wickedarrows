@@ -1,14 +1,15 @@
 package com.subwranglers.wickedarrows.client;
 
+import com.subwranglers.wickedarrows.ServerProxy;
+import com.subwranglers.wickedarrows.block.BlockArrowWorkbench;
 import com.subwranglers.wickedarrows.block.BlockInvokedIce;
 import com.subwranglers.wickedarrows.block.BlockTorchArrow;
 import com.subwranglers.wickedarrows.client.render.*;
+import com.subwranglers.wickedarrows.client.sound.IceCrackleSoundEvent;
+import com.subwranglers.wickedarrows.client.sound.IceExplosionSoundEvent;
 import com.subwranglers.wickedarrows.client.sound.SoundEventVoidVacuum;
 import com.subwranglers.wickedarrows.entity.*;
 import com.subwranglers.wickedarrows.item.*;
-import com.subwranglers.wickedarrows.ServerProxy;
-import com.subwranglers.wickedarrows.client.sound.IceCrackleSoundEvent;
-import com.subwranglers.wickedarrows.client.sound.IceExplosionSoundEvent;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -21,6 +22,7 @@ public class ClientProxy extends ServerProxy {
     public void preInit() {
         super.preInit();
 
+        // Arrows
         loadShotArrow();
         loadIceArrow();
         loadTorchArrow();
@@ -31,6 +33,9 @@ public class ClientProxy extends ServerProxy {
         loadVoidSnareArrow();
         loadSeekingArrow();
         loadRicochetArrow();
+
+        // Blocks
+        loadArrowWorkbench();
     }
 
     public void init() {
@@ -40,6 +45,12 @@ public class ClientProxy extends ServerProxy {
     public void postInit() {
         super.postInit();
     }
+
+    /*
+
+        Arrows
+
+     */
 
     private static void loadShotArrow() {
         ModelLoader.setCustomModelResourceLocation(
@@ -215,5 +226,20 @@ public class ClientProxy extends ServerProxy {
 
         // Entity Rendering
         RenderingRegistry.registerEntityRenderingHandler(EntityRicochetArrow.class, RenderRicochetArrow::new);
+    }
+
+    /*
+
+        Blocks
+
+     */
+
+    private static void loadArrowWorkbench() {
+        // Item Rendering
+        ModelLoader.setCustomModelResourceLocation(
+                BlockArrowWorkbench.INSTANCE_ITEM,
+                0,
+                new ModelResourceLocation(name(ARROW_WORKBENCH, QUALIFY))
+        );
     }
 }

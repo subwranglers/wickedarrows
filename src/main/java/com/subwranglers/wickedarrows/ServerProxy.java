@@ -1,5 +1,6 @@
 package com.subwranglers.wickedarrows;
 
+import com.subwranglers.wickedarrows.block.BlockArrowWorkbench;
 import com.subwranglers.wickedarrows.block.BlockInvokedIce;
 import com.subwranglers.wickedarrows.block.BlockTorchArrow;
 import com.subwranglers.wickedarrows.entity.*;
@@ -28,6 +29,9 @@ public class ServerProxy {
         registerVoidSnareArrow();
         registerSeekingArrow();
         registerRicochetArrow();
+
+        // Blocks
+        registerArrowWorkbench();
 
         // Other
         registerVoidVacuum();
@@ -132,6 +136,17 @@ public class ServerProxy {
     private static void registerRicochetArrow() {
         ForgeRegistries.ITEMS.register(ItemRicochetArrow.INSTANCE);
         registerEntity(EntityRicochetArrow.class, RICOCHET_ARROW);
+    }
+
+    /*
+
+        Blocks
+
+     */
+
+    private static void registerArrowWorkbench() {
+        ForgeRegistries.BLOCKS.register(BlockArrowWorkbench.INSTANCE);
+        ForgeRegistries.ITEMS.register(BlockArrowWorkbench.INSTANCE_ITEM);
     }
 
     /*

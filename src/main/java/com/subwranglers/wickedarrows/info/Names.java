@@ -7,8 +7,7 @@ public class Names {
     private static final String PRE_ITEM = "item_";
     private static final String PRE_ENTITY = "entity_";
 
-    // Blocks & Items ---------------------------
-    public static final String INVOKED_ICE = "invoked_ice";
+    // Items --------------------------------------
     public static final String SHOT_ARR2W = "shot_arr2w";
     public static final String SHOT_ARR3W = "shot_arr3w";
     public static final String SHOT_ARR4W = "shot_arr4w";
@@ -27,7 +26,11 @@ public class Names {
     public static final String SEEKING_ARROW = "seeking_arrow";
     public static final String RICOCHET_ARROW = "ricochet_arrow";
 
-    // Sounds -----------------------------------
+    // Blocks -------------------------------------
+    public static final String INVOKED_ICE = "invoked_ice";
+    public static final String ARROW_WORKBENCH = "arrow_workbench";
+
+    // Sounds -------------------------------------
     public static final String ICE_CRACKLING = "ice_crackling";
     public static final String ICE_EXPLOSION = "ice_explosion";
     public static final String VOID_VACUUM_FX = "void_vacuum_fx";
@@ -41,6 +44,7 @@ public class Names {
 
     // Other --------------------------------------
     public static final String VOID_VACUUM = "void_vacuum";
+    public static final String ARROW_WORKBENCH_GUI = "arrow_workbench_gui";
 
     /**
      * Pass flag to prepend "block_" to the name.
