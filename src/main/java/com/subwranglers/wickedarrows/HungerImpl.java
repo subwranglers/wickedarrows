@@ -13,6 +13,7 @@ import util.coordinates.AabbUtil;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class HungerImpl {
 
@@ -27,9 +28,16 @@ public class HungerImpl {
      * @param pos
      * @return
      */
-    public static List<EntityLivingBase> getAfflictedInAABB(World world, BlockPos pos, @Nullable AxisAlignedBB aabb) {
+    public static List<EntityLivingBase> getAfflictedInAABB(World world,
+                                                            BlockPos pos,
+                                                            @Nullable AxisAlignedBB aabb,
+                                                            @Nullable Predicate<EntityLivingBase> extraAnd) {
         if (aabb == null)
             aabb = AabbUtil.getRadiusAabb(pos, TARGET_RADIUS);
+
+        if (extraAnd == null)
+            extraAnd = entity -> true;
+        Predicate<EntityLivingBase> finalExtra = extraAnd;
 
         List<EntityLivingBase> afflicted = world.getEntitiesWithinAABB(EntityPlayer.class, aabb,
                 player -> player != null && player.isPotionActive(PotionBait.INSTANCE));
@@ -37,7 +45,9 @@ public class HungerImpl {
         if (afflicted.size() == 0)
             // No afflicted players nearby, so just find any afflicted mobs.
             afflicted = world.getEntitiesWithinAABB(EntityLivingBase.class, aabb,
-                    entity -> entity != null && entity.isPotionActive(PotionBait.INSTANCE));
+                    entity -> entity != null
+                            && entity.isPotionActive(PotionBait.INSTANCE)
+                            && finalExtra.test(entity));
 
         return afflicted;
     }

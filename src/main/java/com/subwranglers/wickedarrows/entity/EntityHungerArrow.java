@@ -1,6 +1,5 @@
 package com.subwranglers.wickedarrows.entity;
 
-import com.subwranglers.wickedarrows.HungerImpl;
 import com.subwranglers.wickedarrows.base.EntityWArrow;
 import com.subwranglers.wickedarrows.potion.PotionBait;
 import net.minecraft.entity.EntityLivingBase;
@@ -64,6 +63,5 @@ public class EntityHungerArrow extends EntityWArrow {
             player.addPotionEffect(new PotionEffect(MobEffects.HUNGER, DURATION_HUNGER_TICKS));
         }
 
-        HungerImpl.getReadyZombiesSpidersNear(living).forEach(mob -> mob.setAttackTarget(living));
     }
 }

@@ -40,7 +40,7 @@ public class EventHungerArrowAI {
         if (world.getLightFromNeighbors(pos) > LIGHT_SPAWN_THRESHOLD)
             return;
 
-        List<EntityLivingBase> afflicted = HungerImpl.getAfflictedInAABB(world, pos, null);
+        List<EntityLivingBase> afflicted = HungerImpl.getAfflictedInAABB(world, pos, null, null);
         if (afflicted.size() <= 0)
             return;
         // There are afflicted entities nearby.
@@ -58,15 +58,23 @@ public class EventHungerArrowAI {
     @SubscribeEvent()
     public static void attackAfflicted(LivingEvent event) {
         Entity e = event.getEntity();
-        if (e instanceof EntityZombie || e instanceof EntitySpider) {
-            EntityMob mob = (EntityMob) e;
-            World world = event.getEntity().getEntityWorld();
-            List<EntityLivingBase> entities = HungerImpl.getAfflictedInAABB(world, e.getPosition(), null);
+        if (!(e instanceof EntityZombie || e instanceof EntitySpider))
+            // Entity isn't a zombie or spider.
+            return;
 
-            if (entities.size() > 0 && HungerImpl.shouldIgnoreCurrentTarget(mob))
-                // Attack any afflicted target within range
-                mob.setAttackTarget(entities.get(MathHelper.getInt(world.rand, 0, entities.size() - 1)));
-        }
+        EntityMob mob = (EntityMob) e;
+        if (!HungerImpl.shouldIgnoreCurrentTarget(mob))
+            // Shouldn't change the mob's target.
+            return;
+
+        World world = event.getEntity().getEntityWorld();
+
+        List<EntityLivingBase> entities = HungerImpl.getAfflictedInAABB(world, e.getPosition(), null,
+                entity -> !entity.equals(mob));
+
+        if (entities.size() > 0)
+            // Attack any afflicted target within range
+            mob.setAttackTarget(entities.get(MathHelper.getInt(world.rand, 0, entities.size() - 1)));
     }
 
 }
