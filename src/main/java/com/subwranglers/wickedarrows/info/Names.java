@@ -37,6 +37,7 @@ public class Names {
     public static final String BLEED_POTION = "bleed_potion";
     public static final String BRITTLE_BONES_POTION = "brittle_bones_potion";
     public static final String MOB_CAPTURED_POTION = "mob_captured_potion";
+    public static final String BAIT_POTION = "bait_potion";
 
     // Other --------------------------------------
     public static final String VOID_VACUUM = "void_vacuum";

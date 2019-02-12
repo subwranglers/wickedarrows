@@ -1,6 +1,8 @@
 package com.subwranglers.wickedarrows.entity;
 
+import com.subwranglers.wickedarrows.HungerImpl;
 import com.subwranglers.wickedarrows.base.EntityWArrow;
+import com.subwranglers.wickedarrows.potion.PotionBait;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -49,6 +51,8 @@ public class EntityHungerArrow extends EntityWArrow {
 
     @Override
     protected void arrowHit(EntityLivingBase living) {
+        PotionBait.apply(living);
+
         // Apply a decent amount of exhaustion to the target
         if (living instanceof EntityPlayer) {
             EntityPlayer player = ((EntityPlayer) living);
@@ -59,5 +63,7 @@ public class EntityHungerArrow extends EntityWArrow {
 
             player.addPotionEffect(new PotionEffect(MobEffects.HUNGER, DURATION_HUNGER_TICKS));
         }
+
+        HungerImpl.getReadyZombiesSpidersNear(living).forEach(mob -> mob.setAttackTarget(living));
     }
 }

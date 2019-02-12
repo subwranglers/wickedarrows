@@ -1,34 +1,72 @@
 package com.subwranglers.wickedarrows.events;
 
-import com.subwranglers.wickedarrows.entity.EntityHungerArrow;
+import com.subwranglers.wickedarrows.HungerImpl;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.ai.EntityAIFindEntityNearest;
-import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.EnumSkyBlock;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldEntitySpawner;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.List;
 
 @Mod.EventBusSubscriber
 public class EventHungerArrowAI {
 
-    /**
-     * How fast specified mobs move when moving toward the entity struck with an {@link EntityHungerArrow}.
-     */
-    public static final double ATTRACTION_SPEED = 1.2D;
-
-    public static final float ATTRACTION_DISTANCE = 96.F;
+    public static final int LIGHT_SPAWN_THRESHOLD = 10;
 
     @SubscribeEvent()
-    public static void moveToArrow(EntityJoinWorldEvent event) {
-//        Entity e = event.getEntity();
-//
-//        if (e instanceof EntityZombie) {
-//            EntityZombie zombie = (EntityZombie) e;
-//
-//            // Same Priority as attacking players
-//            zombie.targetTasks.addTask(2, new EntityAIMoveTowardsTarget(
-//                    zombie, ATTRACTION_SPEED, ATTRACTION_DISTANCE));
-//        }
+    public static void spawnZombieOrSpider(LivingSpawnEvent event) {
+        final int LIMIT = 2000;
+        World world = event.getWorld();
+
+        if (MathHelper.getInt(world.rand, 1, LIMIT) < LIMIT)
+            return;
+
+        BlockPos pos = new BlockPos(event.getX(), event.getEntity().getEntityBoundingBox().minY, event.getZ());
+
+        if (world.getLightFromNeighbors(pos) > LIGHT_SPAWN_THRESHOLD)
+            return;
+
+        List<EntityLivingBase> afflicted = HungerImpl.getAfflictedInAABB(world, pos, null);
+        if (afflicted.size() <= 0)
+            return;
+        // There are afflicted entities nearby.
+
+        EntityMob entity = MathHelper.getInt(world.rand, 1, 2) == 1 ?
+                new EntityZombie(world) : new EntitySpider(world);
+
+        entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
+        world.spawnEntity(entity);
+
+        // Don't let a different mob spawn here
+        event.setResult(Event.Result.DENY);
     }
+
+    @SubscribeEvent()
+    public static void attackAfflicted(LivingEvent event) {
+        Entity e = event.getEntity();
+        if (e instanceof EntityZombie || e instanceof EntitySpider) {
+            EntityMob mob = (EntityMob) e;
+            World world = event.getEntity().getEntityWorld();
+            List<EntityLivingBase> entities = HungerImpl.getAfflictedInAABB(world, e.getPosition(), null);
+
+            if (entities.size() > 0 && HungerImpl.shouldIgnoreCurrentTarget(mob))
+                // Attack any afflicted target within range
+                mob.setAttackTarget(entities.get(MathHelper.getInt(world.rand, 0, entities.size() - 1)));
+        }
+    }
+
 }

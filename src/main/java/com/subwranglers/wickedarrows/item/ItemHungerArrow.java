@@ -5,8 +5,19 @@ import com.subwranglers.wickedarrows.base.ItemWArrow;
 import com.subwranglers.wickedarrows.entity.EntityHungerArrow;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import util.MCConst;
 
@@ -30,5 +41,11 @@ public class ItemHungerArrow extends ItemWArrow {
     @Override
     public EntityArrow createArrow(World worldIn, ItemStack stack, EntityLivingBase shooter) {
         return new EntityHungerArrow(worldIn, shooter);
+    }
+
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        worldIn.getEntities(EntityMob.class, mob -> true).forEach(worldIn::removeEntity);
+        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 }

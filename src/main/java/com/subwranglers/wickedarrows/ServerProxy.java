@@ -4,10 +4,7 @@ import com.subwranglers.wickedarrows.block.BlockInvokedIce;
 import com.subwranglers.wickedarrows.block.BlockTorchArrow;
 import com.subwranglers.wickedarrows.entity.*;
 import com.subwranglers.wickedarrows.item.*;
-import com.subwranglers.wickedarrows.potion.PotionBleed;
-import com.subwranglers.wickedarrows.potion.PotionBrittleBones;
-import com.subwranglers.wickedarrows.potion.PotionIce;
-import com.subwranglers.wickedarrows.potion.PotionMobCaptured;
+import com.subwranglers.wickedarrows.potion.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -112,6 +109,7 @@ public class ServerProxy {
     private static void registerHungerArrow() {
         ForgeRegistries.ITEMS.register(ItemHungerArrow.INSTANCE);
         registerEntity(EntityHungerArrow.class, HUNGER_ARROW);
+        ForgeRegistries.POTIONS.register(PotionBait.INSTANCE);
     }
 
     private static void registerMerlinArrow() {
