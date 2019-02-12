@@ -23,7 +23,7 @@ public class TileEntityArrowWorkbench extends TileEntity implements IInteraction
 
     @Override
     public String getName() {
-        return "an arrow workbench"; // TODO: 12/02/19 make an actual proper name
+        return getGuiID();
     }
 
     @Override
