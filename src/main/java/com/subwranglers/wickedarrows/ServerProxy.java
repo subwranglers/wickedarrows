@@ -4,12 +4,17 @@ import com.subwranglers.wickedarrows.block.BlockArrowWorkbench;
 import com.subwranglers.wickedarrows.block.BlockInvokedIce;
 import com.subwranglers.wickedarrows.block.BlockTorchArrow;
 import com.subwranglers.wickedarrows.entity.*;
+import com.subwranglers.wickedarrows.inventory.WickedGuiHandler;
 import com.subwranglers.wickedarrows.item.*;
 import com.subwranglers.wickedarrows.potion.*;
+import com.subwranglers.wickedarrows.tileentity.TileEntityArrowWorkbench;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import static com.subwranglers.wickedarrows.info.Names.*;
 
@@ -146,7 +151,9 @@ public class ServerProxy {
 
     private static void registerArrowWorkbench() {
         ForgeRegistries.BLOCKS.register(BlockArrowWorkbench.INSTANCE);
+        GameRegistry.registerTileEntity(TileEntityArrowWorkbench.class, new ResourceLocation(WickedArrows.MOD_ID, ARROW_WORKBENCH));
         ForgeRegistries.ITEMS.register(BlockArrowWorkbench.INSTANCE_ITEM);
+
     }
 
     /*

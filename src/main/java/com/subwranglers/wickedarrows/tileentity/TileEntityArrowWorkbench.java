@@ -1,33 +1,41 @@
 package com.subwranglers.wickedarrows.tileentity;
 
-import com.subwranglers.wickedarrows.inventory.ContainerArrowWorkbench;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IInteractionObject;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
-import static com.subwranglers.wickedarrows.info.Names.*;
+import javax.annotation.Nullable;
 
-public class TileEntityArrowWorkbench extends TileEntity implements IInteractionObject {
+public class TileEntityArrowWorkbench extends TileEntity {
+
+    public static final int INV_SIZE = 11;
+    private static final String KEY_INVENTORY = "inventory";
+
+    private ItemStackHandler inventory = new ItemStackHandler(INV_SIZE);
 
     @Override
-    public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn) {
-        return new ContainerArrowWorkbench(playerInventory, playerIn);
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+        compound.setTag(KEY_INVENTORY, inventory.serializeNBT());
+        return super.writeToNBT(compound);
     }
 
     @Override
-    public String getGuiID() {
-        return name(ARROW_WORKBENCH_GUI, QUALIFY);
+    public void readFromNBT(NBTTagCompound compound) {
+        inventory.deserializeNBT(compound.getCompoundTag(KEY_INVENTORY));
+        super.readFromNBT(compound);
     }
 
     @Override
-    public String getName() {
-        return getGuiID();
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
     }
 
+    @Nullable
     @Override
-    public boolean hasCustomName() {
-        return false;
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T) inventory : super.getCapability(capability, facing);
     }
 }

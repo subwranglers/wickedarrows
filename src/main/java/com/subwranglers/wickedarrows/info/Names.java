@@ -84,7 +84,7 @@ public class Names {
         else if ((flags & ITEM) == flags) name = PRE_ITEM + name;
         else if ((flags & ENTITY) == flags) name = PRE_ENTITY + name;
 
-        // Add mod ID to name
+        // Add mod ARROW_WORKBENCH to name
         if ((flags & QUALIFY) == flags) name = WickedArrows.MOD_ID + ":" + name;
 
         return name;

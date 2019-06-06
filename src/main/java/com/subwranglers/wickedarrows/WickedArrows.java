@@ -1,9 +1,11 @@
 package com.subwranglers.wickedarrows;
 
+import com.subwranglers.wickedarrows.inventory.WickedGuiHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import static com.subwranglers.wickedarrows.WickedArrows.MOD_ID;
 import static net.minecraftforge.fml.common.Mod.*;
@@ -24,6 +26,7 @@ public class WickedArrows {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         proxy.preInit();
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new WickedGuiHandler());
     }
 
     @EventHandler
