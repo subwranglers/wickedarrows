@@ -106,6 +106,27 @@ public class EntityIceArrow extends EntityWArrow {
     }
 
     @Override
+    public void onUpdate(){
+        super.onUpdate();
+        if (world.isRemote){
+            if(isInWater()){
+                System.out.println("Arrow in water");
+                double d0 = posX;
+                double d1 = posY;
+                double d2 = posZ;
+                double d3 = motionX;
+                double d4 = motionY;
+                double d5 = motionZ;
+                Vec3d vec3d = new Vec3d(d0, d1, d2);
+                Vec3d vec3d1 = new Vec3d(d0 + d3, d1 + d4, d2 + d5);
+                RayTraceResult raytraceresult = world.rayTraceBlocks(vec3d, vec3d1, true, false, false);
+                generateIceSpike(raytraceresult);
+                setDead();
+            }
+        }
+    }
+
+    @Override
     protected void arrowHit(EntityLivingBase livingHit) {
         // They're frozen -- remove all velocity
         livingHit.motionX = 0.D;
