@@ -1,6 +1,7 @@
 package com.subwranglers.wickedarrows.block;
 
 import com.subwranglers.wickedarrows.item.ItemTorchArrow;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -19,6 +20,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -84,6 +86,38 @@ public class BlockTorchArrow extends Block {
     @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         return NULL_AABB;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    @MethodsReturnNonnullByDefault
+    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
+        EnumFacing dir = state.getValue(HIT_FACE);
+
+        // Arbitrary values collected by trial-and-error
+        double wide = 0.15d;
+        double narrow = 0.35d;
+
+        Vec3d start = new Vec3d(pos);
+        Vec3d end = new Vec3d(pos).add(1.d, 1.d, 1.d);
+
+        // Adjust the Vec3d's using wide and narrow values. Add to start and subtract from end to "contract" the
+        // bounding box to fit the model of the BlockTorchArrow.
+        switch (dir.getAxis()) {
+            case X:
+                start = start.add(0.d, narrow, wide);
+                end = end.subtract(0.d, narrow, wide);
+                break;
+            case Y:
+                start = start.add(wide, 0.d, narrow);
+                end = end.subtract(wide, 0.d, narrow);
+                break;
+            case Z:
+                start = start.add(wide, narrow, 0.d);
+                end = end.subtract(wide, narrow, 0.d);
+        }
+
+        return new AxisAlignedBB(start.x, start.y, start.z, end.x, end.y, end.z);
     }
 
     @SideOnly(Side.CLIENT)
