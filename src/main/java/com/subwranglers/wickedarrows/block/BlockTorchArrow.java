@@ -1,7 +1,6 @@
 package com.subwranglers.wickedarrows.block;
 
 import com.subwranglers.wickedarrows.item.ItemTorchArrow;
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -10,12 +9,10 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityTNTPrimed;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -82,8 +79,14 @@ public class BlockTorchArrow extends Block {
     }
 
     @SuppressWarnings("deprecation")
+    @Nullable
     @Override
-    @MethodsReturnNonnullByDefault
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+        return NULL_AABB;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         // Passing in "relative" coordinates for the vector
         return adjustBoundingBox(state, new Vec3d(0.d, 0.d, 0.d));
@@ -91,7 +94,6 @@ public class BlockTorchArrow extends Block {
 
     @SuppressWarnings("deprecation")
     @Override
-    @MethodsReturnNonnullByDefault
     public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
         // Passing in absolute coordinates for the vector because this method requires them.
         return adjustBoundingBox(state, new Vec3d(pos.getX(), pos.getY(), pos.getZ()));
