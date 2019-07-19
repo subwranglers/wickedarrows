@@ -82,24 +82,30 @@ public class BlockTorchArrow extends Block {
     }
 
     @SuppressWarnings("deprecation")
-    @Nullable
     @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return NULL_AABB;
+    @MethodsReturnNonnullByDefault
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        // Passing in "relative" coordinates for the vector
+        return adjustBoundingBox(state, new Vec3d(0.d, 0.d, 0.d));
     }
 
     @SuppressWarnings("deprecation")
     @Override
     @MethodsReturnNonnullByDefault
     public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
+        // Passing in absolute coordinates for the vector because this method requires them.
+        return adjustBoundingBox(state, new Vec3d(pos.getX(), pos.getY(), pos.getZ()));
+    }
+
+    private AxisAlignedBB adjustBoundingBox(IBlockState state, Vec3d pos) {
         EnumFacing dir = state.getValue(HIT_FACE);
 
         // Arbitrary values collected by trial-and-error
         double wide = 0.15d;
         double narrow = 0.35d;
 
-        Vec3d start = new Vec3d(pos);
-        Vec3d end = new Vec3d(pos).add(1.d, 1.d, 1.d);
+        Vec3d start = pos;
+        Vec3d end = pos.add(1.d, 1.d, 1.d);
 
         // Adjust the Vec3d's using wide and narrow values. Add to start and subtract from end to "contract" the
         // bounding box to fit the model of the BlockTorchArrow.
