@@ -95,35 +95,41 @@ public class EntityIceArrow extends EntityWArrow {
     }
 
     @Override
+    public void onUpdate(){
+        super.onUpdate();
+        if (!world.isRemote){
+            Vec3d vec3d1 = new Vec3d(this.posX, this.posY, this.posZ);
+            Vec3d vec3d2 = new Vec3d(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+            RayTraceResult raytraceresult = this.world.rayTraceBlocks(vec3d1, vec3d2, true);
+
+            if(raytraceresult != null){
+                IBlockState blockState = world.getBlockState(raytraceresult.getBlockPos());
+                if(blockState == Blocks.WATER.getDefaultState())
+                    this.onWaterHit(raytraceresult);
+            }
+        }
+    }
+
+    @Override
     protected void onHit(RayTraceResult trace) {
         super.onHit(trace);
 
-        if (trace.getBlockPos() != null && trace.typeOfHit == RayTraceResult.Type.BLOCK && !isDead) {
+        if (!world.isRemote && trace.typeOfHit == RayTraceResult.Type.BLOCK && !isDead) {
             playSound(IceExplosionSoundEvent.INSTANCE, 0.5F, 1.0F);
             generateIceSpike(trace);
             setDead();
         }
     }
 
-    @Override
-    public void onUpdate(){
-        super.onUpdate();
-        if (world.isRemote){
-            if(isInWater()){
-                System.out.println("Arrow in water");
-                double d0 = posX;
-                double d1 = posY;
-                double d2 = posZ;
-                double d3 = motionX;
-                double d4 = motionY;
-                double d5 = motionZ;
-                Vec3d vec3d = new Vec3d(d0, d1, d2);
-                Vec3d vec3d1 = new Vec3d(d0 + d3, d1 + d4, d2 + d5);
-                RayTraceResult raytraceresult = world.rayTraceBlocks(vec3d, vec3d1, true, false, false);
-                generateIceSpike(raytraceresult);
-                setDead();
-            }
-        }
+    protected void onWaterHit(RayTraceResult trace){
+
+        Vec3d position = new Vec3d(this.posX, this.posY, this.posZ);
+        Vec3d velocity = new Vec3d(this.motionX, this.motionY, this.motionZ);
+        Vec3d spikeTip = velocity.normalize().scale(8).add(position);
+
+        generateIceSpike(trace, spikeTip);
+        makeIcePlatform(trace.getBlockPos());
+        setDead();
     }
 
     @Override
@@ -144,10 +150,29 @@ public class EntityIceArrow extends EntityWArrow {
         setDead();
     }
 
+    private void makeIcePlatform(BlockPos pos){
+        IBlockState invokedIce = BlockInvokedIce.getDefaultBlockState();
+        BlockPos.MutableBlockPos mut = new BlockPos.MutableBlockPos(pos);
+
+        tryPutBlock(mut, invokedIce);
+        tryPutBlock(mut.move(EnumFacing.NORTH), invokedIce);
+        tryPutBlock(mut.move(EnumFacing.EAST), invokedIce);
+        tryPutBlock(mut.move(EnumFacing.SOUTH), invokedIce);
+        tryPutBlock(mut.move(EnumFacing.SOUTH), invokedIce);
+        tryPutBlock(mut.move(EnumFacing.WEST), invokedIce);
+        tryPutBlock(mut.move(EnumFacing.WEST), invokedIce);
+        tryPutBlock(mut.move(EnumFacing.NORTH), invokedIce);
+        tryPutBlock(mut.move(EnumFacing.NORTH), invokedIce);
+    }
+
     private void generateIceSpike(RayTraceResult rayTraceResult) {
+        Vec3d spikeTip = getSpikeTipCoords(rayTraceResult);
+        generateIceSpike(rayTraceResult, spikeTip);
+    }
+
+    private void generateIceSpike(RayTraceResult rayTraceResult, Vec3d spikeTip){
         BlockPos.MutableBlockPos mut = new BlockPos.MutableBlockPos(rayTraceResult.getBlockPos());
         IBlockState invokedIce = BlockInvokedIce.getDefaultBlockState();
-        Vec3d spikeTip = getSpikeTipCoords(rayTraceResult);
 
         Consumer<Vec3i> consumer = vec -> {
             mut.setPos(vec.getX(), vec.getY(), vec.getZ());
