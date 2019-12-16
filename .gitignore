@@ -12,21 +12,14 @@ out
 *.iws
 *.iml
 .idea
-/classes/
 
 # gradle
 build
 .gradle
-/gradle/
-/gradlew*
-settings.gradle
 
 # other
 eclipse
 run
 
-# forge
-*-changelog.txt
-*Pauls*
-config/
-logs/
+# Files from Forge MDK
+forge*changelog.txt
