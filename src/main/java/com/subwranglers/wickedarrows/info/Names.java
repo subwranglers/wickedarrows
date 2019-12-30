@@ -3,9 +3,9 @@ package com.subwranglers.wickedarrows.info;
 import com.subwranglers.wickedarrows.WickedArrows;
 
 public class Names {
-    private static final String PRE_BLOCK = "block_";
-    private static final String PRE_ITEM = "item_";
-    private static final String PRE_ENTITY = "entity_";
+    private static final String SUFF_BLOCK = "_block";
+    private static final String SUFF_ITEM = "_item";
+    private static final String SUFF_ENTITY = "_entity";
 
     // Items --------------------------------------
     public static final String SHOT_ARR2W = "shot_arr2w";
@@ -80,9 +80,9 @@ public class Names {
      */
     public static String name(String name, int flags) {
         // Prepend either block, item or entity if asked, but only 1
-        if ((flags & BLOCK) == flags) name = PRE_BLOCK + name;
-        else if ((flags & ITEM) == flags) name = PRE_ITEM + name;
-        else if ((flags & ENTITY) == flags) name = PRE_ENTITY + name;
+        if ((flags & BLOCK) == flags) name = name + SUFF_BLOCK;
+        else if ((flags & ITEM) == flags) name = name + SUFF_ITEM;
+        else if ((flags & ENTITY) == flags) name = name + SUFF_ENTITY;
 
         // Add mod ARROW_WORKBENCH to name
         if ((flags & QUALIFY) == flags) name = WickedArrows.MOD_ID + ":" + name;

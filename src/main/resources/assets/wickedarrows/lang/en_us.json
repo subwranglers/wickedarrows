@@ -1,4 +1,7 @@
 {
+  "item.wickedarrows.torch_arrow": "Torch Arrow",
+  "entity.wickedarrows.torch_arrow": "Torch Arrow",
+
   "item.wickedarrows.ice_arrow": "Ice Arrow",
   "entity.wickedarrows.ice_arrow": "Ice Arrow",
   "block.wickedarrows.invoked_ice": "Invoked Ice",

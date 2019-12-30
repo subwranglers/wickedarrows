@@ -13,8 +13,9 @@ public abstract class WickedArrowRenderer<T extends WickedArrowEntity> extends E
 
     protected EntityModel<T> model;
 
-    protected WickedArrowRenderer(EntityRendererManager renderManager) {
+    protected WickedArrowRenderer(EntityRendererManager renderManager, EntityModel<T> model) {
         super(renderManager);
+        this.model = model;
     }
 
     @Override
@@ -35,10 +36,6 @@ public abstract class WickedArrowRenderer<T extends WickedArrowEntity> extends E
         GlStateManager.popMatrix();
 
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
-    }
-
-    protected void setModel(EntityModel<T> model) {
-        this.model = model;
     }
 
     @Nullable

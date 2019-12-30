@@ -19,7 +19,6 @@ public abstract class WickedArrowEntity extends AbstractArrowEntity implements I
     }
 
     public WickedArrowEntity(EntityType<? extends WickedArrowEntity> entity, World worldIn, double x, double y, double z) {
-
         super(entity, x, y, z, worldIn);
     }
 

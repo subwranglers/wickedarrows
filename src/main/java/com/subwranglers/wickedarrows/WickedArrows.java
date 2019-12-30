@@ -1,11 +1,15 @@
 package com.subwranglers.wickedarrows;
 
 import com.subwranglers.wickedarrows.block.InvokedIceBlock;
+import com.subwranglers.wickedarrows.block.TorchArrowBlock;
 import com.subwranglers.wickedarrows.client.renderer.IceArrowRenderer;
+import com.subwranglers.wickedarrows.client.renderer.TorchArrowRenderer;
 import com.subwranglers.wickedarrows.client.sound.IceCrackleSoundEvent;
 import com.subwranglers.wickedarrows.client.sound.IceExplosionSoundEvent;
 import com.subwranglers.wickedarrows.entity.IceArrowEntity;
+import com.subwranglers.wickedarrows.entity.TorchArrowEntity;
 import com.subwranglers.wickedarrows.item.IceArrowItem;
+import com.subwranglers.wickedarrows.item.TorchArrowItem;
 import com.subwranglers.wickedarrows.potion.IceEffect;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityClassification;
@@ -41,9 +45,7 @@ public class WickedArrows {
     private static final Logger LOGGER = LogManager.getLogger();
 
     public WickedArrows() {
-
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
-
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
     }
 
@@ -62,6 +64,7 @@ public class WickedArrows {
 
         // Entity Rendering
         RenderingRegistry.registerEntityRenderingHandler(IceArrowEntity.class, IceArrowRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(TorchArrowEntity.class, TorchArrowRenderer::new);
 }
 
     @Mod.EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
@@ -70,11 +73,13 @@ public class WickedArrows {
         @SubscribeEvent
         public static void onRegisterBlocks(final RegistryEvent.Register<Block> event) {
             event.getRegistry().register(InvokedIceBlock.INSTANCE);
+            event.getRegistry().register(TorchArrowBlock.INSTANCE);
         }
 
         @SubscribeEvent
         public static void onRegisterItems(final RegistryEvent.Register<Item> event) {
             event.getRegistry().register(IceArrowItem.INSTANCE);
+            event.getRegistry().register(TorchArrowItem.INSTANCE);
         }
 
         @SubscribeEvent
@@ -83,6 +88,12 @@ public class WickedArrows {
                     EntityType.Builder.<IceArrowEntity>create(IceArrowEntity::new, EntityClassification.MISC)
                             .build(ICE_ARROW)
                             .setRegistryName(ICE_ARROW)
+            );
+
+            event.getRegistry().register(
+                    EntityType.Builder.<TorchArrowEntity>create(TorchArrowEntity::new, EntityClassification.MISC)
+                            .build(TORCH_ARROW)
+                            .setRegistryName(TORCH_ARROW)
             );
         }
 
@@ -103,7 +114,5 @@ public class WickedArrows {
         public static void onRegisterEffects(final RegistryEvent.Register<Effect> event) {
             event.getRegistry().register(IceEffect.INSTANCE);
         }
-
-
     }
 }

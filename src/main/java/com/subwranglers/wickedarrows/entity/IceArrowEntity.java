@@ -78,9 +78,7 @@ public class IceArrowEntity extends WickedArrowEntity {
         super(type, worldIn);
     }
 
-    public IceArrowEntity(World worldIn, double x, double y, double z) {
-        super(EntityTypes.ICE_ARROW, worldIn, x, y, z);
-    }
+    public IceArrowEntity(World worldIn, double x, double y, double z) { super(EntityTypes.ICE_ARROW, worldIn, x, y, z); }
 
     public IceArrowEntity(World worldIn, LivingEntity shooter) {
         super(EntityTypes.ICE_ARROW, worldIn, shooter);

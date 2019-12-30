@@ -1,11 +1,11 @@
 package com.subwranglers.wickedarrows.client.model;
 
+import com.subwranglers.wickedarrows.entity.IceArrowEntity;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.client.renderer.model.ModelBox;
-import net.minecraft.entity.Entity;
 
-public class IceArrowModel extends EntityModel {
+public class IceArrowModel<T extends IceArrowEntity> extends EntityModel<T> {
     private final RendererModel arrow;
 
     public IceArrowModel() {
@@ -29,7 +29,7 @@ public class IceArrowModel extends EntityModel {
     }
 
     @Override
-    public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+    public void render(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         arrow.render(scale);
     }
 

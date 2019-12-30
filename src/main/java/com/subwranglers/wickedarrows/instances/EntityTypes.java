@@ -10,4 +10,7 @@ public class EntityTypes {
 
     @ObjectHolder("ice_arrow")
     public static final EntityType<IceArrowEntity> ICE_ARROW = null;
+
+    @ObjectHolder("torch_arrow")
+    public static final EntityType<IceArrowEntity> TORCH_ARROW = null;
 }
