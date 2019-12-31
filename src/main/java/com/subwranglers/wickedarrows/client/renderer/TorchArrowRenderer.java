@@ -10,7 +10,7 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import javax.annotation.Nullable;
 
-public class TorchArrowRenderer extends WickedArrowRenderer<TorchArrowEntity> implements IRenderFactory<TorchArrowEntity> {
+public class TorchArrowRenderer extends WickedArrowRenderer<TorchArrowEntity> {
 
     public static final ResourceLocation TEXTURE = new ResourceLocation(WickedArrows.MOD_ID,
             "textures/entity/projectiles/torch_arrow.png");
@@ -23,10 +23,5 @@ public class TorchArrowRenderer extends WickedArrowRenderer<TorchArrowEntity> im
     @Override
     protected ResourceLocation getEntityTexture(TorchArrowEntity entity) {
         return TEXTURE;
-    }
-
-    @Override
-    public EntityRenderer<? super TorchArrowEntity> createRenderFor(EntityRendererManager manager) {
-        return new TorchArrowRenderer(manager);
     }
 }

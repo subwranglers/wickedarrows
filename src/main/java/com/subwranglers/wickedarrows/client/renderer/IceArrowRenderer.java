@@ -10,7 +10,7 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import javax.annotation.Nullable;
 
-public class IceArrowRenderer<T extends IceArrowEntity> extends WickedArrowRenderer<T> implements IRenderFactory<T> {
+public class IceArrowRenderer<T extends IceArrowEntity> extends WickedArrowRenderer<T> {
 
     public static final ResourceLocation TEXTURE = new ResourceLocation(WickedArrows.MOD_ID,
             "textures/entity/projectiles/ice_arrow.png");
@@ -23,10 +23,5 @@ public class IceArrowRenderer<T extends IceArrowEntity> extends WickedArrowRende
     @Override
     protected ResourceLocation getEntityTexture(T entity) {
         return TEXTURE;
-    }
-
-    @Override
-    public EntityRenderer<? super T> createRenderFor(EntityRendererManager manager) {
-        return new IceArrowRenderer(manager);
     }
 }

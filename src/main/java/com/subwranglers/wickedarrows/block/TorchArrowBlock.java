@@ -103,10 +103,10 @@ public class TorchArrowBlock extends Block {
     public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
         for (Direction facing : Direction.values()) {
             BlockPos neighborPos = pos.offset(facing);
-            BlockState neighbourState = worldIn.getBlockState(neighborPos);
-            Block neighbourBlock = neighbourState.getBlock();
-            if (neighbourBlock == Blocks.TNT) {
-                neighbourBlock.catchFire(neighbourState, worldIn, neighborPos, null, null);
+            BlockState neighborState = worldIn.getBlockState(neighborPos);
+            Block neighborBlock = neighborState.getBlock();
+            if (neighborBlock == Blocks.TNT) {
+                neighborBlock.catchFire(neighborState, worldIn, neighborPos, null, null);
                 worldIn.removeBlock(neighborPos, false);
             }
         }

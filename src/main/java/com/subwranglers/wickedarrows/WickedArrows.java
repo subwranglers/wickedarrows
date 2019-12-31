@@ -3,12 +3,15 @@ package com.subwranglers.wickedarrows;
 import com.subwranglers.wickedarrows.block.InvokedIceBlock;
 import com.subwranglers.wickedarrows.block.TorchArrowBlock;
 import com.subwranglers.wickedarrows.client.renderer.IceArrowRenderer;
+import com.subwranglers.wickedarrows.client.renderer.RicochetArrowRenderer;
 import com.subwranglers.wickedarrows.client.renderer.TorchArrowRenderer;
 import com.subwranglers.wickedarrows.client.sound.IceCrackleSoundEvent;
 import com.subwranglers.wickedarrows.client.sound.IceExplosionSoundEvent;
 import com.subwranglers.wickedarrows.entity.IceArrowEntity;
+import com.subwranglers.wickedarrows.entity.RicochetArrowEntity;
 import com.subwranglers.wickedarrows.entity.TorchArrowEntity;
 import com.subwranglers.wickedarrows.item.IceArrowItem;
+import com.subwranglers.wickedarrows.item.RicochetArrowItem;
 import com.subwranglers.wickedarrows.item.TorchArrowItem;
 import com.subwranglers.wickedarrows.potion.IceEffect;
 import net.minecraft.block.Block;
@@ -65,6 +68,7 @@ public class WickedArrows {
         // Entity Rendering
         RenderingRegistry.registerEntityRenderingHandler(IceArrowEntity.class, IceArrowRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(TorchArrowEntity.class, TorchArrowRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(RicochetArrowEntity.class, RicochetArrowRenderer::new);
 }
 
     @Mod.EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
@@ -80,6 +84,7 @@ public class WickedArrows {
         public static void onRegisterItems(final RegistryEvent.Register<Item> event) {
             event.getRegistry().register(IceArrowItem.INSTANCE);
             event.getRegistry().register(TorchArrowItem.INSTANCE);
+            event.getRegistry().register(RicochetArrowItem.INSTANCE);
         }
 
         @SubscribeEvent
@@ -94,6 +99,12 @@ public class WickedArrows {
                     EntityType.Builder.<TorchArrowEntity>create(TorchArrowEntity::new, EntityClassification.MISC)
                             .build(TORCH_ARROW)
                             .setRegistryName(TORCH_ARROW)
+            );
+
+            event.getRegistry().register(
+                    EntityType.Builder.<RicochetArrowEntity>create(RicochetArrowEntity::new, EntityClassification.MISC)
+                            .build(RICOCHET_ARROW)
+                            .setRegistryName(RICOCHET_ARROW)
             );
         }
 

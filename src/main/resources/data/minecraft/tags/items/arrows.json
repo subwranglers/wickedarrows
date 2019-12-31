@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "wickedarrows:ice_arrow",
-    "wickedarrows:torch_arrow"
+    "wickedarrows:torch_arrow",
+    "wickedarrows:ricochet_arrow"
   ]
 }
