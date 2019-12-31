@@ -1,9 +1,15 @@
 {
-  "item.wickedarrows.torch_arrow": "Torch Arrow",
-  "entity.wickedarrows.torch_arrow": "Torch Arrow",
-
   "item.wickedarrows.ice_arrow": "Ice Arrow",
   "entity.wickedarrows.ice_arrow": "Ice Arrow",
   "block.wickedarrows.invoked_ice": "Invoked Ice",
-  "effect.wickedarrows.frozen": "Frozen"
+  "effect.wickedarrows.frozen": "Frozen",
+
+  "item.wickedarrows.torch_arrow": "Torch Arrow",
+  "entity.wickedarrows.torch_arrow": "Torch Arrow",
+
+  "item.wickedarrows.ricochet_arrow": "Ricochet Arrow",
+  "entity.wickedarrows.ricochet_arrow": "Ricochet Arrow",
+
+  "item.wickedarrows.lightburn_arrow": "Lightburn Arrow",
+  "entity.wickedarrows.lightburn_arrow": "Lightburn Arrow"
 }

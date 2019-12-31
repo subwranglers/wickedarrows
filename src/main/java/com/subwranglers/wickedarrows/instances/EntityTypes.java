@@ -17,4 +17,7 @@ public class EntityTypes {
 
     @ObjectHolder(Names.RICOCHET_ARROW)
     public static final EntityType<IceArrowEntity> RICOCHET_ARROW = null;
+
+    @ObjectHolder(Names.LIGHTBURN_ARROW)
+    public static final EntityType<IceArrowEntity> LIGHTBURN_ARROW = null;
 }
