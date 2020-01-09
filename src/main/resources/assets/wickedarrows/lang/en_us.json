@@ -11,5 +11,9 @@
   "entity.wickedarrows.ricochet_arrow": "Ricochet Arrow",
 
   "item.wickedarrows.lightburn_arrow": "Lightburn Arrow",
-  "entity.wickedarrows.lightburn_arrow": "Lightburn Arrow"
+  "entity.wickedarrows.lightburn_arrow": "Lightburn Arrow",
+
+  "item.wickedarrows.sharp_arrow": "Sharp Arrow",
+  "entity.wickedarrows.sharp_arrow": "Sharp Arrow",
+  "effect.wickedarrows.bleed": "Bleed"
 }

@@ -20,4 +20,7 @@ public class EntityTypes {
 
     @ObjectHolder(Names.LIGHTBURN_ARROW)
     public static final EntityType<IceArrowEntity> LIGHTBURN_ARROW = null;
+
+    @ObjectHolder(Names.SHARP_ARROW)
+    public static final EntityType<IceArrowEntity> SHARP_ARROW = null;
 }
