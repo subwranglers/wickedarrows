@@ -2,6 +2,7 @@ package com.subwranglers.wickedarrows.instances;
 
 import com.subwranglers.wickedarrows.WickedArrows;
 import com.subwranglers.wickedarrows.entity.IceArrowEntity;
+import com.subwranglers.wickedarrows.entity.MerlinArrowEntity;
 import com.subwranglers.wickedarrows.info.Names;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.registries.ObjectHolder;
@@ -23,4 +24,7 @@ public class EntityTypes {
 
     @ObjectHolder(Names.SHARP_ARROW)
     public static final EntityType<IceArrowEntity> SHARP_ARROW = null;
+
+    @ObjectHolder(Names.MERLIN_ARROW)
+    public static final EntityType<MerlinArrowEntity> MERLIN_ARROW = null;
 }

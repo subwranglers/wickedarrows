@@ -15,5 +15,9 @@
 
   "item.wickedarrows.sharp_arrow": "Sharp Arrow",
   "entity.wickedarrows.sharp_arrow": "Sharp Arrow",
-  "effect.wickedarrows.bleed": "Bleed"
+  "effect.wickedarrows.bleed": "Bleed",
+
+  "item.wickedarrows.merlin_arrow": "Merlin Arrow",
+  "entity.wickedarrows.merlin_arrow": "Merlin Arrow",
+  "effect.wickedarrows.brittle_bones": "Brittle Bones"
 }

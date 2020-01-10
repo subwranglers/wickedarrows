@@ -8,6 +8,7 @@ import com.subwranglers.wickedarrows.client.sound.IceExplosionSoundEvent;
 import com.subwranglers.wickedarrows.entity.*;
 import com.subwranglers.wickedarrows.item.*;
 import com.subwranglers.wickedarrows.potion.BleedEffect;
+import com.subwranglers.wickedarrows.potion.BrittleBonesEffect;
 import com.subwranglers.wickedarrows.potion.IceEffect;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityClassification;
@@ -66,6 +67,7 @@ public class WickedArrows {
         RenderingRegistry.registerEntityRenderingHandler(RicochetArrowEntity.class, RicochetArrowRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(LightburnArrowEntity.class, LightburnArrowRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(SharpArrowEntity.class, SharpArrowRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(MerlinArrowEntity.class, MerlinArrowRenderer::new);
 }
 
     @Mod.EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
@@ -84,6 +86,7 @@ public class WickedArrows {
             event.getRegistry().register(RicochetArrowItem.INSTANCE);
             event.getRegistry().register(LightburnArrowItem.INSTANCE);
             event.getRegistry().register(SharpArrowItem.INSTANCE);
+            event.getRegistry().register(MerlinArrowItem.INSTANCE);
         }
 
         @SubscribeEvent
@@ -93,7 +96,8 @@ public class WickedArrows {
                 RegistryEvents.<TorchArrowEntity>createEntityType(TorchArrowEntity::new, TORCH_ARROW),
                 RegistryEvents.<RicochetArrowEntity>createEntityType(RicochetArrowEntity::new, RICOCHET_ARROW),
                 RegistryEvents.<LightburnArrowEntity>createEntityType(LightburnArrowEntity::new, LIGHTBURN_ARROW),
-                RegistryEvents.<SharpArrowEntity>createEntityType(SharpArrowEntity::new, SHARP_ARROW)
+                RegistryEvents.<SharpArrowEntity>createEntityType(SharpArrowEntity::new, SHARP_ARROW),
+                RegistryEvents.<MerlinArrowEntity>createEntityType(MerlinArrowEntity::new, MERLIN_ARROW)
             );
         }
 
@@ -111,6 +115,7 @@ public class WickedArrows {
         public static void onRegisterEffects(final RegistryEvent.Register<Effect> event) {
             event.getRegistry().register(IceEffect.INSTANCE);
             event.getRegistry().register(BleedEffect.INSTANCE);
+            event.getRegistry().register(BrittleBonesEffect.INSTANCE);
         }
 
         private static <T extends WickedArrowEntity> EntityType<?> createEntityType(EntityType.IFactory<T> factoryIn, String registryName) {
