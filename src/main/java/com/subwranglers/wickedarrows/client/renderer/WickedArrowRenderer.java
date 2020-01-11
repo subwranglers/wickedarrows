@@ -37,8 +37,4 @@ public abstract class WickedArrowRenderer<T extends WickedArrowEntity> extends E
 
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
-
-    @Nullable
-    @Override
-    protected abstract ResourceLocation getEntityTexture(T entity);
 }

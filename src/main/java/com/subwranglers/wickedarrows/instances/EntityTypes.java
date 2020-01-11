@@ -27,4 +27,8 @@ public class EntityTypes {
 
     @ObjectHolder(Names.MERLIN_ARROW)
     public static final EntityType<MerlinArrowEntity> MERLIN_ARROW = null;
+
+    @ObjectHolder(Names.SHOT_ARROW)
+    public static final EntityType<MerlinArrowEntity> SHOT_ARROW = null;
+
 }

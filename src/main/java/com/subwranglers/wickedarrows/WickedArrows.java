@@ -68,6 +68,7 @@ public class WickedArrows {
         RenderingRegistry.registerEntityRenderingHandler(LightburnArrowEntity.class, LightburnArrowRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(SharpArrowEntity.class, SharpArrowRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(MerlinArrowEntity.class, MerlinArrowRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ShotArrowEntity.class, ShotArrowRenderer::new);
 }
 
     @Mod.EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
@@ -87,6 +88,14 @@ public class WickedArrows {
             event.getRegistry().register(LightburnArrowItem.INSTANCE);
             event.getRegistry().register(SharpArrowItem.INSTANCE);
             event.getRegistry().register(MerlinArrowItem.INSTANCE);
+            event.getRegistry().register(new ShotArrowItem(2));
+            event.getRegistry().register(new ShotArrowItem(3));
+            event.getRegistry().register(new ShotArrowItem(4));
+            event.getRegistry().register(new ShotArrowItem(5));
+            event.getRegistry().register(new ShotArrowItem(6));
+            event.getRegistry().register(new ShotArrowItem(7));
+            event.getRegistry().register(new ShotArrowItem(8));
+            event.getRegistry().register(new ShotArrowItem(9));
         }
 
         @SubscribeEvent
@@ -97,7 +106,8 @@ public class WickedArrows {
                 RegistryEvents.<RicochetArrowEntity>createEntityType(RicochetArrowEntity::new, RICOCHET_ARROW),
                 RegistryEvents.<LightburnArrowEntity>createEntityType(LightburnArrowEntity::new, LIGHTBURN_ARROW),
                 RegistryEvents.<SharpArrowEntity>createEntityType(SharpArrowEntity::new, SHARP_ARROW),
-                RegistryEvents.<MerlinArrowEntity>createEntityType(MerlinArrowEntity::new, MERLIN_ARROW)
+                RegistryEvents.<MerlinArrowEntity>createEntityType(MerlinArrowEntity::new, MERLIN_ARROW),
+                RegistryEvents.<ShotArrowEntity>createEntityType(ShotArrowEntity::new, SHOT_ARROW)
             );
         }
 
