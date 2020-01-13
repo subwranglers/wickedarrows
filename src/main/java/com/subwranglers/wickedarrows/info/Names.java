@@ -30,9 +30,9 @@ public class Names {
 
     // Potions ------------------------------------
     public static final String MOB_CAPTURED_POTION = "mob_captured_potion";
-    public static final String BAIT_POTION = "bait_potion";
-    public static final String BRITTLE_BONES_POTION = "brittle_bones";
-    public static final String BLEED_POTION = "bleed";
+    public static final String BAIT_EFFECT = "bait";
+    public static final String BRITTLE_BONES_EFFECT = "brittle_bones";
+    public static final String BLEED_EFFECT = "bleed";
     public static final String FROZEN_EFFECT = "frozen";
 
     // Other --------------------------------------

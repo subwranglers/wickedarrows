@@ -31,4 +31,7 @@ public class EntityTypes {
     @ObjectHolder(Names.SHOT_ARROW)
     public static final EntityType<MerlinArrowEntity> SHOT_ARROW = null;
 
+    @ObjectHolder(Names.HUNGER_ARROW)
+    public static final EntityType<MerlinArrowEntity> HUNGER_ARROW = null;
+
 }

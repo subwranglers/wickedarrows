@@ -1,23 +1,34 @@
 {
-  "item.wickedarrows.ice_arrow": "Ice Arrow",
-  "entity.wickedarrows.ice_arrow": "Ice Arrow",
   "block.wickedarrows.invoked_ice": "Invoked Ice",
-  "effect.wickedarrows.frozen": "Frozen",
 
+  "item.wickedarrows.ice_arrow": "Ice Arrow",
+  "item.wickedarrows.hunger_arrow": "Hunger Arrow",
+  "item.wickedarrows.lightburn_arrow": "Lightburn Arrow",
+  "item.wickedarrows.merlin_arrow": "Merlin Arrow",
+  "item.wickedarrows.ricochet_arrow": "Ricochet Arrow",
+  "item.wickedarrows.sharp_arrow": "Sharp Arrow",
+  "item.wickedarrows.shot_arrow_2": "Shot Arrow x2",
+  "item.wickedarrows.shot_arrow_3": "Shot Arrow x3",
+  "item.wickedarrows.shot_arrow_4": "Shot Arrow x4",
+  "item.wickedarrows.shot_arrow_5": "Shot Arrow x5",
+  "item.wickedarrows.shot_arrow_6": "Shot Arrow x6",
+  "item.wickedarrows.shot_arrow_7": "Shot Arrow x7",
+  "item.wickedarrows.shot_arrow_8": "Shot Arrow x8",
+  "item.wickedarrows.shot_arrow_9": "Shot Arrow x9",
   "item.wickedarrows.torch_arrow": "Torch Arrow",
+
+  "entity.wickedarrows.ice_arrow": "Ice Arrow",
+  "entity.wickedarrows.hunger_arrow": "Hunger Arrow",
+  "entity.wickedarrows.lightburn_arrow": "Lightburn Arrow",
+  "entity.wickedarrows.merlin_arrow": "Merlin Arrow",
+  "entity.wickedarrows.ricochet_arrow": "Ricochet Arrow",
+  "entity.wickedarrows.sharp_arrow": "Sharp Arrow",
+  "entity.wickedarrows.shot_arrow": "Shot Arrow",
   "entity.wickedarrows.torch_arrow": "Torch Arrow",
 
-  "item.wickedarrows.ricochet_arrow": "Ricochet Arrow",
-  "entity.wickedarrows.ricochet_arrow": "Ricochet Arrow",
-
-  "item.wickedarrows.lightburn_arrow": "Lightburn Arrow",
-  "entity.wickedarrows.lightburn_arrow": "Lightburn Arrow",
-
-  "item.wickedarrows.sharp_arrow": "Sharp Arrow",
-  "entity.wickedarrows.sharp_arrow": "Sharp Arrow",
+  "effect.wickedarrows.bait": "Bait",
   "effect.wickedarrows.bleed": "Bleed",
+  "effect.wickedarrows.brittle_bones": "Brittle Bones",
+  "effect.wickedarrows.frozen": "Frozen"
 
-  "item.wickedarrows.merlin_arrow": "Merlin Arrow",
-  "entity.wickedarrows.merlin_arrow": "Merlin Arrow",
-  "effect.wickedarrows.brittle_bones": "Brittle Bones"
 }

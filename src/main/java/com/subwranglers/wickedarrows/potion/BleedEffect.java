@@ -30,7 +30,7 @@ public class BleedEffect extends Effect {
 
     protected BleedEffect() {
         super(EffectType.HARMFUL, 0xff0000);
-        setRegistryName(WickedArrows.MOD_ID, BLEED_POTION);
+        setRegistryName(WickedArrows.MOD_ID, BLEED_EFFECT);
 
         addAttributesModifier(SharedMonsterAttributes.MOVEMENT_SPEED, UUID, -0.1D, AttributeModifier.Operation.MULTIPLY_BASE);
     }

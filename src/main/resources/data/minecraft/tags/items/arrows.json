@@ -1,12 +1,12 @@
 {
   "replace": false,
   "values": [
+    "wickedarrows:hunger_arrow",
     "wickedarrows:ice_arrow",
-    "wickedarrows:torch_arrow",
-    "wickedarrows:ricochet_arrow",
     "wickedarrows:lightburn_arrow",
-    "wickedarrows:sharp_arrow",
     "wickedarrows:merlin_arrow",
+    "wickedarrows:ricochet_arrow",
+    "wickedarrows:sharp_arrow",
     "wickedarrows:shot_arrow_2",
     "wickedarrows:shot_arrow_3",
     "wickedarrows:shot_arrow_4",
@@ -14,6 +14,7 @@
     "wickedarrows:shot_arrow_6",
     "wickedarrows:shot_arrow_7",
     "wickedarrows:shot_arrow_8",
-    "wickedarrows:shot_arrow_9"
+    "wickedarrows:shot_arrow_9",
+    "wickedarrows:torch_arrow"
   ]
 }

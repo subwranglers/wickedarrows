@@ -18,7 +18,7 @@ public class BrittleBonesEffect extends Effect {
 
     protected BrittleBonesEffect() {
         super(EffectType.HARMFUL, COLOR);
-        setRegistryName(WickedArrows.MOD_ID, BRITTLE_BONES_POTION);
+        setRegistryName(WickedArrows.MOD_ID, BRITTLE_BONES_EFFECT);
     }
 
     public static void apply(LivingEntity entity, int amplifier) {
