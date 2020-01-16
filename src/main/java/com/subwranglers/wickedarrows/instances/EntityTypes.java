@@ -1,8 +1,7 @@
 package com.subwranglers.wickedarrows.instances;
 
 import com.subwranglers.wickedarrows.WickedArrows;
-import com.subwranglers.wickedarrows.entity.IceArrowEntity;
-import com.subwranglers.wickedarrows.entity.MerlinArrowEntity;
+import com.subwranglers.wickedarrows.entity.*;
 import com.subwranglers.wickedarrows.info.Names;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.registries.ObjectHolder;
@@ -14,24 +13,24 @@ public class EntityTypes {
     public static final EntityType<IceArrowEntity> ICE_ARROW = null;
 
     @ObjectHolder(Names.TORCH_ARROW)
-    public static final EntityType<IceArrowEntity> TORCH_ARROW = null;
+    public static final EntityType<TorchArrowEntity> TORCH_ARROW = null;
 
     @ObjectHolder(Names.RICOCHET_ARROW)
-    public static final EntityType<IceArrowEntity> RICOCHET_ARROW = null;
+    public static final EntityType<RicochetArrowEntity> RICOCHET_ARROW = null;
 
     @ObjectHolder(Names.LIGHTBURN_ARROW)
-    public static final EntityType<IceArrowEntity> LIGHTBURN_ARROW = null;
+    public static final EntityType<LightburnArrowEntity> LIGHTBURN_ARROW = null;
 
     @ObjectHolder(Names.SHARP_ARROW)
-    public static final EntityType<IceArrowEntity> SHARP_ARROW = null;
+    public static final EntityType<SharpArrowEntity> SHARP_ARROW = null;
 
     @ObjectHolder(Names.MERLIN_ARROW)
     public static final EntityType<MerlinArrowEntity> MERLIN_ARROW = null;
 
     @ObjectHolder(Names.SHOT_ARROW)
-    public static final EntityType<MerlinArrowEntity> SHOT_ARROW = null;
+    public static final EntityType<ShotArrowEntity> SHOT_ARROW = null;
 
     @ObjectHolder(Names.HUNGER_ARROW)
-    public static final EntityType<MerlinArrowEntity> HUNGER_ARROW = null;
+    public static final EntityType<HungerArrowEntity> HUNGER_ARROW = null;
 
 }
