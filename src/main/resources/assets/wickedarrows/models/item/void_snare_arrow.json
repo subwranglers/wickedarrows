@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "wickedarrows:items/void_snare_arrow"
-  }
-}
