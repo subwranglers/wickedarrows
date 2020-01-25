@@ -6,18 +6,27 @@ import com.subwranglers.wickedarrows.client.renderer.*;
 import com.subwranglers.wickedarrows.client.sound.IceCrackleSoundEvent;
 import com.subwranglers.wickedarrows.client.sound.IceExplosionSoundEvent;
 import com.subwranglers.wickedarrows.entity.*;
+import com.subwranglers.wickedarrows.info.Names;
 import com.subwranglers.wickedarrows.item.*;
-import com.subwranglers.wickedarrows.potion.BaitEffect;
-import com.subwranglers.wickedarrows.potion.BleedEffect;
-import com.subwranglers.wickedarrows.potion.BrittleBonesEffect;
-import com.subwranglers.wickedarrows.potion.IceEffect;
+import com.subwranglers.wickedarrows.potion.*;
+import com.subwranglers.wickedarrows.voidspace.IVoidSpace;
+import com.subwranglers.wickedarrows.voidspace.VoidSpace;
+import com.subwranglers.wickedarrows.voidspace.VoidSpaceCapability;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Effect;
+import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -27,6 +36,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import static com.subwranglers.wickedarrows.WickedArrows.MOD_ID;
 import static com.subwranglers.wickedarrows.info.Names.*;
@@ -56,6 +68,7 @@ public class WickedArrows {
 //        proxy.init();
 
 //        proxy.postInit();
+        VoidSpaceCapability.register();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
@@ -71,7 +84,10 @@ public class WickedArrows {
         RenderingRegistry.registerEntityRenderingHandler(SharpArrowEntity.class, SharpArrowRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ShotArrowEntity.class, ShotArrowRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(TorchArrowEntity.class, TorchArrowRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(VoidSnareArrowEntity.class, VoidSnareArrowRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(VoidVacuumEntity.class, VoidVacuumRenderer::new);
     }
+
 
     @Mod.EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
     public static class RegistryEvents {
@@ -90,7 +106,6 @@ public class WickedArrows {
             event.getRegistry().register(MerlinArrowItem.INSTANCE);
             event.getRegistry().register(RicochetArrowItem.INSTANCE);
             event.getRegistry().register(SharpArrowItem.INSTANCE);
-            event.getRegistry().register(TorchArrowItem.INSTANCE);
             event.getRegistry().register(new ShotArrowItem(2));
             event.getRegistry().register(new ShotArrowItem(3));
             event.getRegistry().register(new ShotArrowItem(4));
@@ -99,19 +114,26 @@ public class WickedArrows {
             event.getRegistry().register(new ShotArrowItem(7));
             event.getRegistry().register(new ShotArrowItem(8));
             event.getRegistry().register(new ShotArrowItem(9));
+            event.getRegistry().register(TorchArrowItem.INSTANCE);
+            event.getRegistry().register(VoidSnareArrowItem.INSTANCE);
         }
 
         @SubscribeEvent
         public static void onRegisterEntityTypes(final RegistryEvent.Register<EntityType<?>> event){
             event.getRegistry().registerAll(
-                RegistryEvents.<HungerArrowEntity>createEntityType(HungerArrowEntity::new, HUNGER_ARROW),
-                RegistryEvents.<IceArrowEntity>createEntityType(IceArrowEntity::new, ICE_ARROW),
-                RegistryEvents.<LightburnArrowEntity>createEntityType(LightburnArrowEntity::new, LIGHTBURN_ARROW),
-                RegistryEvents.<MerlinArrowEntity>createEntityType(MerlinArrowEntity::new, MERLIN_ARROW),
-                RegistryEvents.<RicochetArrowEntity>createEntityType(RicochetArrowEntity::new, RICOCHET_ARROW),
-                RegistryEvents.<SharpArrowEntity>createEntityType(SharpArrowEntity::new, SHARP_ARROW),
-                RegistryEvents.<ShotArrowEntity>createEntityType(ShotArrowEntity::new, SHOT_ARROW),
-                RegistryEvents.<TorchArrowEntity>createEntityType(TorchArrowEntity::new, TORCH_ARROW)
+                RegistryEvents.<HungerArrowEntity>createEntityType(HUNGER_ARROW, HungerArrowEntity::new),
+                RegistryEvents.<IceArrowEntity>createEntityType(ICE_ARROW, IceArrowEntity::new),
+                RegistryEvents.<LightburnArrowEntity>createEntityType(LIGHTBURN_ARROW, LightburnArrowEntity::new),
+                RegistryEvents.<MerlinArrowEntity>createEntityType(MERLIN_ARROW, MerlinArrowEntity::new),
+                RegistryEvents.<RicochetArrowEntity>createEntityType(RICOCHET_ARROW, RicochetArrowEntity::new),
+                RegistryEvents.<SharpArrowEntity>createEntityType(SHARP_ARROW, SharpArrowEntity::new),
+                RegistryEvents.<ShotArrowEntity>createEntityType(SHOT_ARROW, ShotArrowEntity::new),
+                RegistryEvents.<TorchArrowEntity>createEntityType(TORCH_ARROW, TorchArrowEntity::new),
+                RegistryEvents.<VoidSnareArrowEntity>createEntityType(VOID_SNARE_ARROW, VoidSnareArrowEntity::new),
+                RegistryEvents.createEntityType(VOID_VACUUM, EntityType.Builder
+                        .<VoidVacuumEntity>create(VoidVacuumEntity::new, EntityClassification.MISC)
+                        .size(1, 1)
+                )
             );
         }
 
@@ -131,12 +153,17 @@ public class WickedArrows {
             event.getRegistry().register(BleedEffect.INSTANCE);
             event.getRegistry().register(BrittleBonesEffect.INSTANCE);
             event.getRegistry().register(IceEffect.INSTANCE);
+            event.getRegistry().register(MobCapturedEffect.INSTANCE);
         }
 
-        private static <T extends WickedArrowEntity> EntityType<?> createEntityType(EntityType.IFactory<T> factoryIn, String registryName) {
+        private static <T extends Entity> EntityType<?> createEntityType(String registryName, EntityType.IFactory<T> factoryIn) {
             return EntityType.Builder.create(factoryIn, EntityClassification.MISC)
                     .build(registryName)
                     .setRegistryName(registryName);
+        }
+
+        private static <T extends Entity> EntityType<?> createEntityType(String key, EntityType.Builder<T> builder) {
+            return  builder.build(key).setRegistryName(key);
         }
     }
 }

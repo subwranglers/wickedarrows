@@ -33,4 +33,10 @@ public class EntityTypes {
     @ObjectHolder(Names.HUNGER_ARROW)
     public static final EntityType<HungerArrowEntity> HUNGER_ARROW = null;
 
+    @ObjectHolder(Names.VOID_SNARE_ARROW)
+    public static final EntityType<VoidSnareArrowEntity> VOID_SNARE_ARROW = null;
+
+    @ObjectHolder(Names.VOID_VACUUM)
+    public static final EntityType<VoidVacuumEntity> VOID_VACUUM = null;
+
 }

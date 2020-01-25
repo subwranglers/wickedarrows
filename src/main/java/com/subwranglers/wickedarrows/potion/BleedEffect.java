@@ -40,6 +40,7 @@ public class BleedEffect extends Effect {
         // to change in the future, when a larger effort will be put on balancing the strength of Sharp Arrows.
         int initialDuration = 20 * DURATION_SECONDS * (int) Math.pow(amplifier, 0.55D);
 
+        // TODO: Creating a subclass of EffectInstance is going to cause problems with saving and loading, we need to find a better solution
         entity.addPotionEffect(new EffectInstance(INSTANCE, initialDuration) {
 
             /*

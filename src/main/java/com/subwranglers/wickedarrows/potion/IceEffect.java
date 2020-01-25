@@ -34,18 +34,8 @@ public class IceEffect extends Effect {
      * @param living the entity to "freeze"
      */
     public static void applyFrozenEffectToEntity(LivingEntity living) {
-        living.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, DURATION, 5) {
-            @Override
-            public boolean doesShowParticles() {
-                return false;
-            }
-        });
-        living.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, DURATION) {
-            @Override
-            public boolean doesShowParticles() {
-                return false;
-            }
-        });
+        living.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, DURATION, 5, false, false));
+        living.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, DURATION, 0, false, false));
         living.addPotionEffect(new EffectInstance(INSTANCE, DURATION));
     }
 }

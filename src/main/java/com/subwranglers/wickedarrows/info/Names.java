@@ -29,7 +29,7 @@ public class Names {
     public static final String VOID_VACUUM_FX = "void_vacuum_fx";
 
     // Potions ------------------------------------
-    public static final String MOB_CAPTURED_POTION = "mob_captured_potion";
+    public static final String MOB_CAPTURED_EFFECT = "mob_captured";
     public static final String BAIT_EFFECT = "bait";
     public static final String BRITTLE_BONES_EFFECT = "brittle_bones";
     public static final String BLEED_EFFECT = "bleed";

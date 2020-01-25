@@ -16,6 +16,7 @@
   "item.wickedarrows.shot_arrow_8": "Shot Arrow x8",
   "item.wickedarrows.shot_arrow_9": "Shot Arrow x9",
   "item.wickedarrows.torch_arrow": "Torch Arrow",
+  "item.wickedarrows.void_snare_arrow": "Void Snare Arrow",
 
   "entity.wickedarrows.ice_arrow": "Ice Arrow",
   "entity.wickedarrows.hunger_arrow": "Hunger Arrow",
@@ -25,10 +26,12 @@
   "entity.wickedarrows.sharp_arrow": "Sharp Arrow",
   "entity.wickedarrows.shot_arrow": "Shot Arrow",
   "entity.wickedarrows.torch_arrow": "Torch Arrow",
+  "entity.wickedarrows.void_snare_arrow": "Void Snare Arrow",
 
   "effect.wickedarrows.bait": "Bait",
   "effect.wickedarrows.bleed": "Bleed",
   "effect.wickedarrows.brittle_bones": "Brittle Bones",
-  "effect.wickedarrows.frozen": "Frozen"
+  "effect.wickedarrows.frozen": "Frozen",
+  "effect.wickedarrows.mob_captured": "Mob Captured"
 
 }

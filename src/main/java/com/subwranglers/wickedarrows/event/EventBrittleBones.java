@@ -1,11 +1,12 @@
 package com.subwranglers.wickedarrows.event;
 
+import com.subwranglers.wickedarrows.WickedArrows;
 import com.subwranglers.wickedarrows.potion.BrittleBonesEffect;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = WickedArrows.MOD_ID)
 public class EventBrittleBones {
 
     @SubscribeEvent

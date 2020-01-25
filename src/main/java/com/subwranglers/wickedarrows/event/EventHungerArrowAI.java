@@ -1,6 +1,7 @@
 package com.subwranglers.wickedarrows.event;
 
 import com.subwranglers.wickedarrows.HungerImpl;
+import com.subwranglers.wickedarrows.WickedArrows;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -19,7 +20,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = WickedArrows.MOD_ID)
 public class EventHungerArrowAI {
 
     public static final int LIGHT_SPAWN_THRESHOLD = 10;
